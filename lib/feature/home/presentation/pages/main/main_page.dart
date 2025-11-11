@@ -25,7 +25,8 @@ class _MainPageState extends State<MainPage> {
             showSelectedLabels: false,
             showUnselectedLabels: false,
             backgroundColor: context.colorScheme.surfaceContainerHighest,
-            selectedIconTheme: IconThemeData(color: context.colorScheme.onSurface),
+            selectedIconTheme:
+                IconThemeData(color: context.colorScheme.onSurface),
             unselectedIconTheme: const IconThemeData(color: Colors.grey),
             type: BottomNavigationBarType.fixed,
             onTap: (index) => widget.navigationShell.goBranch(index),
