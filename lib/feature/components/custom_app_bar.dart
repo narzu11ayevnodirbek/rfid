@@ -23,20 +23,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => AppBar(
         titleSpacing: 0,
-        backgroundColor: backgroundColor ?? (title == '' ? context.colorScheme.surface : null),
+        backgroundColor: backgroundColor ??
+            (title == '' ? context.colorScheme.surface : null),
         title: Text(title),
         shape: shape == BoxShape.circle
             ? const RoundedRectangleBorder()
             : const ContinuousRectangleBorder(),
         scrolledUnderElevation: 0,
+
         automaticallyImplyLeading: false,
         // leadingWidth: 72,
-        leading: backButtonEnabled
-            ? IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(isBottomSheet ? Icons.close : Icons.arrow_back_ios_new),
-              )
-            : null,
+        // leading: backButtonEnabled
+        //     ? IconButton(
+        //         onPressed: () => Navigator.pop(context),
+        //         icon: Icon(isBottomSheet ? Icons.close : Icons.arrow_back_ios_new),
+        //       )
+        //     : null,
         actions: action,
         centerTitle: true,
       );

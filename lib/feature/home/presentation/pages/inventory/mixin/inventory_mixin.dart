@@ -1,21 +1,21 @@
-part of 'package:rf_id_test/feature/home/presentation/pages/inventory/inventory_page.dart';
+// part of 'package:rf_id_test/feature/home/presentation/pages/inventory/inventory_page.dart';
 
-mixin InventoryMixin on State<InventoryPage> {
-  late final InventoryBloc _bloc;
+// mixin InventoryMixin on State<InventoryPage> {
+//   late final InventoryBloc _bloc;
 
-  late final ScrollController _scrollController;
+//   late final ScrollController _scrollController;
 
-  @override
-  void initState() {
-    super.initState();
-    _bloc = context.read<InventoryBloc>();
-    _bloc.add(InitialInventoryEvent());
+//   @override
+//   void initState() {
+//     super.initState();
+//     _bloc = context.read<InventoryBloc>();
+//     _bloc.add(InitialInventoryEvent());
 
-    _scrollController = ScrollController();
-  }
+//     _scrollController = ScrollController();
+//   }
 
-  Future<void> _onRefresh() async => Future.delayed(
-        const Duration(seconds: 1),
-        () => _bloc.add(InitialInventoryEvent()),
-      );
-}
+//   Future<void> _onRefresh() async => Future.delayed(
+//         const Duration(seconds: 1),
+//         () => _bloc.add(InitialInventoryEvent()),
+//       );
+// }

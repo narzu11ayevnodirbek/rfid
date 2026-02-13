@@ -38,6 +38,7 @@ class AuthInterceptor extends QueuedInterceptor {
         final newHeaders = Map<String, dynamic>.from(requestOptions.headers);
         newHeaders['Authorization'] = 'Bearer $newToken';
         requestOptions.headers = newHeaders;
+        print('newToken');
 
         final cloneResponse = await dio.fetch(requestOptions);
         Logger().e(requestOptions);

@@ -33,6 +33,32 @@ class ApiClient {
   }
 
   Dio get getDio => _getDio();
+
+
+  Future<bool> sendTagRequest({
+    required String endpoint,
+    required Map<String, dynamic> body,
+  }) async {
+    try {
+      final dio = sl<Dio>();
+
+      final response = await dio.post(
+        endpoint,
+        data: body,
+        options: optionsWithBearer(),
+      );
+
+      print('📤 POST → $endpoint');
+      print('📦 Body → $body');
+      print('📥 Response → ${response.data}');
+
+      return response.data['success'] == true;
+    } catch (e) {
+      print('❌ sendTagRequest error: $e');
+      return false;
+    }
+  }
+
 }
 
 extension ApiExt on Response {
