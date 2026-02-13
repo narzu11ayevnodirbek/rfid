@@ -22,4 +22,9 @@ class LocalSource {
   Future<void> setUserToken(String token) async => box.put('auth_token', token);
 
   String get getUserToken => (box.get('auth_token', defaultValue: '') as String?) ?? '';
+
+  Future<void> clearUserData() async {
+    await box.delete('auth_token');
+  }
+
 }

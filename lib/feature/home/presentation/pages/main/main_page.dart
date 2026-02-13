@@ -14,6 +14,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
+        resizeToAvoidBottomInset: true,
         body: widget.navigationShell,
         bottomNavigationBar: Theme(
           data: ThemeData(
@@ -22,11 +23,12 @@ class _MainPageState extends State<MainPage> {
           ),
           child: BottomNavigationBar(
             currentIndex: widget.navigationShell.currentIndex,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
             backgroundColor: context.colorScheme.surfaceContainerHighest,
             selectedIconTheme:
                 IconThemeData(color: context.colorScheme.onSurface),
+            selectedItemColor: Theme.of(context).colorScheme.onSurface,
             unselectedIconTheme: const IconThemeData(color: Colors.grey),
             type: BottomNavigationBarType.fixed,
             onTap: (index) => widget.navigationShell.goBranch(index),
@@ -42,7 +44,7 @@ class _MainPageState extends State<MainPage> {
                 activeIcon: Icon(Icons.local_offer),
               ),
               BottomNavigationBarItem(
-                label: 'Инвентаризация',
+                label: 'Перемишение',
                 icon: Icon(Icons.swap_horizontal_circle_outlined),
                 activeIcon: Icon(Icons.swap_horizontal_circle),
               ),

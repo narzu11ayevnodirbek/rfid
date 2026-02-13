@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:rf_id_test/core/l10n/app_localizations.dart';
 
@@ -15,12 +16,16 @@ class App extends StatelessWidget {
         builder: (context, state) => KeyboardDismisser(
           child: MaterialApp.router(
             title: 'Rf Id Inventory',
+
             debugShowCheckedModeBanner: false,
             // themeMode: state.themeMode,
             themeMode: ThemeMode.light,
             theme: state.lightTheme,
             darkTheme: state.darkTheme,
             routerConfig: router,
+            // routeInformationParser: router.routeInformationParser,
+            // routeInformationProvider: router.routeInformationProvider,
+            // routerDelegate: router.routerDelegate,
 
             /// app language
             locale: switch (state.appLocale) {
