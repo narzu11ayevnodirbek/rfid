@@ -2,12 +2,17 @@ import 'dart:async';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
+import '../../../../../core/api/api_client.dart';
+import '../../../../../core/base/local_source.dart';
+import '../../../../../injector_container.dart';
 import '../../../../core/api/api_client.dart';
 import '../../../../core/base/local_source.dart';
 import '../../../../injector_container.dart';
 import '../../rfid/rfid_bus.dart';
+import '../../utils/app_snackbar.dart';
 import '../models/inventory_item.dart';
 import '../models/inventory_model.dart';
+import '../models/inventory_task_model.dart';
 import '../services/inventory_service.dart';
 
 class InventoryController extends GetxController {
@@ -21,13 +26,16 @@ class InventoryController extends GetxController {
   RxBool isRefreshing = false.obs;
 
   bool _scanActive = false;
-  final Set<String> _sentTags = {};
+  // final Set<String> _sentTags = {};
 
   final LocalSource _localSource = sl<LocalSource>();
   late final InventoryService _service;
 
   RxList<String> scannedTags = <String>[].obs;
+  /// ID единиц, по которым нажали «Завершить» — зелёные, не открывать снова
+  final RxList<String> completedItemIds = <String>[].obs;
   RxString selectedInventoryId = ''.obs;
+  RxString selectedTaskId = ''.obs;
 
   @override
   void onInit() {
@@ -50,7 +58,7 @@ class InventoryController extends GetxController {
 
   void startScan() {
     _scanActive = true;
-
+    lastScanSuccess.value = false; // сброс, чтобы не показывать "прочитано" до реального чтения
     _buffer.clear();
   }
 
@@ -77,6 +85,7 @@ class InventoryController extends GetxController {
     if (!_scanActive) return;
     if (!scannedTags.contains(epc)) {
       scannedTags.add(epc);
+      AppSnackbar.showInfo('RFID', 'Метка считана: $epc');
     }
 
     _buffer.add(epc);
@@ -88,17 +97,24 @@ class InventoryController extends GetxController {
 
   Future<void> fetchInventories() async {
     isLoading.value = true;
-    inventories.value = await _service.getInventories();
-    isLoading.value = false;
+    try {
+      inventories.value = await _service.getInventories();
+    } catch (e) {
+      print('❌ fetchInventories error: $e');
+      inventories.value = [];
+      AppSnackbar.showError('Ошибка', 'Не удалось загрузить список. Проверьте сеть и авторизацию.');
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   Future<void> refreshInventories() async {
     isRefreshing.value = true;
     try {
       inventories.value = await _service.getInventories();
-      Get.snackbar('Обмен', 'Информация обновлена');
+      AppSnackbar.showSuccess('Обмен', 'Информация обновлена');
     } catch (_) {
-      Get.snackbar('Ошибка', 'Проблема с Интернетом или API');
+      AppSnackbar.showError('Ошибка', 'Проблема с Интернетом или API');
     }
     isRefreshing.value = false;
   }
@@ -162,7 +178,7 @@ class InventoryController extends GetxController {
     }
   }
 
-  Future<void> finishItem({
+  Future<bool> finishItem({
     required String taskId,
     required InventoryItem item,
     required String epc,
@@ -180,12 +196,40 @@ class InventoryController extends GetxController {
 
     if (ok) {
       scannedTags.add(epc);
-
-      Get.snackbar('✅ Успешно', 'RFID успешно привязан');
-
+      completedItemIds.add(item.id);
       print('🟢 ITEM CLOSED → ${item.id}');
-    } else {
-      Get.snackbar('❌ Ошибка', 'Сервер не принял запрос');
+    }
+    return ok;
+  }
+
+  /// Отправка всех считанных меток для выбранной инвентаризации/задачи.
+  Future<bool> finishTaskScan({required InventoryTaskModel task}) async {
+    if (scannedTags.isEmpty) {
+      AppSnackbar.showError('Ошибка', 'Нет считанных меток для отправки');
+      return false;
+    }
+    try {
+      final invId = int.tryParse(task.inventoryId) ?? int.tryParse(selectedInventoryId.value) ?? 0;
+      if (invId == 0) {
+        AppSnackbar.showError('Ошибка', 'Не указан ID инвентаризации');
+        return false;
+      }
+      final ok = await _service.finishInventory(
+        inventoryId: invId,
+        scannedItems: scannedTags.toList(),
+        durationSeconds: 0,
+        deviceId: 'MOBILE-TASK',
+      );
+      if (ok) {
+        AppSnackbar.showSuccess('Инвентаризация', 'Метки отправлены на сервер');
+        scannedTags.clear();
+      } else {
+        AppSnackbar.showError('Ошибка', 'Сервер не принял результаты');
+      }
+      return ok;
+    } catch (e) {
+      AppSnackbar.showError('Ошибка', 'Не удалось отправить результаты: $e');
+      return false;
     }
   }
 

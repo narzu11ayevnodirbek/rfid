@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rf_id_test/feature/new_feature/inventory/pages/database_page.dart';
 import '../controllers/inventory_controller.dart';
+import 'database_page.dart';
 import 'inventory_items_page.dart';
+import 'view_page.dart';
 
 class InventoryPage extends StatelessWidget {
   const InventoryPage({super.key});
@@ -21,6 +23,8 @@ class InventoryPage extends StatelessWidget {
                 inv.refreshInventories();
               } else if (value == 'database') {
                 Get.to(const DatabasePage());
+              } else if (value == 'view') {
+                Get.to(const ViewPage());
               } else if (value == 'signout') {
                 showDialog(
                   context: context,
@@ -62,6 +66,10 @@ class InventoryPage extends StatelessWidget {
                 child: Text('Вся БД'),
               ),
               const PopupMenuItem(
+                value: 'view',
+                child: Text('Просмотр'),
+              ),
+              const PopupMenuItem(
                 value: 'signout',
                 child: Text('Выход'),
               ),
@@ -81,8 +89,9 @@ class InventoryPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
+          // Показываем все инвентаризации, кроме закрытых (пропадать должна только после «Закрыть» на сервере)
           final assignedInventories = inv.inventories
-              .where((item) => item.statusCode == 'assigned')
+              .where((item) => item.statusCode != 'closed')
               .toList();
 
           return ListView.separated(

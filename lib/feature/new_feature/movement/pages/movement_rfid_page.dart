@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/movement/pages/set_movement_rfid_page.dart';
-import '../../../../injector_container.dart';
-import '../controllers/movement_read_rfid_controller.dart';
-import '../models/movement_item.dart';
-import '../models/movement_task_model.dart';
-import '../movement_repository.dart';
 
-class MovementRfidPage extends StatefulWidget {
+import '../../utils/rfid_trigger_hint.dart';
+import '../controllers/movement_rfid_scan_controller.dart';
+import '../models/movement_task_model.dart';
+
+/// Экран перемещения: Запустить RFID → список меток с кнопкой X → Стоп → Отправить на сервер.
+class MovementRfidPage extends StatelessWidget {
   const MovementRfidPage({
     super.key,
     required this.movement,
@@ -18,137 +17,129 @@ class MovementRfidPage extends StatefulWidget {
   final MovementTaskModel task;
 
   @override
-  State<MovementRfidPage> createState() => _MovementRfidPageState();
-}
-
-class _MovementRfidPageState extends State<MovementRfidPage> {
-  late Future<List<MovementItem>> futureItems;
-
-  @override
-  void initState() {
-    super.initState();
-    futureItems = sl<MovementRepository>()
-        .fetchMovementItems(int.parse(widget.movement.movementId));
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (!Get.isRegistered<MovementRfidScanController>()) {
+      Get.put(MovementRfidScanController(task));
+    }
+    final c = Get.find<MovementRfidScanController>();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('ПЕРЕМЕЩЕНИЕ №${widget.task.name}'),
+        title: Text('Перемещение ${task.movementName.isNotEmpty ? task.movementName : task.name}'),
       ),
       body: SafeArea(
-        child: FutureBuilder<List<MovementItem>>(
-          future: futureItems,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
-
-            final items = snapshot.data ?? [];
-
-            if (!Get.isRegistered<MovementReadRfidController>()) {
-              Get.put(
-                MovementReadRfidController(widget.task, items),
-              );
-            }
-
-            final c = Get.find<MovementReadRfidController>();
-
-            if (items.isEmpty) {
-              return const Center(
-                child: Text(
-                  'Hozircha obyektlar yo‘q',
-                  style: TextStyle(fontSize: 18),
-                ),
-              );
-            }
-
-            return Obx(
-              () => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        stat('Всего', c.total.value),
-                        stat('Найдено', c.moved.value),
-                        stat('Не найдено', c.notMoved.value),
-                        stat('Чтений', c.readCount.value),
-                      ],
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (task.sourceLocation != null && task.sourceLocation!.isNotEmpty)
+                _infoRow('Откуда', task.sourceLocation!),
+              _infoRow('Куда', task.destination),
+              const SizedBox(height: 16),
+              const RfidTriggerHint(),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: c.isScanning.value ? () => c.stopScan() : () => c.startScan(),
+                      icon: Icon(c.isScanning.value ? Icons.stop : Icons.play_arrow),
+                      label: Text(c.isScanning.value ? 'Стоп' : 'Запустить RFID'),
                     ),
-                    const SizedBox(height: 20),
-                    Expanded(
-                      child: ListView.separated(
-                        padding: const EdgeInsets.all(12),
-                        itemCount: items.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
-                        itemBuilder: (_, index) {
-                          final item = items[index];
-
-                          final isFound = c.moved.value > 0 &&
-                              c.items.any((e) => e.id == item.id);
-
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                SetMovementRfidPage(item: item),
-                              );
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 250),
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: isFound ? Colors.green : Colors.red,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      item.name,
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  if (isFound)
-                                    const Icon(
-                                      Icons.check_circle,
-                                      color: Colors.white,
-                                    ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: c.scannedCount == 0 ? null : () => c.clearAll(),
+                      icon: const Icon(Icons.clear_all),
+                      label: const Text('Очистить'),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
-          },
+              const SizedBox(height: 8),
+              Obx(() => Text(
+                'Считано меток: ${c.scannedCount}',
+                style: const TextStyle(fontSize: 14),
+              )),
+              const SizedBox(height: 12),
+              Expanded(
+                child: Obx(() {
+                  final list = c.scannedList;
+                  if (list.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        'Нажмите «Запустить RFID», затем считывайте метки физической кнопкой. Удалите ошибочные по X.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (_, i) {
+                      final epc = list[i];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 6),
+                        child: ListTile(
+                          leading: const Icon(Icons.nfc),
+                          title: Text(epc, style: const TextStyle(fontSize: 12)),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.close, color: Colors.red),
+                            onPressed: () => c.removeScanned(epc),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }),
+              ),
+              const SizedBox(height: 12),
+              Obx(() => FilledButton.icon(
+                onPressed: c.isSending.value || c.scannedCount == 0
+                    ? null
+                    : () => c.submit(),
+                icon: c.isSending.value
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.send),
+                label: const Text('Отправить на сервер'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+              )),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget stat(String title, int value) => Column(
+  Widget _infoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 12)),
-          Text(
-            value.toString(),
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          SizedBox(
+            width: 80,
+            child: Text(
+              '$label:',
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
             ),
           ),
+          Expanded(
+            child: Text(value, style: const TextStyle(fontSize: 14)),
+          ),
         ],
-      );
+      ),
+    );
+  }
 }

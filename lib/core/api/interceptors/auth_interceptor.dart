@@ -52,7 +52,7 @@ class AuthInterceptor extends QueuedInterceptor {
 
     handler.next(err);
 
-    return super.onError(err, handler);
+    // return super.onError(err, handler);
   }
 
   Future<String> _refreshTokenRequest() async {

@@ -12,6 +12,7 @@ class MovementTaskModel {
     required this.executorName,
     required this.movementName,
     required this.destination,
+    this.sourceLocation,
     required this.items,
     required this.itemsCount,
     required this.movedCount,
@@ -31,6 +32,7 @@ class MovementTaskModel {
       executorName: json['executor_name'] ?? '',
       movementName: json['movement_name'] ?? '',
       destination: json['destination'] ?? '',
+      sourceLocation: json['source_location']?.toString(),
       items: List<Map<String, dynamic>>.from(json['items'] ?? []),
       itemsCount: json['items_count'] ?? 0,
       movedCount: json['moved_count'] ?? 0,
@@ -49,6 +51,7 @@ class MovementTaskModel {
   final String executorName;
   final String movementName;
   final String destination;
+  final String? sourceLocation;
   final List<Map<String, dynamic>> items;
   final int itemsCount;
   final int movedCount;

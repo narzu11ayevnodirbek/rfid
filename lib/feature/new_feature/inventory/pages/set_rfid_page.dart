@@ -2,20 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../rfid/rfid_controller.dart';
+import '../../utils/app_dialog.dart';
+import '../../utils/app_snackbar.dart';
+import '../../utils/rfid_trigger_hint.dart';
 import '../controllers/inventory_controller.dart';
 import '../models/inventory_item.dart';
 import '../models/inventory_task_model.dart';
 import 'barcode_page.dart';
 
-class SetRfidPage extends StatelessWidget {
+class SetRfidPage extends StatefulWidget {
   const SetRfidPage({super.key, required this.item, required this.task});
 
   final InventoryItem item;
   final InventoryTaskModel task;
 
   @override
+  State<SetRfidPage> createState() => _SetRfidPageState();
+}
+
+class _SetRfidPageState extends State<SetRfidPage> {
+  double _power = 10;
+
+  @override
+  void initState() {
+    super.initState();
+    // При открытии экрана сбрасываем "уже прочитано", чтобы не показывать зелёное до нового чтения
+    Get.find<InventoryController>().lastScanSuccess.value = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final inv = Get.find<InventoryController>();
+    final item = widget.item;
+    final task = widget.task;
     return Scaffold(
       appBar: AppBar(title: const Text('Единица ТМЦ')),
       body: SafeArea(
@@ -96,23 +115,27 @@ class SetRfidPage extends StatelessWidget {
                           style: TextStyle(color: Colors.white),
                         ),
                         Slider(
-                          value: 10,
+                          value: _power,
                           max: 10,
                           activeColor: Colors.blue,
                           divisions: 10,
-                          label: '100%',
+                          label: '${(_power * 10).toInt()}%',
                           onChanged: (v) {
-                            // c.powerStep.value = v.toInt();
-                            // c.applyPower();
+                            setState(() {
+                              _power = v;
+                            });
+                            final rfid = Get.find<RfidController>();
+                            rfid.setPowerStep(v.toInt());
                           },
                         ),
                         Text(
-                          'Текушая мошност 100%',
+                          'Текущая мощность ${(_power * 10).toInt()}%',
                           style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
                   ),
+                  const RfidTriggerHint(),
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -129,7 +152,7 @@ class SetRfidPage extends StatelessWidget {
                             inv.startScan();
                             await rfid.start();
 
-                            Get.snackbar('RFID', 'Считывание тега...');
+                            AppSnackbar.showInfo('RFID', 'Чтение только по нажатию физической кнопки на считывателе.');
                           },
                           style: FilledButton.styleFrom(
                             backgroundColor: Colors.black,
@@ -147,26 +170,42 @@ class SetRfidPage extends StatelessWidget {
                                 final inv = Get.find<InventoryController>();
 
                                 if (inv.scannedTags.isEmpty) {
-                                  Get.snackbar('Ошибка', 'Сначала отсканируйте RFID!');
+                                  await AppDialog.showError(
+                                    context,
+                                    title: 'Нет данных',
+                                    message: 'Сначала прочитайте метку RFID, нажав физическую кнопку на считывателе.',
+                                    solution: 'Нажмите «Запустить RFID», затем поднесите метку к считывателю и нажмите физическую кнопку на устройстве.',
+                                  );
                                   return;
                                 }
 
                                 final epc = inv.scannedTags.last;
 
-                                await inv.finishItem(
-                                  taskId: task.inventoryId,
-                                  item: item,
+                                final ok = await inv.finishItem(
+                                  taskId: task.id,
+                                  item: widget.item,
                                   epc: epc,
                                 );
+                                if (!ok) {
+                                  await AppDialog.showError(
+                                    context,
+                                    title: 'Ошибка отправки в базу',
+                                    message: 'Не удалось отправить данные о прочитанной метке и объекте на сервер.',
+                                    reason: 'Сервер не принял запрос. Возможны проблемы с сетью, авторизацией или занятостью сервера.',
+                                    solution: 'Проверьте подключение к интернету, повторно войдите в приложение при необходимости и попробуйте снова. Если ошибка повторяется — обратитесь к администратору.',
+                                  );
+                                  return;
+                                }
                                 Navigator.pop(context);
-                                Get.snackbar(
-                                  'Успешно',
-                                  'Инвентаризация закрыта!',
-                                  backgroundColor: Colors.green,
-                                  colorText: Colors.white,
-                                );
+                                AppSnackbar.showSuccess('Успешно', 'Данные отправлены в базу. Инвентаризация закрыта.');
                               } catch (e) {
-                                throw Exception();
+                                await AppDialog.showError(
+                                  context,
+                                  title: 'Ошибка отправки',
+                                  message: 'Не удалось отправить данные в базу данных.',
+                                  reason: e.toString(),
+                                  solution: 'Проверьте интернет-соединение и повторите попытку. При повторении ошибки обратитесь в поддержку.',
+                                );
                               }
                             },
                             style: FilledButton.styleFrom(

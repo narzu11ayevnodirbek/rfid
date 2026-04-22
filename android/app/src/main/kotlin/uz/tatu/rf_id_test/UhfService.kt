@@ -23,6 +23,9 @@ class UhfService(private val context: Context) {
     private val buffer = mutableListOf<String>()
     private var lastEmitTime = 0L
 
+    private var singleShot = true          // xohlasangiz false qilib multi qoldirasiz
+    private var emittedThisPress = false   // shu bosishda 1 martagina chiqarish
+
     val streamHandler = object : EventChannel.StreamHandler {
         override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
             eventSink = events
@@ -42,10 +45,8 @@ class UhfService(private val context: Context) {
 
         uhf?.setPower(26)
 
-        context.registerReceiver(
-            triggerReceiver,
-            IntentFilter("android.rfid.FUN_KEY")
-        )
+        triggerEnabled = false
+        stopReading()
         inited = true;
         return true
     }
@@ -55,23 +56,39 @@ class UhfService(private val context: Context) {
 
 
     fun startReading() {
+        println("🚀 startReading called. isReading=$isReading uhfNull=${uhf==null}")
         if (isReading) return
         isReading = true
         seen.clear()
+        emittedThisPress = false
 
         uhf?.setInventoryCallback { tagInfo ->
             val epc = tagInfo?.epc ?: return@setInventoryCallback
+            if (epc.isBlank()) return@setInventoryCallback
+            // 1 press = 1 EPC
+            if (singleShot && emittedThisPress) return@setInventoryCallback
+            println("📡 CALLBACK EPC=$epc")
             if (seen.contains(epc)) return@setInventoryCallback
-
             seen.add(epc)
-
+            emittedThisPress = true
             mainHandler.post {
-                println("📡 EPC READ → $epc | sink = ${eventSink != null}")
+                println("📡 EPC EMIT → $epc | sink=${eventSink != null}")
                 eventSink?.success(epc)
+            }
+            if (singleShot) {
+                mainHandler.post { stopReading() }
             }
         }
 
-        uhf?.startInventoryTag()
+        val ok = uhf?.startInventoryTag()
+        println("🚀 startInventoryTag() result=$ok")
+    }
+
+    private var triggerEnabled = false
+
+    fun setTriggerEnabled(enabled: Boolean) {
+        triggerEnabled = enabled
+        if (!enabled) stopReading()
     }
 
 
@@ -79,6 +96,7 @@ class UhfService(private val context: Context) {
         if (!isReading) return
         isReading = false
         uhf?.stopInventory()
+        emittedThisPress = false
     }
 
     fun setPower(level: Int) {
@@ -88,24 +106,10 @@ class UhfService(private val context: Context) {
     fun release() {
         stopReading()
         uhf?.free()
-        try {
-            context.unregisterReceiver(triggerReceiver)
-        } catch (_: Exception) {
-        }
+        uhf = null
+        inited = false
     }
 
-    private val triggerReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action != "android.rfid.FUN_KEY") return
-
-            val keyCode = intent.getIntExtra("keyCode", 0)
-            val keyDown = intent.getBooleanExtra("keydown", false)
-
-            if (keyCode == 3) {
-                if (keyDown) startReading()
-                else stopReading()
-            }
-        }
-    }
+    fun isTriggerArmed(): Boolean = triggerEnabled
 }
 

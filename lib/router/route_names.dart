@@ -9,4 +9,5 @@ class Routes {
   static const String products = '/products';
   static const String marking = '/marking';
   static const String transition = '/transition';
+  static const String bindRfid = '/bind_rfid';
 }

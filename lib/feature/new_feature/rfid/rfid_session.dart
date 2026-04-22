@@ -3,6 +3,7 @@ enum RfidMode {
   inventory,
   marking,
   movement,
+  bindRfid, // привязка метки к объекту (новые объекты)
 }
 
 class RfidSession {

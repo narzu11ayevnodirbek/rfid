@@ -48,6 +48,11 @@ class _MainPageState extends State<MainPage> {
                 icon: Icon(Icons.swap_horizontal_circle_outlined),
                 activeIcon: Icon(Icons.swap_horizontal_circle),
               ),
+              // BottomNavigationBarItem(
+              //   label: 'Привязка меток',
+              //   icon: Icon(Icons.nfc),
+              //   activeIcon: Icon(Icons.nfc_rounded),
+              // ),
             ],
           ),
         ),

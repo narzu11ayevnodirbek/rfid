@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/inventory/pages/set_rfid_page.dart';
+// import 'package:rf_id_test/feature/new_feature/inventory/pages/set_rfid_page.dart';
+// import 'package:rf_id_test/feature/new_feature/rfid/rfid_controller.dart';
+// import 'package:rf_id_test/feature/new_feature/utils/rfid_trigger_hint.dart';
+import '../../../../../injector_container.dart';
 import '../../../../injector_container.dart';
+import '../../rfid/rfid_controller.dart';
+import '../../utils/rfid_trigger_hint.dart';
 import '../controllers/inventory_controller.dart';
 import '../controllers/read_rfid_controller.dart';
 import '../models/inventory_item.dart';
@@ -34,6 +39,7 @@ class _ReadRfidPageState extends State<ReadRfidPage> {
   @override
   Widget build(BuildContext context) {
     final c = Get.put(ReadRfidController(widget.inventory, widget.task));
+    final invController = Get.find<InventoryController>();
     return Scaffold(
       appBar: AppBar(title: Text('Инвентаризация №${widget.inventory.name}')),
       body: SafeArea(
@@ -53,72 +59,86 @@ class _ReadRfidPageState extends State<ReadRfidPage> {
                     stat('Чтений', c.readCount.value),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
+                const RfidTriggerHint(),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: () async {
+                          final rfid = Get.find<RfidController>();
+                        if (c.isReading.value) {
+                          invController.stopScan();
+                            await rfid.stop();
+                            await c.stop();
+                          } else {
+                          invController.selectedInventoryId.value =
+                              widget.inventory.id;
+                          invController.startScan();
+                            await rfid.initOnce();
+                            await c.start();
+                            await rfid.start();
+                          }
+                        },
+                        icon: Icon(
+                          c.isReading.value ? Icons.stop : Icons.play_arrow,
+                        ),
+                        label: Text(c.isReading.value ? 'Остановить RFID' : 'Запустить RFID'),
+                      ),
+                    ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: () async {
+                        await invController.finishTaskScan(task: widget.task);
+                      },
+                      icon: const Icon(Icons.cloud_upload),
+                      label: const Text('Отправить на сервер'),
+                    ),
+                  ),
+                  ],
+                ),
+                const SizedBox(height: 12),
                 Expanded(
-                  child: FutureBuilder<List<InventoryItem>>(
-                    future: futureItems,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      if (snapshot.hasError) {
-                        return Center(child: Text(snapshot.error.toString()));
-                      }
-
-                      final items = snapshot.data!;
-                      if (items.isEmpty) {
+                  child: Obx(
+                    () {
+                      final tags = invController.scannedTags;
+                      if (tags.isEmpty) {
                         return const Center(
                           child: Text(
-                            'Hozircha obyektlar yo‘q',
-                            style: TextStyle(fontSize: 18),
+                            'Пока нет считанных меток.\nНажмите «Запустить RFID» и жмите физическую кнопку на устройстве.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16),
                           ),
                         );
                       }
-
                       return ListView.separated(
                         padding: const EdgeInsets.all(12),
-                        itemCount: items.length,
+                        itemCount: tags.length,
                         separatorBuilder: (_, __) => const SizedBox(height: 8),
                         itemBuilder: (_, index) {
-                          final item = items[index];
-
-                          final isFound =
-                              invController.scannedTags.contains(item.rfid);
-                          print('Scanned tags: ${invController.scannedTags}');
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => SetRfidPage(
-                                    item: item,
-                                    task: widget.task,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 250),
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: isFound ? Colors.green : Colors.red,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      item.name,
-                                      style:
-                                          const TextStyle(color: Colors.white),
+                          final epc = tags[index];
+                          return Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.nfc, color: Colors.white),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    epc,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
                                     ),
                                   ),
-                                  if (isFound)
-                                    const Icon(Icons.check_circle,
-                                        color: Colors.white)
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         },

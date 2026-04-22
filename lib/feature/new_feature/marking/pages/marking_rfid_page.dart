@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/marking/models/marking_item.dart';
-import 'package:rf_id_test/feature/new_feature/marking/models/marking_task_model.dart';
 import 'package:rf_id_test/feature/new_feature/marking/pages/set_marking_rfid_page.dart';
-import '../../../../injector_container.dart';
+// import 'package:rf_id_test/feature/new_feature/marking/models/marking_item.dart';
+// import 'package:rf_id_test/feature/new_feature/marking/models/marking_task_model.dart';
+// import 'package:rf_id_test/feature/new_feature/marking/pages/set_marking_rfid_page.dart';
 import '../../rfid/rfid_session.dart';
 import '../controller/marking_controller.dart';
 import '../controller/marking_read_rfid_controller.dart';
-import '../marking_repository.dart';
+import '../models/marking_item.dart';
+import '../models/marking_task_model.dart';
 
 class MarkingRfidPage extends StatefulWidget {
   const MarkingRfidPage({super.key, required this.marking, required this.task});
@@ -20,13 +21,21 @@ class MarkingRfidPage extends StatefulWidget {
 }
 
 class _MarkingRfidPageState extends State<MarkingRfidPage> {
-  late Future<List<MarkingItem>> futureItems;
+  late final List<MarkingItem> items;
 
   @override
   void initState() {
     super.initState();
-    futureItems = sl<MarkingRepository>().fetchMarkingItems(
-        int.parse(widget.marking.markingId), int.parse(widget.task.id));
+    // Используем items, уже пришедшие в задаче из API get_marking_tasks_for_mobile.php
+    items = widget.task.items
+        .map(
+          (e) => MarkingItem.fromJson(
+            Map<String, dynamic>.from(e),
+            markingId: widget.task.markingId,
+            taskId: widget.task.id,
+          ),
+        )
+        .toList();
   }
 
   final markingController = Get.find<MarkingController>();
@@ -34,7 +43,7 @@ class _MarkingRfidPageState extends State<MarkingRfidPage> {
   @override
   Widget build(BuildContext context) {
     RfidSession.instance.currentMode = RfidMode.marking;
-    final c = Get.put(MarkingReadRfidController(widget.marking));
+    final c = Get.put(MarkingReadRfidController(widget.task));
 
     return Scaffold(
       appBar: AppBar(title: Text('МАРКИРОВКА №${widget.marking.name}')),
@@ -56,74 +65,62 @@ class _MarkingRfidPageState extends State<MarkingRfidPage> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: FutureBuilder<List<MarkingItem>>(
-                    future: futureItems,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      if (snapshot.hasError) {
-                        return Center(child: Text(snapshot.error.toString()));
-                      }
-
-                      final items = snapshot.data!;
-                      if (items.isEmpty) {
-                        return const Center(
+                  child: items.isEmpty
+                      ? const Center(
                           child: Text(
                             'Hozircha obyektlar yo‘q',
                             style: TextStyle(fontSize: 18),
                           ),
-                        );
-                      }
+                        )
+                      : ListView.separated(
+                          padding: const EdgeInsets.all(12),
+                          itemCount: items.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 8),
+                          itemBuilder: (_, index) {
+                            final item = items[index];
 
-                      return ListView.separated(
-                        padding: const EdgeInsets.all(12),
-                        itemCount: items.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 8),
-                        itemBuilder: (_, index) {
-                          final item = items[index];
+                            final isBound = markingController
+                                .completedItemIds
+                                .contains(item.id);
 
-                          final isBound =
-                              markingController.scannedTags.isNotEmpty;
-
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      SetMarkingRfidPage(item: item),
+                            return GestureDetector(
+                              onTap: isBound
+                                  ? null
+                                  : () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                              SetMarkingRfidPage(item: item),
+                                        ),
+                                      );
+                                    },
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 250),
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: isBound ? Colors.green : Colors.red,
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
-                              );
-                            },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 250),
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: isBound ? Colors.green : Colors.red,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      item.name,
-                                      style:
-                                          const TextStyle(color: Colors.white),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        item.name,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
                                     ),
-                                  ),
-                                  if (isBound)
-                                    const Icon(Icons.check_circle,
-                                        color: Colors.white)
-                                ],
+                                    if (isBound)
+                                      const Icon(Icons.check_circle,
+                                          color: Colors.white)
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                            );
+                          },
+                        ),
                 )
               ],
             ),

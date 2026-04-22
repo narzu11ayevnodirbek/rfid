@@ -6,6 +6,9 @@ class RfidService {
 
   Future<void> init() async => _method.invokeMethod('initTask');
 
+  /// Запуск сканирования: после нажатия кнопки «Запустить RFID» на экране
+  /// ридер начинает сразу считывать метки (без обязательного нажатия
+  /// физического курка).
   Future<void> startScan() async => _method.invokeMethod('start');
 
   Future<void> stopScan() async => _method.invokeMethod('stop');
@@ -15,4 +18,10 @@ class RfidService {
 
   Future<void> setPower(int level) async =>
       _method.invokeMethod('setPower', {'level': level});
+
+  /// Запись EPC в MemoryBank.EPC метки (асинхронно).
+  /// Нативная сторона (Android/iOS) должна реализовать метод 'writeEpc'.
+  /// Возвращает успех или бросает PlatformException с кодом: WRITE_FAILED, WRITE_LOCK, NO_TAG_FOUND, MULTIPLE_TAGS.
+  Future<void> writeEpc(String epc) async =>
+      _method.invokeMethod('writeEpc', {'epc': epc});
 }

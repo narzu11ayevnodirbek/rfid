@@ -44,7 +44,8 @@ class ApiClient {
 
       final response = await dio.post(
         endpoint,
-        data: body,
+        // data: body,
+        data: FormData.fromMap(body),
         options: optionsWithBearer(),
       );
 
