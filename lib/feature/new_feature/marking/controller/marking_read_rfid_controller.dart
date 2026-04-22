@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
+import '../../../../../core/api/api_client.dart';
 import '../../../../core/api/api_client.dart';
 import '../../rfid/rfid_bus.dart';
 import '../../rfid/rfid_session.dart';
@@ -23,6 +24,7 @@ class MarkingReadRfidController extends GetxController {
 
   final Set<String> _scanned = {};
   late final StreamSubscription<String> _sub;
+  String? _lastEpc;
 
   @override
   void onInit() {
@@ -34,12 +36,15 @@ class MarkingReadRfidController extends GetxController {
   }
 
   Future<void> _onTagRead(String epc) async {
-    if (_scanned.contains(epc)) return;
-    _scanned.add(epc);
+    final n = epc.trim().toUpperCase();
+    if (_lastEpc == n) return;
+    _lastEpc = n;
+    if (_scanned.contains(n)) return;
+    _scanned.add(n);
 
     readCount.value++;
 
-    final ok = await _bindTag(epc);
+    final ok = await _bindTag(n);
     if (ok) {
       marked.value++;
       notMarked.value = total.value - marked.value;
@@ -47,13 +52,20 @@ class MarkingReadRfidController extends GetxController {
   }
 
   Future<bool> _bindTag(String epc) async {
-    return ApiClient().sendTagRequest(
-      endpoint: 'api/bind_rfid_to_item.php',
-      body: {
-        'item_id': task.id,
-        'epc': epc,
-      },
-    );
+    try {
+      final ok = await ApiClient().sendTagRequest(
+        endpoint: 'api/process_marking_scan.php',
+        body: {
+          'marking_id': task.markingId,
+          'task_id': task.id,
+          'item_id': task.id,
+          'rfid': epc,
+        },
+      );
+      return ok;
+    } catch (_) {
+      return false;
+    }
   }
 
   Future<void> applyPower() async {}

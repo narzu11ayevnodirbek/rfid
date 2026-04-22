@@ -11,9 +11,10 @@ import 'package:rf_id_test/feature/home/presentation/bloc/home/home_bloc.dart';
 import 'package:rf_id_test/feature/home/presentation/pages/home/home_page.dart';
 // import 'package:rf_id_test/feature/home/presentation/pages/inventory/inventory_page.dart';
 import 'package:rf_id_test/feature/home/presentation/pages/main/main_page.dart';
-import 'package:rf_id_test/feature/new_feature/inventory/pages/inventory_page.dart';
-import 'package:rf_id_test/feature/new_feature/marking/pages/marking_page.dart';
-import 'package:rf_id_test/feature/new_feature/movement/pages/movement_page.dart';
+// import 'package:rf_id_test/feature/new_feature/bind_rfid/pages/bind_rfid_page.dart';
+// import 'package:rf_id_test/feature/new_feature/inventory/pages/inventory_page.dart';
+// import 'package:rf_id_test/feature/new_feature/marking/pages/marking_page.dart';
+// import 'package:rf_id_test/feature/new_feature/movement/pages/movement_page.dart';
 // import 'package:rf_id_test/feature/home/presentation/pages/marking/marking_page.dart';
 // import 'package:rf_id_test/feature/home/presentation/pages/products/products_page.dart';
 // import 'package:rf_id_test/feature/home/presentation/pages/transition/movement_page.dart';
@@ -24,6 +25,9 @@ import 'package:rf_id_test/router/route_names.dart';
 import '../feature/home/presentation/pages/inventory/inventory_page.dart';
 import '../feature/home/presentation/pages/marking/marking_page.dart';
 import '../feature/home/presentation/pages/transition/transition_page.dart';
+import '../feature/new_feature/inventory/pages/inventory_page.dart';
+import '../feature/new_feature/marking/pages/marking_page.dart';
+import '../feature/new_feature/movement/pages/movement_page.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final shellRootNavigatorKey = GlobalKey<StatefulNavigationShellState>();
@@ -117,6 +121,21 @@ final GoRouter router = GoRouter(
             ),
           ],
         ),
+
+        // StatefulShellBranch(
+        //   routes: [
+        //     GoRoute(
+        //       name: Routes.bindRfid,
+        //       path: Routes.bindRfid,
+        //       // builder: (_, __) => BlocProvider<InventoryBloc>(
+        //       //   create: (context) => sl<InventoryBloc>(),
+        //       //   child: const InventoryPage(),
+        //       // ),
+        //       builder: (context, state) => const BindRfidPage(),
+        //       routes: [],
+        //     ),
+        //   ],
+        // ),
       ],
     ),
   ],

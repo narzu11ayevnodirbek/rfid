@@ -10,6 +10,7 @@ class TagModel {
     required this.code,
     required this.hasRfid,
     required this.imageUrl,
+    required this.rfid,
   });
 
   factory TagModel.fromJson(Map<String, dynamic> json) => TagModel(
@@ -23,6 +24,7 @@ class TagModel {
         responsible: json['responsible'] ?? '',
         createdAt: json['created_at'] ?? '',
         imageUrl: json['photo_path'] ?? '',
+        rfid: json['rfid']?.toString() ?? '',
       );
 
   final String id;
@@ -36,6 +38,7 @@ class TagModel {
   final String code;
   final bool hasRfid;
   final String imageUrl;
+  final String rfid;
 
   String get data => '$name ($code)';
 

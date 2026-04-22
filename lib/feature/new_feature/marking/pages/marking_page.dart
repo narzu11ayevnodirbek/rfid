@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rf_id_test/feature/new_feature/marking/controller/marking_controller.dart';
+import '../controller/marking_controller.dart';
 import 'marking_items_page.dart';
+import '../../inventory/pages/view_page.dart';
 
 class MarkingPage extends StatelessWidget {
   const MarkingPage({super.key});
@@ -18,12 +20,18 @@ class MarkingPage extends StatelessWidget {
             onSelected: (value) {
               if (value == 'exchange') {
                 inv.refreshMarkings();
+              } else if (value == 'view') {
+                Get.to(const ViewPage());
               }
             },
             itemBuilder: (context) => [
               const PopupMenuItem(
                 value: 'exchange',
                 child: Text('Обмен'),
+              ),
+              const PopupMenuItem(
+                value: 'view',
+                child: Text('Просмотр'),
               ),
             ],
           ),

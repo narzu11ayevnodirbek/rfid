@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/movement/controllers/movement_controller.dart';
-import 'package:rf_id_test/feature/new_feature/movement/pages/movement_rfid_page.dart';
+// import 'package:rf_id_test/feature/new_feature/movement/controllers/movement_controller.dart';
+// import 'package:rf_id_test/feature/new_feature/movement/pages/free_transfer_page.dart';
+// import 'package:rf_id_test/feature/new_feature/movement/pages/movement_rfid_page.dart';
+
+import '../controllers/movement_controller.dart';
+import 'free_transfer_page.dart';
+import 'movement_rfid_page.dart';
+import '../../inventory/pages/view_page.dart';
 
 class MovementPage extends StatelessWidget {
   const MovementPage({super.key});
@@ -12,18 +18,24 @@ class MovementPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Перемишение'),
+        title: const Text('Перемещение'),
         actions: [
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == 'exchange') {
                 movement.refreshMovements();
+              } else if (value == 'view') {
+                Get.to(const ViewPage());
               }
             },
             itemBuilder: (context) => [
               const PopupMenuItem(
                 value: 'exchange',
                 child: Text('Обмен'),
+              ),
+              const PopupMenuItem(
+                value: 'view',
+                child: Text('Просмотр'),
               ),
             ],
           ),
@@ -44,9 +56,29 @@ class MovementPage extends StatelessWidget {
           return ListView.separated(
             padding: const EdgeInsets.all(12),
             separatorBuilder: (_, __) => const SizedBox(height: 8),
-            itemCount: movement.movements.length,
+            itemCount: movement.movements.length + 1,
             itemBuilder: (context, index) {
-              final item = movement.movements[index];
+              if (index == 0) {
+                return GestureDetector(
+                  onTap: () => Get.to(const FreeTransferPage()),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade100,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.open_in_new, color: Colors.blue),
+                        SizedBox(width: 12),
+                        Text('Свободное перемещение', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              final item = movement.movements[index - 1];
 
               return GestureDetector(
                 onTap: () {

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/api/api_client.dart';
+import '../../../../../injector_container.dart';
 import '../../../../core/api/api_client.dart';
 import '../../../../injector_container.dart';
 import '../models/marking_task_model.dart';
@@ -26,7 +28,7 @@ class MarkingItemsController extends GetxController {
 
     final res = await _dio.get(
       'api/get_marking_tasks_for_mobile.php',
-      queryParameters: {'item_id': markingId},
+      queryParameters: {'marking_id': int.tryParse(markingId) ?? markingId},
       options: optionsWithBearer(),
     );
 

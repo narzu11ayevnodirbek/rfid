@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import '../../../../../core/api/api_client.dart';
+import '../../../../../core/base/local_source.dart';
+import '../../../../../injector_container.dart';
 import '../../../../core/api/api_client.dart';
 import '../../../../core/base/local_source.dart';
 import '../../../../injector_container.dart';
@@ -47,5 +50,26 @@ class MarkingService {
     }
 
     return [];
+  }
+
+  Future<String> getItemPhoto({
+    required int markingId,
+    required String itemId,
+  }) async {
+    final response = await _dio.get(
+      'api/get_marking_items.php',
+      queryParameters: {'marking_id': markingId},
+      options: optionsWithBearer(),
+    );
+
+    if (response.data is Map && response.data['success'] == true) {
+      final list = List<Map<String, dynamic>>.from(response.data['data'] ?? []);
+      final found = list.firstWhere(
+            (e) => (e['id'] ?? e['item_id']).toString() == itemId,
+        orElse: () => {},
+      );
+      return (found['photo'] ?? found['photo_path'] ?? '').toString();
+    }
+    return '';
   }
 }

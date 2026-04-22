@@ -13,16 +13,19 @@ class MarkingItem {
   factory MarkingItem.fromJson(Map<String, dynamic> json, {
     required String markingId,
     required String taskId,
-  }) => MarkingItem(
-    id: json['id'].toString(),
+  }) {
+    print('MarkingItem JSON: $json');
+    return MarkingItem(
+    id: (json['item_id'] ?? json['id']).toString(),
     name: json['name'] ?? '',
-    markingNumber: json['inventory_number'] ?? '',
+    markingNumber: json['inventory_number'] ?? json['barcode'] ?? '',
     status: json['status'] ?? '',
-    photo: json['photo'] ?? '',
-    rfid: json['rfid'] ?? '',
+    photo: json['photo'] ?? json['photo_path'] ?? '',
+    rfid: (json['rfid'] ?? '').toString(),
     markingId: markingId,
     taskId: taskId,
   );
+  }
   final String id;
   final String name;
   final String markingNumber;

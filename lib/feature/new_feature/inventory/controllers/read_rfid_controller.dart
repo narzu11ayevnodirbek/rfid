@@ -4,7 +4,9 @@ import 'package:rf_id_test/feature/new_feature/inventory/models/inventory_task_m
 import '../../rfid/rfid_bus.dart';
 import '../../rfid/rfid_service.dart';
 import '../../rfid/rfid_session.dart';
+import '../../utils/app_snackbar.dart';
 import '../models/inventory_model.dart';
+import '../models/inventory_task_model.dart';
 import 'inventory_controller.dart';
 
 class ReadRfidController extends GetxController {
@@ -57,17 +59,9 @@ class ReadRfidController extends GetxController {
   }
 
   Future<void> start() async {
-    print('🔥 FLUTTER → startScan() CALLING...');
-    print('🔥 FLUTTER → startScan() CALLED OK!');
     if (isReading.value) return;
     await applyPower();
-    await _service.startScan();
     isReading.value = true;
-
-    Future.delayed(const Duration(seconds: 5), () async {
-      await _service.stopScan();
-      isReading.value = false;
-    });
   }
 
   Future<void> stop() async {
@@ -87,14 +81,14 @@ class ReadRfidController extends GetxController {
     final inv = Get.find<InventoryController>()..stopScan();
 
     if (inv.scannedTags.isEmpty) {
-      Get.snackbar('Ошибка', 'Нет считанных меток');
+      AppSnackbar.showError('Ошибка', 'Нет считанных меток');
       return;
     }
 
     final lastEpc = inv.scannedTags.last;
 
     await inv.sendTagToServer(lastEpc, status: '2');
-
+    AppSnackbar.showSuccess('Успешно', 'Данные отправлены в базу');
     Get.back();
   }
 }

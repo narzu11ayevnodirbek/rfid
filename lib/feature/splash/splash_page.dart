@@ -16,14 +16,16 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
-      context.go(localSource.getUserToken.isNotEmpty ? Routes.inventory : Routes.auth);
+      context.go(
+          localSource.getUserToken.isNotEmpty ? Routes.inventory : Routes.auth);
     });
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: Text('Splash'),
+          child: Image.asset('assets/logo/playstore.png',
+              width: 200, height: 200, fit: BoxFit.cover),
         ),
       );
 }

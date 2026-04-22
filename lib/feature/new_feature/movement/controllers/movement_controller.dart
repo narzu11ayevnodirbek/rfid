@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../utils/app_snackbar.dart';
 import '../models/movement_task_model.dart';
 import '../services/movement_task_service.dart';
 
@@ -31,37 +31,10 @@ class MovementController extends GetxController {
   Future<void> refreshMovements() async {
     try {
       isRefreshing.value = true;
-
-      // Loading snackbar
-      Get.snackbar(
-        'Yangilanmoqda...',
-        "Ma'lumotlar yuklanmoqda",
-        snackPosition: SnackPosition.BOTTOM,
-        showProgressIndicator: true,
-        duration: const Duration(seconds: 2),
-      );
-
       movements.value = await _service.getTasks();
-
-      // Success snackbar
-      Get.snackbar(
-        'Muvaffaqiyatli ✅',
-        "Ma'lumotlar yangilandi",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green.withOpacity(0.8),
-        colorText: Colors.white,
-        duration: const Duration(seconds: 2),
-      );
+      AppSnackbar.showSuccess('Успешно', 'Данные обновлены');
     } catch (e) {
-      // Error snackbar
-      Get.snackbar(
-        'Xatolik ❌',
-        "Qayta urunib ko'ring",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.8),
-        colorText: Colors.white,
-        duration:   Duration(seconds: 3),
-      );
+      AppSnackbar.showError('Ошибка', 'Не удалось обновить данные');
     } finally {
       isRefreshing.value = false;
     }
