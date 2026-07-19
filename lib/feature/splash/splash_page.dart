@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: Image.asset('assets/logo/playstore.png',
+          child: Image.asset('assets/logo/app_logo.png',
               width: 200, height: 200, fit: BoxFit.cover),
         ),
       );
