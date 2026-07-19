@@ -23,9 +23,6 @@ class App extends StatelessWidget {
             theme: state.lightTheme,
             darkTheme: state.darkTheme,
             routerConfig: router,
-            // routeInformationParser: router.routeInformationParser,
-            // routeInformationProvider: router.routeInformationProvider,
-            // routerDelegate: router.routerDelegate,
 
             /// app language
             locale: switch (state.appLocale) {

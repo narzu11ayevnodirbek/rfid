@@ -108,7 +108,7 @@ void _marking() {
 
 void _movement() {
   sl.registerLazySingleton<MovementService>(
-    () => MovementService(),
+    MovementService.new,
   );
 
   sl.registerLazySingleton<MovementRepository>(
