@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:rf_id_test/core/base/local_source.dart';
-import '../../../../../injector_container.dart';
-import '../../../../injector_container.dart';
+import 'package:rfid/core/base/local_source.dart';
+import '../../../../infrastructure/di/injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../models/inventory_task_model.dart';
 import '../services/inventory_service.dart';
 

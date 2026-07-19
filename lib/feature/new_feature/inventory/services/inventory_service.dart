@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:rf_id_test/core/base/local_source.dart';
-import 'package:rf_id_test/injector_container.dart';
+import 'package:rfid/core/base/local_source.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
 import '../../../../../core/api/api_client.dart';
 import '../../../../core/api/api_client.dart';
 import '../models/inventory_item.dart';

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:rf_id_test/core/api/api_client.dart';
-import 'package:rf_id_test/core/constants/constants.dart';
-import 'package:rf_id_test/core/error/exceptions.dart';
-import 'package:rf_id_test/feature/auth/data/dto/user_dto.dart';
-import 'package:rf_id_test/feature/auth/domain/repository/auth_params.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/core/constants/constants.dart';
+import 'package:rfid/domain/failures/exceptions.dart';
+import 'package:rfid/feature/auth/data/dto/user_dto.dart';
+import 'package:rfid/feature/auth/domain/repository/auth_params.dart';
 
 class AuthRemoteDataSource {
   AuthRemoteDataSource({required Dio dio}) : _dio = dio;

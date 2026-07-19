@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rf_id_test/core/constants/constants.dart';
-import 'package:rf_id_test/core/enums/status_enums.dart';
-import 'package:rf_id_test/core/error/failure.dart';
-import 'package:rf_id_test/feature/home/domain/entity/products/products.dart';
-import 'package:rf_id_test/feature/home/domain/entity/products/products_filter.dart';
-import 'package:rf_id_test/feature/home/domain/use_case/get_list_use_case.dart';
+import 'package:rfid/core/constants/constants.dart';
+import 'package:rfid/infrastructure/enums/status_enums.dart';
+import 'package:rfid/domain/failures/failure.dart';
+import 'package:rfid/feature/home/domain/entity/products/products.dart';
+import 'package:rfid/feature/home/domain/entity/products/products_filter.dart';
+import 'package:rfid/feature/home/domain/use_case/get_list_use_case.dart';
 
 part 'products_event.dart';
 part 'products_state.dart';

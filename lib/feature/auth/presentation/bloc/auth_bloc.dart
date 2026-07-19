@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rf_id_test/core/enums/status_enums.dart';
-import 'package:rf_id_test/core/error/exceptions.dart';
-import 'package:rf_id_test/feature/auth/domain/repository/auth_params.dart';
-import 'package:rf_id_test/feature/auth/domain/repository/auth_repository.dart';
+import 'package:rfid/infrastructure/enums/status_enums.dart';
+import 'package:rfid/domain/failures/exceptions.dart';
+import 'package:rfid/feature/auth/domain/repository/auth_params.dart';
+import 'package:rfid/feature/auth/domain/repository/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

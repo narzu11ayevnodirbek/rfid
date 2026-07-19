@@ -1,4 +1,4 @@
-import 'package:rf_id_test/feature/home/domain/entity/get_list_entity/get_list_entity.dart';
+import 'package:rfid/feature/home/domain/entity/get_list_entity/get_list_entity.dart';
 
 class Products extends GetListEntity {
   const Products({

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-import 'package:rf_id_test/core/theme/themes.dart';
+import 'package:rfid/core/extension/extension.dart';
+import 'package:rfid/core/theme/themes.dart';
 
 class CachedNetworkImageView extends StatelessWidget {
   const CachedNetworkImageView({

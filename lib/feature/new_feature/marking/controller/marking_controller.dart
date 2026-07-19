@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/core/base/local_source.dart';
-import 'package:rf_id_test/feature/new_feature/marking/models/marking_model.dart';
-import 'package:rf_id_test/feature/new_feature/marking/services/marking_service.dart';
+import 'package:rfid/core/base/local_source.dart';
+import 'package:rfid/feature/new_feature/marking/models/marking_model.dart';
+import 'package:rfid/feature/new_feature/marking/services/marking_service.dart';
 import '../../../../../core/api/api_client.dart';
-import '../../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../../../../core/api/api_client.dart';
-import '../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../../rfid/rfid_bus.dart';
 import '../../utils/app_snackbar.dart';
 import '../models/marking_model.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rf_id_test/injector_container.dart';
-import 'package:rf_id_test/router/route_names.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
+import 'package:rfid/presentation/router/route_names.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rf_id_test/router/route_names.dart';
+import 'package:rfid/presentation/router/route_names.dart';
 
 part 'mixin/home_mixin.dart';
 

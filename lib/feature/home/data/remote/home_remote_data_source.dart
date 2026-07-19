@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:rf_id_test/core/api/api_client.dart';
-import 'package:rf_id_test/core/constants/constants.dart';
-import 'package:rf_id_test/core/error/exceptions.dart';
-import 'package:rf_id_test/feature/home/data/dto/get_list_model/get_list_model.dart';
-import 'package:rf_id_test/feature/home/data/dto/inventory/inventory_dto.dart';
-import 'package:rf_id_test/feature/home/data/dto/inventory/products_dto.dart';
-import 'package:rf_id_test/feature/home/domain/use_case/get_list_use_case.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/core/constants/constants.dart';
+import 'package:rfid/domain/failures/exceptions.dart';
+import 'package:rfid/feature/home/data/dto/get_list_model/get_list_model.dart';
+import 'package:rfid/feature/home/data/dto/inventory/inventory_dto.dart';
+import 'package:rfid/feature/home/data/dto/inventory/products_dto.dart';
+import 'package:rfid/feature/home/domain/use_case/get_list_use_case.dart';
 
 class HomeRemoteDataSource {
   HomeRemoteDataSource({required Dio dio}) : _dio = dio;

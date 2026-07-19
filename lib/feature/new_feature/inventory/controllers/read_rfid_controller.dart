@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/inventory/models/inventory_task_model.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
 import '../../rfid/rfid_bus.dart';
 import '../../rfid/rfid_service.dart';
 import '../../rfid/rfid_session.dart';

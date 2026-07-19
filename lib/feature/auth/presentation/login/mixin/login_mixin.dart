@@ -1,4 +1,4 @@
-part of 'package:rf_id_test/feature/auth/presentation/login/login_page.dart';
+part of 'package:rfid/feature/auth/presentation/login/login_page.dart';
 
 mixin LoginMixin on State<LoginPage> {
   late final AuthBloc _bloc;

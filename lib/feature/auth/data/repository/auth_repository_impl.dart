@@ -1,8 +1,8 @@
-import 'package:rf_id_test/core/base/local_source.dart';
-import 'package:rf_id_test/feature/auth/data/remote/auth_remote_data_source.dart';
-import 'package:rf_id_test/feature/auth/domain/entity/user.dart';
-import 'package:rf_id_test/feature/auth/domain/repository/auth_params.dart';
-import 'package:rf_id_test/feature/auth/domain/repository/auth_repository.dart';
+import 'package:rfid/core/base/local_source.dart';
+import 'package:rfid/feature/auth/data/remote/auth_remote_data_source.dart';
+import 'package:rfid/feature/auth/domain/entity/user.dart';
+import 'package:rfid/feature/auth/domain/repository/auth_params.dart';
+import 'package:rfid/feature/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({

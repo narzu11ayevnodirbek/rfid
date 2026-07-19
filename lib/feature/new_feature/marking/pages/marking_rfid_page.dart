@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/marking/pages/set_marking_rfid_page.dart';
-// import 'package:rf_id_test/feature/new_feature/marking/models/marking_item.dart';
-// import 'package:rf_id_test/feature/new_feature/marking/models/marking_task_model.dart';
-// import 'package:rf_id_test/feature/new_feature/marking/pages/set_marking_rfid_page.dart';
+import 'package:rfid/feature/new_feature/marking/pages/set_marking_rfid_page.dart';
 import '../../rfid/rfid_session.dart';
 import '../controller/marking_controller.dart';
 import '../controller/marking_read_rfid_controller.dart';

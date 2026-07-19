@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rf_id_test/core/enums/status_enums.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-import 'package:rf_id_test/feature/auth/domain/repository/auth_params.dart';
-import 'package:rf_id_test/feature/auth/presentation/bloc/auth_bloc.dart';
-import 'package:rf_id_test/feature/components/custom_app_bar.dart';
-import 'package:rf_id_test/feature/components/custom_text_field.dart';
-import 'package:rf_id_test/feature/components/loading_view.dart';
-import 'package:rf_id_test/router/route_names.dart';
+import 'package:rfid/infrastructure/enums/status_enums.dart';
+import 'package:rfid/core/extension/extension.dart';
+import 'package:rfid/feature/auth/domain/repository/auth_params.dart';
+import 'package:rfid/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:rfid/presentation/components/custom_app_bar.dart';
+import 'package:rfid/presentation/components/custom_text_field.dart';
+import 'package:rfid/presentation/components/loading_view.dart';
+import 'package:rfid/presentation/router/route_names.dart';
 
 part 'mixin/login_mixin.dart';
 

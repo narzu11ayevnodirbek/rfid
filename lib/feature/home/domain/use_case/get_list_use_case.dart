@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rf_id_test/core/base/usecase.dart';
-import 'package:rf_id_test/core/error/failure.dart';
-import 'package:rf_id_test/feature/home/domain/entity/get_list_entity/get_list_entity.dart';
-import 'package:rf_id_test/feature/home/domain/repository/home_repository.dart';
+import 'package:rfid/core/base/usecase.dart';
+import 'package:rfid/domain/failures/failure.dart';
+import 'package:rfid/feature/home/domain/entity/get_list_entity/get_list_entity.dart';
+import 'package:rfid/feature/home/domain/repository/home_repository.dart';
 
 class GetListUseCase implements UseCase<List<GetListEntity>, GetListParams> {
   GetListUseCase({required HomeRepository repository}) : _repository = repository;

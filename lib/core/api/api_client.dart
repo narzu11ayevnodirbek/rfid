@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:rf_id_test/injector_container.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
 
 import 'interceptors/auth_interceptor.dart';
 

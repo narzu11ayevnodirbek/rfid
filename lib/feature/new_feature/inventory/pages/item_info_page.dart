@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-// import 'package:rf_id_test/feature/new_feature/inventory/models/tag_model.dart';
+import 'package:rfid/core/extension/extension.dart';
 
-import '../models/tag_model.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
 
 class ItemInfoPage extends StatelessWidget {
   const ItemInfoPage({super.key, required this.item});
