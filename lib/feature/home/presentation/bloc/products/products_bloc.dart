@@ -10,6 +10,7 @@ import 'package:rfid/feature/home/domain/entity/products/products_filter.dart';
 import 'package:rfid/feature/home/domain/use_case/get_list_use_case.dart';
 
 part 'products_event.dart';
+
 part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {

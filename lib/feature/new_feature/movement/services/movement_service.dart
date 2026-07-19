@@ -3,9 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rfid/core/api/interceptors/http_to_https_interceptor.dart';
-// import 'package:rf_id_test/feature/new_feature/movement/models/movement_model.dart';
-import '../models/movement_item.dart';
-import '../models/movement_model.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_item.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_model.dart';
 
 class MovementService {
   MovementService() {
@@ -32,9 +31,7 @@ class MovementService {
     try {
       final response = await dio.get('https://mderp.uz/api/movements.php');
       if (response.data['success'] == true) {
-        return (response.data['data'] as List)
-            .map((e) => MovementModel.fromJson(e))
-            .toList();
+        return (response.data['data'] as List).map((e) => MovementModel.fromJson(e)).toList();
       }
       return [];
     } on DioException catch (e) {
@@ -96,10 +93,7 @@ class MovementService {
     if (response.data is Map && response.data['success'] == true) {
       final List list = response.data['data'];
 
-      return list
-          .map((e) =>
-              MovementItem.fromJson(e, movementId: movementId.toString()))
-          .toList();
+      return list.map((e) => MovementItem.fromJson(e, movementId: movementId.toString())).toList();
     }
 
     return [];
@@ -118,10 +112,9 @@ class MovementService {
       final List list = response.data['data'] ?? [];
       final found = list.cast<Map>().firstWhere(
             (e) => (e['item_id'] ?? e['id']).toString() == itemId,
-        orElse: () => {},
-      );
+            orElse: () => {},
+          );
 
-      // photo yoki photo_path bo‘lsa olamiz
       final p = (found['photo'] ?? found['photo_path'] ?? '').toString();
       return p;
     }

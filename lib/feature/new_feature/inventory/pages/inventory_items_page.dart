@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/inventory/pages/read_rfid_page.dart';
-import '../controllers/inventory_controller.dart';
-import '../controllers/inventory_task_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/inventory_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/inventory_task_controller.dart';
 
 class InventoryItemsPage extends StatelessWidget {
-  const InventoryItemsPage(
-      {super.key, required this.inventoryId, required this.inventory});
+  const InventoryItemsPage({super.key, required this.inventoryId, required this.inventory});
 
   final String inventoryId;
   final dynamic inventory;
 
   @override
   Widget build(BuildContext context) {
-    final itemsCtrl =
-        Get.isRegistered<InventoryTaskController>(tag: inventoryId)
-            ? Get.find<InventoryTaskController>(tag: inventoryId)
-            : Get.put(InventoryTaskController(inventoryId), tag: inventoryId);
+    final itemsCtrl = Get.isRegistered<InventoryTaskController>(tag: inventoryId)
+        ? Get.find<InventoryTaskController>(tag: inventoryId)
+        : Get.put(InventoryTaskController(inventoryId), tag: inventoryId);
 
     return Scaffold(
       appBar: AppBar(
@@ -40,8 +38,7 @@ class InventoryItemsPage extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  Get.find<InventoryController>().selectedInventoryId.value =
-                      inventoryId;
+                  Get.find<InventoryController>().selectedInventoryId.value = inventoryId;
 
                   Get.to(() => ReadRfidPage(
                         inventory: inventory,
@@ -60,14 +57,12 @@ class InventoryItemsPage extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Объект: ${item.location}',
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 12),
+                          style: const TextStyle(color: Colors.white, fontSize: 12),
                         ),
                       ),
                       const SizedBox(
                         height: 40,
-                        child:
-                            VerticalDivider(color: Colors.grey, thickness: 2),
+                        child: VerticalDivider(color: Colors.grey, thickness: 2),
                       ),
                       Expanded(
                         child: Column(
@@ -75,13 +70,11 @@ class InventoryItemsPage extends StatelessWidget {
                           children: [
                             Text(
                               'Прогресс: ${item.found}/${item.total}',
-                              style: const TextStyle(
-                                  color: Colors.white70, fontSize: 11),
+                              style: const TextStyle(color: Colors.white70, fontSize: 11),
                             ),
                             Text(
                               'Статус: ${item.status}',
-                              style: const TextStyle(
-                                  color: Colors.white70, fontSize: 11),
+                              style: const TextStyle(color: Colors.white70, fontSize: 11),
                             ),
                           ],
                         ),

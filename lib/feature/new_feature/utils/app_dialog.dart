@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Полноценные диалоги для ошибок и важных сообщений: причина и способ решения.
 class AppDialog {
   AppDialog._();
-  /// Показать диалог об ошибке с причиной и решением.
-  /// [title] — заголовок (например «Ошибка отправки»).
-  /// [message] — что произошло.
-  /// [reason] — возможная причина (опционально).
-  /// [solution] — что сделать (опционально).
+
   static Future<void> showError(
     BuildContext context, {
     required String title,
@@ -56,7 +51,6 @@ class AppDialog {
     );
   }
 
-  /// Показать диалог с информацией (успех или подсказка).
   static Future<void> showInfo(
     BuildContext context, {
     required String title,

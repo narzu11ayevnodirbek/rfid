@@ -10,6 +10,7 @@ import 'package:rfid/feature/home/domain/entity/inventory/inventory.dart';
 import 'package:rfid/feature/home/domain/use_case/get_list_use_case.dart';
 
 part 'inventory_event.dart';
+
 part 'inventory_state.dart';
 
 class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
@@ -27,15 +28,10 @@ class InventoryBloc extends Bloc<InventoryEvent, InventoryState> {
     Emitter<InventoryState> emit,
   ) async {
     emit(state.copyWith(status: PageStatus.loading));
-    final result = await _getListUseCase(const GetListParams(
-      destination: Urls.inventory,
-    ));
+    final result = await _getListUseCase(const GetListParams(destination: Urls.inventory));
 
     result.fold(
-      (e) => emit(state.copyWith(
-        status: PageStatus.error,
-        message: e is ServerFailure ? e.message : e.message,
-      )),
+      (e) => emit(state.copyWith(status: PageStatus.error, message: e is ServerFailure ? e.message : e.message)),
       (r) {
         printLog(r);
         emit(state.copyWith(

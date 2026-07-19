@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-import '../models/tag_model.dart';
-import '../services/items_service.dart';
-import '../../rfid/rfid_service.dart';
-import '../../utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
+import 'package:rfid/feature/new_feature/inventory/services/items_service.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_service.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
 
 class ViewController extends GetxController {
   final RfidService _rfid = RfidService();
@@ -59,7 +59,6 @@ class ViewController extends GetxController {
   void _onTagRead(String epc) {
     if (!isReading.value) return;
 
-    // Пытаемся найти объект по rfid
     final found = _allItems.firstWhereOrNull(
       (item) => item.rfid.isNotEmpty && item.rfid == epc,
     );
@@ -72,4 +71,3 @@ class ViewController extends GetxController {
     }
   }
 }
-

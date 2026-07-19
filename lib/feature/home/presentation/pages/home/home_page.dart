@@ -16,10 +16,11 @@ class _HomePageState extends State<HomePage> with HomeMixin {
   Widget build(BuildContext context) => Scaffold(
         body: Center(
           child: InkWell(
-              onTap: () {
-                context.pushNamed(Routes.products);
-              },
-              child: Text('Главная')),
+            onTap: () {
+              context.pushNamed(Routes.products);
+            },
+            child: const Text('Главная'),
+          ),
         ),
       );
 }

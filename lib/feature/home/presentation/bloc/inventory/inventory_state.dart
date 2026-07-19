@@ -23,9 +23,5 @@ class InventoryState extends Equatable {
       );
 
   @override
-  List<Object?> get props => [
-        status,
-        inventoryList,
-        message,
-      ];
+  List<Object?> get props => [status, inventoryList, message];
 }

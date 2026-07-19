@@ -1,10 +1,4 @@
-enum RfidMode {
-  none,
-  inventory,
-  marking,
-  movement,
-  bindRfid, // привязка метки к объекту (новые объекты)
-}
+enum RfidMode { none, inventory, marking, movement, bindRfid }
 
 class RfidSession {
   RfidSession._();

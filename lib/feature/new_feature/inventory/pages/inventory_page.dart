@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/inventory/pages/database_page.dart';
-import '../controllers/inventory_controller.dart';
-import 'database_page.dart';
-import 'inventory_items_page.dart';
-import 'view_page.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/inventory_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/inventory_items_page.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/view_page.dart';
 
 class InventoryPage extends StatelessWidget {
   const InventoryPage({super.key});
@@ -46,8 +45,7 @@ class InventoryPage extends StatelessWidget {
                         child: const Text('Отмена'),
                       ),
                       FilledButton(
-                        style:
-                            FilledButton.styleFrom(backgroundColor: Colors.red),
+                        style: FilledButton.styleFrom(backgroundColor: Colors.red),
                         onPressed: () async {},
                         child: const Text('Выйти'),
                       ),
@@ -78,9 +76,8 @@ class InventoryPage extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(3),
-          child: Obx(() => inv.isRefreshing.value
-              ? const LinearProgressIndicator(minHeight: 3)
-              : const SizedBox.shrink()),
+          child:
+              Obx(() => inv.isRefreshing.value ? const LinearProgressIndicator(minHeight: 3) : const SizedBox.shrink()),
         ),
       ),
       body: Obx(
@@ -89,10 +86,7 @@ class InventoryPage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // Показываем все инвентаризации, кроме закрытых (пропадать должна только после «Закрыть» на сервере)
-          final assignedInventories = inv.inventories
-              .where((item) => item.statusCode != 'closed')
-              .toList();
+          final assignedInventories = inv.inventories.where((item) => item.statusCode != 'closed').toList();
 
           return ListView.separated(
             padding: const EdgeInsets.all(12),
@@ -104,8 +98,7 @@ class InventoryPage extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   inv.selectedInventoryId.value = item.id;
-                  Get.to(() => InventoryItemsPage(
-                      inventoryId: item.id, inventory: item));
+                  Get.to(() => InventoryItemsPage(inventoryId: item.id, inventory: item));
                 },
                 child: Container(
                   padding: const EdgeInsets.all(12),
@@ -120,11 +113,8 @@ class InventoryPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Инвентаризация №${item.name}  ',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
-                            Text(item.userName ?? '',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
+                                style: const TextStyle(color: Colors.white, fontSize: 9)),
+                            Text(item.userName ?? '', style: const TextStyle(color: Colors.white, fontSize: 9)),
                           ],
                         ),
                       ),
@@ -141,12 +131,9 @@ class InventoryPage extends StatelessWidget {
                           children: [
                             Text(
                               'Дата создания: ${item.createdAt}',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 9),
+                              style: const TextStyle(color: Colors.white, fontSize: 9),
                             ),
-                            Text('Тип: ${item.type}',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
+                            Text('Тип: ${item.type}', style: const TextStyle(color: Colors.white, fontSize: 9)),
                           ],
                         ),
                       )

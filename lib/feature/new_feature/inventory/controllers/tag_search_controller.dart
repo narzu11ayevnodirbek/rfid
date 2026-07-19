@@ -1,17 +1,15 @@
 import 'package:flutter/foundation.dart';
-import '../models/tag_model.dart';
-import '../services/items_service.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
+import 'package:rfid/feature/new_feature/inventory/services/items_service.dart';
 
 class TagSearchController extends ChangeNotifier {
   TagSearchController();
 
   final ItemsService _service = ItemsService();
 
-  final ValueNotifier<List<TagModel>> allTags =
-      ValueNotifier<List<TagModel>>([]);
+  final ValueNotifier<List<TagModel>> allTags = ValueNotifier<List<TagModel>>([]);
 
-  final ValueNotifier<List<TagModel>> filteredTags =
-      ValueNotifier<List<TagModel>>([]);
+  final ValueNotifier<List<TagModel>> filteredTags = ValueNotifier<List<TagModel>>([]);
 
   Future<void> load() async {
     final data = await _service.fetchItems();
@@ -27,12 +25,10 @@ class TagSearchController extends ChangeNotifier {
 
     final q = query.toLowerCase();
 
-    filteredTags.value =
-        allTags.value.where((e) => e.data.toLowerCase().contains(q)).toList();
+    filteredTags.value = allTags.value.where((e) => e.data.toLowerCase().contains(q)).toList();
   }
 
-  List<TagModel> get scannedOnly =>
-      allTags.value.where((e) => e.hasRfid).toList();
+  List<TagModel> get scannedOnly => allTags.value.where((e) => e.hasRfid).toList();
 
   @override
   void dispose() {

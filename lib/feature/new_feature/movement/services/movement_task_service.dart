@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
 
-import '../../../../../core/api/api_client.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../../../core/api/api_client.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../models/movement_task_model.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_task_model.dart';
 
 class MovementTaskService {
   final Dio _dio = sl<Dio>();
@@ -16,9 +14,7 @@ class MovementTaskService {
     );
 
     if (res.data['success'] == true) {
-      return (res.data['data'] as List)
-          .map((e) => MovementTaskModel.fromJson(e))
-          .toList();
+      return (res.data['data'] as List).map((e) => MovementTaskModel.fromJson(e)).toList();
     }
     return [];
   }

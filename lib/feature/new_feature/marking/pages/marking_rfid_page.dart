@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/marking/pages/set_marking_rfid_page.dart';
-import '../../rfid/rfid_session.dart';
-import '../controller/marking_controller.dart';
-import '../controller/marking_read_rfid_controller.dart';
-import '../models/marking_item.dart';
-import '../models/marking_task_model.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_session.dart';
+import 'package:rfid/feature/new_feature/marking/controller/marking_controller.dart';
+import 'package:rfid/feature/new_feature/marking/controller/marking_read_rfid_controller.dart';
+import 'package:rfid/feature/new_feature/marking/models/marking_item.dart';
+import 'package:rfid/feature/new_feature/marking/models/marking_task_model.dart';
 
 class MarkingRfidPage extends StatefulWidget {
   const MarkingRfidPage({super.key, required this.marking, required this.task});
@@ -23,7 +23,6 @@ class _MarkingRfidPageState extends State<MarkingRfidPage> {
   @override
   void initState() {
     super.initState();
-    // Используем items, уже пришедшие в задаче из API get_marking_tasks_for_mobile.php
     items = widget.task.items
         .map(
           (e) => MarkingItem.fromJson(
@@ -72,14 +71,11 @@ class _MarkingRfidPageState extends State<MarkingRfidPage> {
                       : ListView.separated(
                           padding: const EdgeInsets.all(12),
                           itemCount: items.length,
-                          separatorBuilder: (_, __) =>
-                              const SizedBox(height: 8),
+                          separatorBuilder: (_, __) => const SizedBox(height: 8),
                           itemBuilder: (_, index) {
                             final item = items[index];
 
-                            final isBound = markingController
-                                .completedItemIds
-                                .contains(item.id);
+                            final isBound = markingController.completedItemIds.contains(item.id);
 
                             return GestureDetector(
                               onTap: isBound
@@ -88,8 +84,7 @@ class _MarkingRfidPageState extends State<MarkingRfidPage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) =>
-                                              SetMarkingRfidPage(item: item),
+                                          builder: (_) => SetMarkingRfidPage(item: item),
                                         ),
                                       );
                                     },
@@ -105,13 +100,10 @@ class _MarkingRfidPageState extends State<MarkingRfidPage> {
                                     Expanded(
                                       child: Text(
                                         item.name,
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     ),
-                                    if (isBound)
-                                      const Icon(Icons.check_circle,
-                                          color: Colors.white)
+                                    if (isBound) const Icon(Icons.check_circle, color: Colors.white)
                                   ],
                                 ),
                               ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/marking/controller/marking_controller.dart';
-import '../controller/marking_controller.dart';
-import 'marking_items_page.dart';
-import '../../inventory/pages/view_page.dart';
+import 'package:rfid/feature/new_feature/marking/pages/marking_items_page.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/view_page.dart';
 
 class MarkingPage extends StatelessWidget {
   const MarkingPage({super.key});
@@ -38,9 +37,8 @@ class MarkingPage extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(3),
-          child: Obx(() => inv.isRefreshing.value
-              ? const LinearProgressIndicator(minHeight: 3)
-              : const SizedBox.shrink()),
+          child:
+              Obx(() => inv.isRefreshing.value ? const LinearProgressIndicator(minHeight: 3) : const SizedBox.shrink()),
         ),
       ),
       body: Obx(
@@ -73,12 +71,9 @@ class MarkingPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Маркировка №${item.id}  ',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
+                            Text('Маркировка №${item.id}  ', style: const TextStyle(color: Colors.white, fontSize: 9)),
                             Text('${item.name}: ${item.type}',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
+                                style: const TextStyle(color: Colors.white, fontSize: 9)),
                           ],
                         ),
                       ),
@@ -95,12 +90,9 @@ class MarkingPage extends StatelessWidget {
                           children: [
                             Text(
                               'Дата создания: ${item.createdAt}',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 9),
+                              style: const TextStyle(color: Colors.white, fontSize: 9),
                             ),
-                            Text('Тип: ${item.name}',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
+                            Text('Тип: ${item.name}', style: const TextStyle(color: Colors.white, fontSize: 9)),
                           ],
                         ),
                       )

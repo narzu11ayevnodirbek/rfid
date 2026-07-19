@@ -1,12 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'base_functions.dart';
-import 'base_state.dart';
+import 'package:rfid/core/base/base_functions.dart';
+import 'package:rfid/core/base/base_state.dart';
 
 abstract class BaseCubit<BUILDABLE, LISTENABLE> extends Cubit<BaseState<BUILDABLE, LISTENABLE>> {
-  // final log = getIt<Logger>();
-  // final display = getIt<Display>();
-
   BaseCubit(BUILDABLE initialBuildable) : super(BaseState(buildable: initialBuildable)) {
     buildable = initialBuildable;
   }

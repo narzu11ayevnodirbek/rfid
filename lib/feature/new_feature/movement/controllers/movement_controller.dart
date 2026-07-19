@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import '../../utils/app_snackbar.dart';
-import '../models/movement_task_model.dart';
-import '../services/movement_task_service.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_task_model.dart';
+import 'package:rfid/feature/new_feature/movement/services/movement_task_service.dart';
 
 class MovementController extends GetxController {
   final MovementTaskService _service = MovementTaskService();
@@ -22,12 +22,6 @@ class MovementController extends GetxController {
     isLoading.value = false;
   }
 
-  // Future<void> refreshMovements() async {
-  //   isRefreshing.value = true;
-  //   movements.value = await _service.getTasks();
-  //   isRefreshing.value = false;
-  // }
-
   Future<void> refreshMovements() async {
     try {
       isRefreshing.value = true;
@@ -39,5 +33,4 @@ class MovementController extends GetxController {
       isRefreshing.value = false;
     }
   }
-
 }

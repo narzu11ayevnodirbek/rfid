@@ -26,5 +26,4 @@ class LocalSource {
   Future<void> clearUserData() async {
     await box.delete('auth_token');
   }
-
 }

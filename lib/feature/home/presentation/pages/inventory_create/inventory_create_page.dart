@@ -20,9 +20,7 @@ class _InventoryCreatePageState extends State<InventoryCreatePage> with Inventor
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: CustomAppBar(
-          title: widget.args.isCreate
-              ? 'Добавить новую инвентаризацию'
-              : 'Редактирование инвентаризации',
+          title: widget.args.isCreate ? 'Добавить новую инвентаризацию' : 'Редактирование инвентаризации',
           isBottomSheet: true,
         ),
         body: ListView(
@@ -54,8 +52,7 @@ class _InventoryCreatePageState extends State<InventoryCreatePage> with Inventor
               builder: (_, typeError, __) => Autocomplete(
                 optionsBuilder: (value) {
                   if (value.text.isEmpty) return const Iterable<String>.empty();
-                  return items
-                      .where((element) => element.toLowerCase().contains(value.text.toLowerCase()));
+                  return items.where((element) => element.toLowerCase().contains(value.text.toLowerCase()));
                 },
                 fieldViewBuilder: (
                   context,

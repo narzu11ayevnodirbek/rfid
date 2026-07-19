@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Подсказка на всех экранах с RFID: сканер читает метки только при нажатии физической кнопки на устройстве.
 class RfidTriggerHint extends StatelessWidget {
   const RfidTriggerHint({super.key});
 
-  static const String text =
-      'После нажатия «Запустить RFID» читайте метки, нажимая физическую кнопку на считывателе. '
+  static const String text = 'После нажатия «Запустить RFID» читайте метки, нажимая физическую кнопку на считывателе. '
       'Метки не читаются непрерывно — только в момент нажатия кнопки.';
 
   @override

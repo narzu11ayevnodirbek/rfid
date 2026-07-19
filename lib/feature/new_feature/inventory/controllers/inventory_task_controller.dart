@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
 import 'package:rfid/core/base/local_source.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../models/inventory_task_model.dart';
-import '../services/inventory_service.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
+import 'package:rfid/feature/new_feature/inventory/services/inventory_service.dart';
 
 class InventoryTaskController extends GetxController {
   InventoryTaskController(this.inventoryId);

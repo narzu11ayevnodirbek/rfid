@@ -1,5 +1,3 @@
-/// Модель задания на инвентаризацию по ТЗ (GET /api/inventory/{id}).
-/// expected_items — план: EPC и название объекта по локации.
 class InventoryPlanModel {
   InventoryPlanModel({
     required this.inventoryId,
@@ -11,8 +9,7 @@ class InventoryPlanModel {
     final list = json['expected_items'];
     final items = (list is List)
         ? (list)
-            .map((e) => ExpectedInventoryItem.fromJson(
-                e is Map<String, dynamic> ? e : Map<String, dynamic>.from(e)))
+            .map((e) => ExpectedInventoryItem.fromJson(e is Map<String, dynamic> ? e : Map<String, dynamic>.from(e)))
             .toList()
         : <ExpectedInventoryItem>[];
     return InventoryPlanModel(
@@ -30,8 +27,7 @@ class InventoryPlanModel {
 class ExpectedInventoryItem {
   ExpectedInventoryItem({required this.epc, required this.name});
 
-  factory ExpectedInventoryItem.fromJson(Map<String, dynamic> json) =>
-      ExpectedInventoryItem(
+  factory ExpectedInventoryItem.fromJson(Map<String, dynamic> json) => ExpectedInventoryItem(
         epc: (json['epc'] ?? '').toString().trim(),
         name: (json['name'] ?? '').toString(),
       );

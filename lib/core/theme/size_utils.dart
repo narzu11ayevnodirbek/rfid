@@ -103,17 +103,13 @@ const kPaddingAllB8 = EdgeInsets.fromLTRB(8, 8, 8, 0);
 const kPaddingLeft16Top0Right16Bottom12 = EdgeInsets.fromLTRB(16, 0, 16, 12);
 const kPaddingCardItemWithDivider = EdgeInsets.fromLTRB(16, 12, 12, 4);
 
-EdgeInsets kPadding12AvoidBottom(BuildContext context) =>
-    EdgeInsets.fromLTRB(12, 12, 12, 12 + context.padding.bottom);
+EdgeInsets kPadding12AvoidBottom(BuildContext context) => EdgeInsets.fromLTRB(12, 12, 12, 12 + context.padding.bottom);
 
-EdgeInsets kPadding12AvoidTop(BuildContext context) =>
-    EdgeInsets.fromLTRB(12, 12 + context.padding.top, 12, 12);
+EdgeInsets kPadding12AvoidTop(BuildContext context) => EdgeInsets.fromLTRB(12, 12 + context.padding.top, 12, 12);
 
-EdgeInsets kPadding8AvoidBottom(BuildContext context) =>
-    EdgeInsets.fromLTRB(8, 8, 8, 8 + context.padding.bottom);
+EdgeInsets kPadding8AvoidBottom(BuildContext context) => EdgeInsets.fromLTRB(8, 8, 8, 8 + context.padding.bottom);
 
-EdgeInsets kPadding8AvoidTop(BuildContext context) =>
-    EdgeInsets.fromLTRB(8, 8 + context.padding.top, 8, 8);
+EdgeInsets kPadding8AvoidTop(BuildContext context) => EdgeInsets.fromLTRB(8, 8 + context.padding.top, 8, 8);
 
 /// border radius
 const kRadius = Radius.zero;
@@ -160,8 +156,7 @@ const kShapeRoundedTop12 = RoundedRectangleBorder(
 );
 
 /// grid
-SliverGridDelegate itemGridDelegate(BuildContext context) =>
-    SliverGridDelegateWithFixedCrossAxisCount(
+SliverGridDelegate itemGridDelegate(BuildContext context) => SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,

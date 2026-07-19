@@ -41,10 +41,7 @@ class _ProductsPageState extends State<ProductsPage> with ProductsMixin {
                         itemCount: state.productsList.length,
                         itemBuilder: (context, index) {
                           final item = state.productsList[index];
-                          return ProductsItem(
-                            item: item,
-                            // onTap: () {},
-                          );
+                          return ProductsItem(item: item);
                         },
                         separatorBuilder: (_, __) => 12.kBoxHeight,
                       ),

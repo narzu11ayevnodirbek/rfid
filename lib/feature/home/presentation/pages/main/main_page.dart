@@ -26,8 +26,7 @@ class _MainPageState extends State<MainPage> {
             showSelectedLabels: true,
             showUnselectedLabels: true,
             backgroundColor: context.colorScheme.surfaceContainerHighest,
-            selectedIconTheme:
-                IconThemeData(color: context.colorScheme.onSurface),
+            selectedIconTheme: IconThemeData(color: context.colorScheme.onSurface),
             selectedItemColor: Theme.of(context).colorScheme.onSurface,
             unselectedIconTheme: const IconThemeData(color: Colors.grey),
             type: BottomNavigationBarType.fixed,
@@ -48,11 +47,6 @@ class _MainPageState extends State<MainPage> {
                 icon: Icon(Icons.swap_horizontal_circle_outlined),
                 activeIcon: Icon(Icons.swap_horizontal_circle),
               ),
-              // BottomNavigationBarItem(
-              //   label: 'Привязка меток',
-              //   icon: Icon(Icons.nfc),
-              //   activeIcon: Icon(Icons.nfc_rounded),
-              // ),
             ],
           ),
         ),

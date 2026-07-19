@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../rfid/rfid_service.dart';
-import '../../utils/app_dialog.dart';
-import '../../utils/app_snackbar.dart';
-import '../models/movement_task_model.dart';
-import '../services/transfer_service.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_service.dart';
+import 'package:rfid/feature/new_feature/utils/app_dialog.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_task_model.dart';
+import 'package:rfid/feature/new_feature/movement/services/transfer_service.dart';
 
-/// Контроллер экрана перемещения: сканирование меток списком, удаление по X, отправка пакета на сервер.
 class MovementRfidScanController extends GetxController {
   MovementRfidScanController(this.task);
 
@@ -18,7 +17,9 @@ class MovementRfidScanController extends GetxController {
   final RfidService _rfid = RfidService();
 
   final RxSet<String> _scannedSet = <String>{}.obs;
+
   List<String> get scannedList => _scannedSet.toList();
+
   int get scannedCount => _scannedSet.length;
 
   RxBool isScanning = false.obs;

@@ -6,28 +6,26 @@ class MovementItem {
     required this.status,
     required this.photo,
     required this.rfid,
-
-    required this.movementId
+    required this.movementId,
   });
 
   factory MovementItem.fromJson(Map<String, dynamic> json, {required String movementId}) {
     print('MovementItem JSON: $json');
     return MovementItem(
-    id: (json['item_id'] ?? json['id']).toString(),
-    name: json['name'] ?? '',
-    movementNumber: json['movement_number'] ?? '',
-    status: json['status'] ?? '',
-    photo: json['photo'] ?? '',
-    rfid: json['rfid'] ?? '',
-    movementId: movementId
-  );
+        id: (json['item_id'] ?? json['id']).toString(),
+        name: json['name'] ?? '',
+        movementNumber: json['movement_number'] ?? '',
+        status: json['status'] ?? '',
+        photo: json['photo'] ?? '',
+        rfid: json['rfid'] ?? '',
+        movementId: movementId);
   }
+
   final String id;
   final String name;
   final String movementNumber;
   final String status;
   final String photo;
   final String rfid;
-
   final String movementId;
 }

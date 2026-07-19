@@ -15,9 +15,8 @@ class ProductsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedPrice =
-        NumberFormat.currency(locale: 'ru_RU', symbol: 'сум', decimalDigits: 0)
-            .format(double.tryParse(item.price.toString()) ?? 0);
+    final formattedPrice = NumberFormat.currency(locale: 'ru_RU', symbol: 'сум', decimalDigits: 0)
+        .format(double.tryParse(item.price.toString()) ?? 0);
     return Material(
       child: InkWell(
         onTap: () {},
@@ -78,8 +77,7 @@ class ProductsItem extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: TitledText(
-                                  title: 'Цена', subTitle: formattedPrice),
+                              child: TitledText(title: 'Цена', subTitle: formattedPrice),
                             )
                           ],
                         )

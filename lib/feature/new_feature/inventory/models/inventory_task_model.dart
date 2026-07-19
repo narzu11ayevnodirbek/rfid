@@ -15,8 +15,7 @@ class InventoryTaskModel {
     required this.middleName,
   });
 
-  factory InventoryTaskModel.fromJson(Map<String, dynamic> json) =>
-      InventoryTaskModel(
+  factory InventoryTaskModel.fromJson(Map<String, dynamic> json) => InventoryTaskModel(
         id: json['id'] ?? '',
         inventoryId: json['inventory_id'] ?? '',
         employeeId: json['employee_id'] ?? '',

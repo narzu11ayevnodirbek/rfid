@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:logger/logger.dart';
-import 'package:rfid/core/base/base_functions.dart';
 import 'package:rfid/core/base/local_source.dart';
 import 'package:rfid/domain/failures/exceptions.dart';
 import 'package:rfid/domain/failures/failure.dart';

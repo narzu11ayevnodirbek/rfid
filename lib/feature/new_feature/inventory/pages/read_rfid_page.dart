@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:rf_id_test/feature/new_feature/inventory/pages/set_rfid_page.dart';
-// import 'package:rf_id_test/feature/new_feature/rfid/rfid_controller.dart';
-// import 'package:rf_id_test/feature/new_feature/utils/rfid_trigger_hint.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../rfid/rfid_controller.dart';
-import '../../utils/rfid_trigger_hint.dart';
-import '../controllers/inventory_controller.dart';
-import '../controllers/read_rfid_controller.dart';
-import '../models/inventory_item.dart';
-import '../models/inventory_task_model.dart';
-import '../repositories/inventory_repository.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_controller.dart';
+import 'package:rfid/feature/new_feature/utils/rfid_trigger_hint.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/inventory_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/read_rfid_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_item.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
+import 'package:rfid/feature/new_feature/inventory/repositories/inventory_repository.dart';
 
 class ReadRfidPage extends StatefulWidget {
   const ReadRfidPage({super.key, required this.inventory, required this.task});
@@ -30,8 +26,7 @@ class _ReadRfidPageState extends State<ReadRfidPage> {
   void initState() {
     super.initState();
 
-    futureItems = sl<InventoryRepository>()
-        .fetchInventoryItems(int.parse(widget.inventory.id));
+    futureItems = sl<InventoryRepository>().fetchInventoryItems(int.parse(widget.inventory.id));
   }
 
   final invController = Get.find<InventoryController>();
@@ -68,14 +63,13 @@ class _ReadRfidPageState extends State<ReadRfidPage> {
                       child: FilledButton.icon(
                         onPressed: () async {
                           final rfid = Get.find<RfidController>();
-                        if (c.isReading.value) {
-                          invController.stopScan();
+                          if (c.isReading.value) {
+                            invController.stopScan();
                             await rfid.stop();
                             await c.stop();
                           } else {
-                          invController.selectedInventoryId.value =
-                              widget.inventory.id;
-                          invController.startScan();
+                            invController.selectedInventoryId.value = widget.inventory.id;
+                            invController.startScan();
                             await rfid.initOnce();
                             await c.start();
                             await rfid.start();
@@ -87,16 +81,16 @@ class _ReadRfidPageState extends State<ReadRfidPage> {
                         label: Text(c.isReading.value ? 'Остановить RFID' : 'Запустить RFID'),
                       ),
                     ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: () async {
-                        await invController.finishTaskScan(task: widget.task);
-                      },
-                      icon: const Icon(Icons.cloud_upload),
-                      label: const Text('Отправить на сервер'),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: () async {
+                          await invController.finishTaskScan(task: widget.task);
+                        },
+                        icon: const Icon(Icons.cloud_upload),
+                        label: const Text('Отправить на сервер'),
+                      ),
                     ),
-                  ),
                   ],
                 ),
                 const SizedBox(height: 12),
