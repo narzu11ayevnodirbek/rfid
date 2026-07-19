@@ -1,4 +1,4 @@
-part of 'package:rf_id_test/feature/home/presentation/pages/products/products_page.dart';
+part of 'package:rfid/feature/home/presentation/pages/products/products_page.dart';
 
 mixin ProductsMixin on State<ProductsPage> {
   late final ProductsBloc _bloc;

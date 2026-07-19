@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/inventory/pages/database_page.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/database_page.dart';
 import '../controllers/inventory_controller.dart';
 import 'database_page.dart';
 import 'inventory_items_page.dart';

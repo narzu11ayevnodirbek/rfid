@@ -1,4 +1,4 @@
-import 'package:rf_id_test/feature/auth/domain/entity/user.dart';
+import 'package:rfid/feature/auth/domain/entity/user.dart';
 
 class AuthResponse {
   AuthResponse({

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:rf_id_test/core/enums/status_enums.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-import 'package:rf_id_test/feature/components/custom_app_bar.dart';
-import 'package:rf_id_test/feature/components/loading_view.dart';
-import 'package:rf_id_test/feature/home/presentation/bloc/products/products_bloc.dart';
-import 'package:rf_id_test/feature/home/presentation/pages/products/widget/products_item.dart';
+import 'package:rfid/infrastructure/enums/status_enums.dart';
+import 'package:rfid/core/extension/extension.dart';
+import 'package:rfid/presentation/components/custom_app_bar.dart';
+import 'package:rfid/presentation/components/loading_view.dart';
+import 'package:rfid/feature/home/presentation/bloc/products/products_bloc.dart';
+import 'package:rfid/feature/home/presentation/pages/products/widget/products_item.dart';
 
 part 'mixin/products_mixin.dart';
 

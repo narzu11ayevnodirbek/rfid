@@ -1,4 +1,4 @@
-part of 'package:rf_id_test/home/home_page_old.dart';
+part of 'package:rfid/home/home_page_old.dart';
 
 mixin HomeMixin on State<HomePage> {
   late final ValueNotifier<String> nfcReaderResult;

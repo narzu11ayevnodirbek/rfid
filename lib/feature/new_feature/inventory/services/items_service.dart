@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:rf_id_test/injector_container.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
 import '../models/tag_model.dart';
 
 class ItemsService {

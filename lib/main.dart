@@ -5,13 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' hide Transition;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/rfid/rfid_controller.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_controller.dart';
 
-import 'app/app.dart';
-import 'app/bloc/app_bloc.dart';
+import 'presentation/pages/app/app.dart';
+import 'application/app/app_bloc.dart';
 import 'feature/new_feature/inventory/controllers/inventory_controller.dart';
-import 'injector_container.dart' as di;
-import 'injector_container.dart';
+import 'infrastructure/di/injector_container.dart' as di;
+import 'infrastructure/di/injector_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

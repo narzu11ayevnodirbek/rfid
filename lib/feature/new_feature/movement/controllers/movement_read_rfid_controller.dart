@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/api/api_client.dart';
-import '../../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../../../../core/api/api_client.dart';
-import '../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../../rfid/rfid_bus.dart';
 import '../../rfid/rfid_session.dart';
 import '../models/movement_item.dart';

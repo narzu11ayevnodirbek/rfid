@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:rf_id_test/core/constants/constants.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
+import 'package:rfid/core/constants/constants.dart';
+import 'package:rfid/core/extension/extension.dart';
 
 class LocalSource {
   LocalSource(this.box);

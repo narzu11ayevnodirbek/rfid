@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:rf_id_test/feature/new_feature/rfid/rfid_bus.dart';
-import 'package:rf_id_test/feature/new_feature/rfid/rfid_service.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_bus.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_service.dart';
 // import 'package:rf_id_test/feature/new_feature/rfid/rfid_bus.dart';
 // import 'package:rf_id_test/feature/new_feature/rfid/rfid_service.dart';
 

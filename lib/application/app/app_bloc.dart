@@ -4,9 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-import 'package:rf_id_test/core/theme/themes.dart';
-import 'package:rf_id_test/injector_container.dart';
+import 'package:rfid/core/extension/extension.dart';
+import 'package:rfid/core/theme/themes.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';

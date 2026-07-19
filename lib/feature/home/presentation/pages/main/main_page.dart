@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
+import 'package:rfid/core/extension/extension.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.navigationShell});

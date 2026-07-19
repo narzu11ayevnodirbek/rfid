@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-import 'package:rf_id_test/feature/components/custom_app_bar.dart';
-import 'package:rf_id_test/feature/components/custom_text_field.dart';
+import 'package:rfid/core/extension/extension.dart';
+import 'package:rfid/presentation/components/custom_app_bar.dart';
+import 'package:rfid/presentation/components/custom_text_field.dart';
 
 part 'mixin/inventory_create_mixin.dart';
 

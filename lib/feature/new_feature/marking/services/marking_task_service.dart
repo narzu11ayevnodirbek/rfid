@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import '../../../../../core/api/api_client.dart';
 import '../../../../../core/base/local_source.dart';
-import '../../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../../../../core/api/api_client.dart';
 import '../../../../core/base/local_source.dart';
-import '../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../models/marking_model.dart';
 
 class MarkingTaskService {

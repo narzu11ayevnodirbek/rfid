@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/api/api_client.dart';
-import '../../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../../../../core/api/api_client.dart';
-import '../../../../injector_container.dart';
+import '../../../../infrastructure/di/injector_container.dart';
 import '../models/marking_task_model.dart';
 
 class MarkingItemsController extends GetxController {

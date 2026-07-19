@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:rf_id_test/core/l10n/app_localizations.dart';
+import 'package:rfid/infrastructure/localization/app_localizations.dart';
 
-import '../router/app_routes.dart';
-import 'bloc/app_bloc.dart';
+import '../../../application/app/app_bloc.dart';
+import '../../router/app_routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,9 +15,7 @@ class App extends StatelessWidget {
         builder: (context, state) => KeyboardDismisser(
           child: MaterialApp.router(
             title: 'Rf Id Inventory',
-
             debugShowCheckedModeBanner: false,
-            // themeMode: state.themeMode,
             themeMode: ThemeMode.light,
             theme: state.lightTheme,
             darkTheme: state.darkTheme,

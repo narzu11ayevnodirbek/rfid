@@ -1,4 +1,4 @@
-import 'package:rf_id_test/feature/new_feature/movement/services/movement_service.dart';
+import 'package:rfid/feature/new_feature/movement/services/movement_service.dart';
 import 'models/movement_item.dart';
 
 class MovementRepository {

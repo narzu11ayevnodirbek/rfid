@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:rf_id_test/core/l10n/app_localizations.dart';
-import 'package:rf_id_test/core/theme/themes.dart';
+import 'package:rfid/core/theme/themes.dart';
+import 'package:rfid/infrastructure/localization/app_localizations.dart';
 
 part 'build_context_extension.dart';
 part 'date_parse_extension.dart';

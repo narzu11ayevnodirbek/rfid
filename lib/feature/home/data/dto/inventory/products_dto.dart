@@ -1,5 +1,5 @@
-import 'package:rf_id_test/feature/home/data/dto/get_list_model/get_list_model.dart';
-import 'package:rf_id_test/feature/home/domain/entity/products/products.dart';
+import 'package:rfid/feature/home/data/dto/get_list_model/get_list_model.dart';
+import 'package:rfid/feature/home/domain/entity/products/products.dart';
 
 class ProductsDto extends GetListModel {
   const ProductsDto({

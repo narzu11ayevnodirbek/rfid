@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
+import 'package:rfid/core/extension/extension.dart';
 
 class AuthTextField extends StatelessWidget {
   const AuthTextField({

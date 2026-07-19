@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rf_id_test/core/extention/extension.dart';
-import 'package:rf_id_test/feature/components/titled_status.dart';
-import 'package:rf_id_test/feature/components/titled_text.dart';
-import 'package:rf_id_test/feature/home/domain/entity/products/products.dart';
+import 'package:rfid/core/extension/extension.dart';
+import 'package:rfid/presentation/components/titled_status.dart';
+import 'package:rfid/presentation/components/titled_text.dart';
+import 'package:rfid/feature/home/domain/entity/products/products.dart';
 
 final BorderRadius _borderRadius = 12.kBorderRadiusAll;
 final EdgeInsets _padding = 16.kPaddingAll;

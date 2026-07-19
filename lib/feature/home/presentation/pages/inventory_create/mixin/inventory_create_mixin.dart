@@ -1,4 +1,4 @@
-part of 'package:rf_id_test/feature/home/presentation/pages/inventory_create/inventory_create_page.dart';
+part of 'package:rfid/feature/home/presentation/pages/inventory_create/inventory_create_page.dart';
 
 mixin InventoryCreateMixin on State<InventoryCreatePage> {
   late final TextEditingController _nameTextController;

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
-import 'package:rf_id_test/core/api/interceptors/http_to_https_interceptor.dart';
+import 'package:rfid/core/api/interceptors/http_to_https_interceptor.dart';
 // import 'package:rf_id_test/feature/new_feature/movement/models/movement_model.dart';
 import '../models/movement_item.dart';
 import '../models/movement_model.dart';
