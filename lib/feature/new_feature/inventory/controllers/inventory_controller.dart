@@ -2,18 +2,15 @@ import 'dart:async';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../../../../core/api/api_client.dart';
-import '../../../../../core/base/local_source.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../../../core/api/api_client.dart';
-import '../../../../core/base/local_source.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../rfid/rfid_bus.dart';
-import '../../utils/app_snackbar.dart';
-import '../models/inventory_item.dart';
-import '../models/inventory_model.dart';
-import '../models/inventory_task_model.dart';
-import '../services/inventory_service.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/core/base/local_source.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_bus.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_item.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_model.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
+import 'package:rfid/feature/new_feature/inventory/services/inventory_service.dart';
 
 class InventoryController extends GetxController {
   RxBool lastScanSuccess = false.obs;
@@ -26,13 +23,11 @@ class InventoryController extends GetxController {
   RxBool isRefreshing = false.obs;
 
   bool _scanActive = false;
-  // final Set<String> _sentTags = {};
 
   final LocalSource _localSource = sl<LocalSource>();
   late final InventoryService _service;
 
   RxList<String> scannedTags = <String>[].obs;
-  /// ID единиц, по которым нажали «Завершить» — зелёные, не открывать снова
   final RxList<String> completedItemIds = <String>[].obs;
   RxString selectedInventoryId = ''.obs;
   RxString selectedTaskId = ''.obs;
@@ -58,7 +53,7 @@ class InventoryController extends GetxController {
 
   void startScan() {
     _scanActive = true;
-    lastScanSuccess.value = false; // сброс, чтобы не показывать "прочитано" до реального чтения
+    lastScanSuccess.value = false;
     _buffer.clear();
   }
 
@@ -69,10 +64,7 @@ class InventoryController extends GetxController {
     final tags = List<String>.from(_buffer);
     _buffer.clear();
 
-    for (final epc in tags) {
-
-
-    }
+    for (final epc in tags) {}
   }
 
   void stopScan() {
@@ -90,7 +82,6 @@ class InventoryController extends GetxController {
 
     _buffer.add(epc);
     lastScanSuccess.value = true;
-
 
     print('🟢 BUFFER SIZE: ${_buffer.length}');
   }
@@ -202,7 +193,6 @@ class InventoryController extends GetxController {
     return ok;
   }
 
-  /// Отправка всех считанных меток для выбранной инвентаризации/задачи.
   Future<bool> finishTaskScan({required InventoryTaskModel task}) async {
     if (scannedTags.isEmpty) {
       AppSnackbar.showError('Ошибка', 'Нет считанных меток для отправки');
@@ -232,5 +222,4 @@ class InventoryController extends GetxController {
       return false;
     }
   }
-
 }

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:rfid/infrastructure/di/injector_container.dart';
 
-import 'interceptors/auth_interceptor.dart';
+import 'package:rfid/core/api/interceptors/auth_interceptor.dart';
 
 class ApiClient {
   static const String _baseUrl = 'http://localhost/';
@@ -34,7 +34,6 @@ class ApiClient {
 
   Dio get getDio => _getDio();
 
-
   Future<bool> sendTagRequest({
     required String endpoint,
     required Map<String, dynamic> body,
@@ -44,7 +43,6 @@ class ApiClient {
 
       final response = await dio.post(
         endpoint,
-        // data: body,
         data: FormData.fromMap(body),
         options: optionsWithBearer(),
       );
@@ -59,7 +57,6 @@ class ApiClient {
       return false;
     }
   }
-
 }
 
 extension ApiExt on Response {

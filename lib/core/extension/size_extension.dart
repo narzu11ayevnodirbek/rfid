@@ -1,14 +1,11 @@
 part of 'extension.dart';
 
 extension SizeExtension on BuildContext {
-  bool get isMobile =>
-      MediaQuery.of(this).size.width < 600 && (Platform.isAndroid || Platform.isIOS);
+  bool get isMobile => MediaQuery.of(this).size.width < 600 && (Platform.isAndroid || Platform.isIOS);
 
-  bool get isTablet =>
-      MediaQuery.of(this).size.width > 600 && (Platform.isAndroid || Platform.isIOS);
+  bool get isTablet => MediaQuery.of(this).size.width > 600 && (Platform.isAndroid || Platform.isIOS);
 
-  double get doubleToWidth =>
-      isMobile ? MediaQuery.of(this).size.width : (MediaQuery.of(this).size.width - 48) / 2;
+  double get doubleToWidth => isMobile ? MediaQuery.of(this).size.width : (MediaQuery.of(this).size.width - 48) / 2;
 
   EdgeInsets get kMargin16 => EdgeInsets.only(
         top: MediaQuery.of(this).padding.top,

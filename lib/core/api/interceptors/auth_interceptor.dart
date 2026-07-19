@@ -22,17 +22,13 @@ class AuthInterceptor extends QueuedInterceptor {
 
   @override
   Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
-    // faqat 401 va refresh emas bo‘lsa
-    if (err.response?.statusCode == 401 &&
-        !_isRefreshing &&
-        !_isRefreshRequest(err.requestOptions)) {
+    if (err.response?.statusCode == 401 && !_isRefreshing && !_isRefreshRequest(err.requestOptions)) {
       _isRefreshing = true;
 
       try {
         final String newToken = await _refreshTokenRequest();
         await localSource.setUserToken(newToken);
 
-        // eski requestni yangilangan token bilan yuboramiz
         final RequestOptions requestOptions = err.requestOptions;
 
         final newHeaders = Map<String, dynamic>.from(requestOptions.headers);
@@ -51,8 +47,6 @@ class AuthInterceptor extends QueuedInterceptor {
     }
 
     handler.next(err);
-
-    // return super.onError(err, handler);
   }
 
   Future<String> _refreshTokenRequest() async {

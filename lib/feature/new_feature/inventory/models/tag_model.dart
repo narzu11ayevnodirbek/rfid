@@ -30,7 +30,6 @@ class TagModel {
   final String id;
   final String name;
   final String price;
-
   final String statusFilter;
   final String location;
   final String responsible;

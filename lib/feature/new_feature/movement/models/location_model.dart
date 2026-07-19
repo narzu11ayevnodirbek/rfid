@@ -1,4 +1,3 @@
-/// Локация для выбора «куда перемещаем» (GET /api/locations).
 class LocationModel {
   LocationModel({
     required this.id,

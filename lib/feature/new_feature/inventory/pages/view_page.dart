@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/view_controller.dart';
-import '../models/tag_model.dart';
-import '../../utils/rfid_trigger_hint.dart';
-import 'item_info_page.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/view_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
+import 'package:rfid/feature/new_feature/utils/rfid_trigger_hint.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/item_info_page.dart';
 
 class ViewPage extends StatelessWidget {
   const ViewPage({super.key});
@@ -37,9 +37,7 @@ class ViewPage extends StatelessWidget {
                       c.isReading.value ? Icons.stop : Icons.play_arrow,
                     ),
                     label: Text(
-                      c.isReading.value
-                          ? 'Остановить чтение'
-                          : 'Запустить чтение',
+                      c.isReading.value ? 'Остановить чтение' : 'Запустить чтение',
                     ),
                   ),
                 ),
@@ -89,4 +87,3 @@ class ViewPage extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'all_from_database_page.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/all_from_database_page.dart';
 
 class DatabasePage extends StatelessWidget {
   const DatabasePage({super.key});

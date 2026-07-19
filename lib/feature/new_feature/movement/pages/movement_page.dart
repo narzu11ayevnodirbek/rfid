@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:rf_id_test/feature/new_feature/movement/controllers/movement_controller.dart';
-// import 'package:rf_id_test/feature/new_feature/movement/pages/free_transfer_page.dart';
-// import 'package:rf_id_test/feature/new_feature/movement/pages/movement_rfid_page.dart';
-
-import '../controllers/movement_controller.dart';
-import 'free_transfer_page.dart';
-import 'movement_rfid_page.dart';
-import '../../inventory/pages/view_page.dart';
+import 'package:rfid/feature/new_feature/movement/controllers/movement_controller.dart';
+import 'package:rfid/feature/new_feature/movement/pages/free_transfer_page.dart';
+import 'package:rfid/feature/new_feature/movement/pages/movement_rfid_page.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/view_page.dart';
 
 class MovementPage extends StatelessWidget {
   const MovementPage({super.key});
@@ -42,9 +38,8 @@ class MovementPage extends StatelessWidget {
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(3),
-          child: Obx(() => movement.isRefreshing.value
-              ? const LinearProgressIndicator(minHeight: 3)
-              : const SizedBox.shrink()),
+          child: Obx(() =>
+              movement.isRefreshing.value ? const LinearProgressIndicator(minHeight: 3) : const SizedBox.shrink()),
         ),
       ),
       body: Obx(
@@ -100,11 +95,8 @@ class MovementPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Перемещения №${item.name}  ',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
-                            Text(item.destination,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 9)),
+                                style: const TextStyle(color: Colors.white, fontSize: 9)),
+                            Text(item.destination, style: const TextStyle(color: Colors.white, fontSize: 9)),
                           ],
                         ),
                       ),
@@ -121,8 +113,7 @@ class MovementPage extends StatelessWidget {
                           children: [
                             Text(
                               'Дата создания: ${item.createdAt}',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 9),
+                              style: const TextStyle(color: Colors.white, fontSize: 9),
                             ),
                           ],
                         ),

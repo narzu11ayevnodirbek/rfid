@@ -11,8 +11,7 @@ class GetListUseCase implements UseCase<List<GetListEntity>, GetListParams> {
   final HomeRepository _repository;
 
   @override
-  Future<Either<Failure, List<GetListEntity>>> call(GetListParams params) =>
-      _repository.getList(params);
+  Future<Either<Failure, List<GetListEntity>>> call(GetListParams params) => _repository.getList(params);
 }
 
 class GetListParams extends Equatable {

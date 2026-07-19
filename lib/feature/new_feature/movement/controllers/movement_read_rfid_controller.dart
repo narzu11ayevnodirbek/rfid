@@ -3,14 +3,12 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/api/api_client.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../../../core/api/api_client.dart';
-import '../../../../infrastructure/di/injector_container.dart';
-import '../../rfid/rfid_bus.dart';
-import '../../rfid/rfid_session.dart';
-import '../models/movement_item.dart';
-import '../models/movement_task_model.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/infrastructure/di/injector_container.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_bus.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_session.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_item.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_task_model.dart';
 
 class MovementReadRfidController extends GetxController {
   MovementReadRfidController(this.task, this.items);
@@ -31,16 +29,12 @@ class MovementReadRfidController extends GetxController {
   final Set<String> _scanned = {};
   late final StreamSubscription<String> _sub;
 
-  /// Последняя считанная метка — отправка на сервер только по кнопке "Завершить"
   String? lastScannedEpc;
 
-  /// ID единиц, по которым нажали «Завершить» — зелёные, не открывать снова
   final RxList<String> completedItemIds = <String>[].obs;
 
-  /// Флаг для UI: тег прочитан на текущем экране единицы
   final RxBool lastScanSuccess = false.obs;
 
-  /// Сбросить при открытии страницы единицы, чтобы учитывать только чтение на этом экране
   void clearLastScan() {
     lastScannedEpc = null;
     lastScanSuccess.value = false;
@@ -55,7 +49,6 @@ class MovementReadRfidController extends GetxController {
     _sub = RfidBus.instance.stream.listen(_onTagRead);
   }
 
-  /// Только накапливаем метки; отправка на сервер — по кнопке "Завершить"
   void _onTagRead(String epc) {
     if (_scanned.contains(epc)) return;
     _scanned.add(epc);
@@ -64,11 +57,9 @@ class MovementReadRfidController extends GetxController {
     readCount.value++;
   }
 
-  /// Отправка на сервер; возвращает (успех, сообщение об ошибке для UI).
   Future<({bool ok, String? errorMessage})> sendMovement(String epc, MovementItem item) async {
     try {
       final dio = sl<Dio>();
-      // Не передаём status: '2' — задание закрывается только по кнопке «Завершить задание»
       final response = await dio.post(
         'api/process_movement_tsd.php',
         data: {
@@ -87,9 +78,8 @@ class MovementReadRfidController extends GetxController {
       }
       return (ok: false, errorMessage: data['message']?.toString() ?? 'Ошибка сервера');
     } on DioException catch (e) {
-      final msg = e.response?.data is Map
-          ? (e.response!.data['message'] ?? e.response!.data['error'])?.toString()
-          : null;
+      final msg =
+          e.response?.data is Map ? (e.response!.data['message'] ?? e.response!.data['error'])?.toString() : null;
       return (ok: false, errorMessage: msg ?? 'Сервер не принял запрос');
     }
   }

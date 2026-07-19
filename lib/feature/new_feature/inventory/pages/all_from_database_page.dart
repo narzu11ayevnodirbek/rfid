@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/inventory/pages/read_items_list_page.dart';
-// import 'package:rf_id_test/feature/new_feature/inventory/pages/item_info_page.dart';
-// import 'package:rf_id_test/feature/new_feature/inventory/pages/read_items_list_page.dart';
-// import 'package:rf_id_test/feature/new_feature/inventory/services/items_service.dart';
-
-import '../controllers/tag_search_controller.dart';
-import '../models/tag_model.dart';
-import '../services/items_service.dart';
-import 'item_info_page.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/tag_search_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
+import 'package:rfid/feature/new_feature/inventory/services/items_service.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/item_info_page.dart';
 
 class AllFromDatabasePage extends StatefulWidget {
   const AllFromDatabasePage({super.key});
@@ -74,48 +70,35 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                               child: FutureBuilder<List<TagModel>>(
                                   future: itemsFuture,
                                   builder: (context, asyncSnapshot) {
-                                    if (asyncSnapshot.connectionState ==
-                                        ConnectionState.waiting) {
+                                    if (asyncSnapshot.connectionState == ConnectionState.waiting) {
                                       return const CircularProgressIndicator();
                                     } else if (asyncSnapshot.hasError) {
-                                      return Text(
-                                          'Ошибка: ${asyncSnapshot.error}');
+                                      return Text('Ошибка: ${asyncSnapshot.error}');
                                     }
 
                                     final items = asyncSnapshot.data ?? [];
 
-                                    final readItems = items
-                                        .where((item) => item.hasRfid)
-                                        .toList();
+                                    final readItems = items.where((item) => item.hasRfid).toList();
 
                                     return Column(
                                       spacing: 8,
                                       children: [
                                         const Text('Прогресс считывания'),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               child: Column(
-                                                children: [
-                                                  const Text('Всего'),
-                                                  Text(items.length.toString())
-                                                ],
+                                                children: [const Text('Всего'), Text(items.length.toString())],
                                               ),
                                             ),
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  Get.to(
-                                                      const ReadItemsListPage());
+                                                  Get.to(const ReadItemsListPage());
                                                 },
                                                 child: Column(
-                                                  children: [
-                                                    const Text('Считано'),
-                                                    Text(readItems.length
-                                                        .toString())
-                                                  ],
+                                                  children: [const Text('Считано'), Text(readItems.length.toString())],
                                                 ),
                                               ),
                                             ),
@@ -123,8 +106,7 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                               child: Column(
                                                 children: [
                                                   const Text('Чтений меток'),
-                                                  Text(readItems.length
-                                                      .toString())
+                                                  Text(readItems.length.toString())
                                                 ],
                                               ),
                                             )
@@ -143,8 +125,7 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                           ),
                           FilledButton(
                               onPressed: () {},
-                              style: FilledButton.styleFrom(
-                                  backgroundColor: Colors.black),
+                              style: FilledButton.styleFrom(backgroundColor: Colors.black),
                               child: const Text('ЗАПУСТИТЬ RFID')),
                           const SizedBox(
                             height: 12,
@@ -204,8 +185,7 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                     valueListenable: tagController.filteredTags,
                                     builder: (context, list, _) {
                                       if (list.isEmpty) {
-                                        return const Center(
-                                            child: Text('Ничего не найдено'));
+                                        return const Center(child: Text('Ничего не найдено'));
                                       }
                                       return GestureDetector(
                                         onTap: () {
@@ -214,8 +194,7 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                         child: ListView.separated(
                                           padding: const EdgeInsets.all(10),
                                           itemCount: list.length,
-                                          separatorBuilder: (_, __) =>
-                                              const SizedBox(height: 10),
+                                          separatorBuilder: (_, __) => const SizedBox(height: 10),
                                           itemBuilder: (context, index) {
                                             final item = list[index];
 
@@ -223,17 +202,14 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                                 onLongPressStart: (details) {
                                                   showMenu(
                                                     context: context,
-                                                    position:
-                                                        RelativeRect.fromLTRB(
+                                                    position: RelativeRect.fromLTRB(
                                                       details.globalPosition.dx,
                                                       details.globalPosition.dy,
                                                       details.globalPosition.dx,
                                                       details.globalPosition.dy,
                                                     ),
                                                     items: [
-                                                      const PopupMenuItem(
-                                                          value: 'search',
-                                                          child: Text('Поиск')),
+                                                      const PopupMenuItem(value: 'search', child: Text('Поиск')),
                                                       PopupMenuItem(
                                                           value: 'info',
                                                           onTap: () {
@@ -241,31 +217,18 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                                               item: item,
                                                             ));
                                                           },
-                                                          child: const Text(
-                                                              'Инфо')),
+                                                          child: const Text('Инфо')),
                                                     ],
                                                   );
                                                 },
                                                 child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: item.hasRfid
-                                                      ? Colors.green
-                                                      : Colors.black,
+                                                  padding: const EdgeInsets.all(8),
+                                                  color: item.hasRfid ? Colors.green : Colors.black,
                                                   child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      Text(item.data,
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .white)),
-                                                      Text(item.status,
-                                                          style: const TextStyle(
-                                                              color: Colors
-                                                                  .white70)),
+                                                      Text(item.data, style: const TextStyle(color: Colors.white)),
+                                                      Text(item.status, style: const TextStyle(color: Colors.white70)),
                                                     ],
                                                   ),
                                                 ));
@@ -280,15 +243,13 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                       final list = tagController.scannedOnly;
 
                                       if (list.isEmpty) {
-                                        return const Center(
-                                            child: Text('Ничего не найдено'));
+                                        return const Center(child: Text('Ничего не найдено'));
                                       }
 
                                       return ListView.separated(
                                         padding: const EdgeInsets.all(10),
                                         itemCount: list.length,
-                                        separatorBuilder: (_, __) =>
-                                            const SizedBox(height: 10),
+                                        separatorBuilder: (_, __) => const SizedBox(height: 10),
                                         itemBuilder: (context, index) {
                                           final item = list[index];
 
@@ -296,15 +257,10 @@ class _AllFromDatabasePageState extends State<AllFromDatabasePage> {
                                             padding: const EdgeInsets.all(8),
                                             color: Colors.green,
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Text(item.data,
-                                                    style: const TextStyle(
-                                                        color: Colors.white)),
-                                                Text(item.status,
-                                                    style: const TextStyle(
-                                                        color: Colors.white70)),
+                                                Text(item.data, style: const TextStyle(color: Colors.white)),
+                                                Text(item.status, style: const TextStyle(color: Colors.white70)),
                                               ],
                                             ),
                                           );

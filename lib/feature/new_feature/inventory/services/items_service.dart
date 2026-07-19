@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:rfid/infrastructure/di/injector_container.dart';
-import '../models/tag_model.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
 
 class ItemsService {
   final Dio _dio = sl<Dio>();

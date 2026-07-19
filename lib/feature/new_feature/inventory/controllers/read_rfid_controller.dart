@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
-import '../../rfid/rfid_bus.dart';
-import '../../rfid/rfid_service.dart';
-import '../../rfid/rfid_session.dart';
-import '../../utils/app_snackbar.dart';
-import '../models/inventory_model.dart';
-import '../models/inventory_task_model.dart';
-import 'inventory_controller.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_bus.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_service.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_session.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_model.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/inventory_controller.dart';
 
 class ReadRfidController extends GetxController {
   ReadRfidController(this.inventory, this.task);
@@ -36,8 +35,6 @@ class ReadRfidController extends GetxController {
     });
 
     RfidSession.instance.currentMode = RfidMode.inventory;
-
-
 
     total.value = inventory.total;
     found.value = inventory.found;

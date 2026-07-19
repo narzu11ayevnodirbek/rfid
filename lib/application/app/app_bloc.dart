@@ -9,6 +9,7 @@ import 'package:rfid/core/theme/themes.dart';
 import 'package:rfid/infrastructure/di/injector_container.dart';
 
 part 'app_event.dart';
+
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {

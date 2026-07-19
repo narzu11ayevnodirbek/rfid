@@ -23,5 +23,4 @@ extension BuildContextExt on BuildContext {
     final focus = FocusScope.of(this);
     if (focus.hasFocus) focus.unfocus();
   }
-
 }

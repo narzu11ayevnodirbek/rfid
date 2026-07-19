@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/tag_model.dart';
-import '../services/items_service.dart';
+import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
+import 'package:rfid/feature/new_feature/inventory/services/items_service.dart';
 
 class ReadItemsListPage extends StatefulWidget {
   const ReadItemsListPage({super.key});
@@ -14,8 +14,7 @@ class _ReadItemsListPageState extends State<ReadItemsListPage> {
   List<TagModel> items = [];
   bool isLoadingItems = true;
 
-  List<TagModel> get readedItems =>
-      items.where((item) => item.hasRfid).toList();
+  List<TagModel> get readedItems => items.where((item) => item.hasRfid).toList();
 
   @override
   void initState() {

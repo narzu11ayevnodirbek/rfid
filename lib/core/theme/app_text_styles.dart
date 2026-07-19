@@ -447,10 +447,8 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
         bodyTitle3: bodyTitle3 ?? this.bodyTitle3,
         blackFontSize24Weight600: blackFontSize24Weight600 ?? this.blackFontSize24Weight600,
         whiteFontSize18Weight600: whiteFontSize18Weight600 ?? this.whiteFontSize18Weight600,
-        primary10FontSize14Weight700:
-            primary10FontSize14Weight700 ?? this.primary10FontSize14Weight700,
-        lightBlackFontSize14Weight500:
-            lightBlackFontSize14Weight500 ?? this.lightBlackFontSize14Weight500,
+        primary10FontSize14Weight700: primary10FontSize14Weight700 ?? this.primary10FontSize14Weight700,
+        lightBlackFontSize14Weight500: lightBlackFontSize14Weight500 ?? this.lightBlackFontSize14Weight500,
         primaryFontS32Weight700: primaryFontS32Weight700 ?? this.primaryFontS32Weight700,
         fontSize18Weight500: fontSize18Weight500 ?? this.fontSize18Weight500,
       );
@@ -482,20 +480,17 @@ class ThemeTextStyles extends ThemeExtension<ThemeTextStyles> {
       bodyHeadline: TextStyle.lerp(bodyHeadline, other.bodyHeadline, t)!,
       bodyLargeTitle: TextStyle.lerp(bodyLargeTitle, other.bodyLargeTitle, t)!,
       bodyLargeBoldTitle: TextStyle.lerp(bodyLargeBoldTitle, other.bodyLargeBoldTitle, t)!,
-      blackFontSize24Weight600:
-          TextStyle.lerp(blackFontSize24Weight600, other.blackFontSize24Weight600, t)!,
+      blackFontSize24Weight600: TextStyle.lerp(blackFontSize24Weight600, other.blackFontSize24Weight600, t)!,
       bodySubheadline: TextStyle.lerp(bodySubheadline, other.bodySubheadline, t)!,
       bodyTitle1: TextStyle.lerp(bodyTitle1, other.bodyTitle1, t)!,
       bodyTitle2: TextStyle.lerp(bodyTitle2, other.bodyTitle2, t)!,
       bodyTitle3: TextStyle.lerp(bodyTitle3, other.bodyTitle3, t)!,
-      whiteFontSize18Weight600:
-          TextStyle.lerp(whiteFontSize18Weight600, other.whiteFontSize18Weight600, t)!,
+      whiteFontSize18Weight600: TextStyle.lerp(whiteFontSize18Weight600, other.whiteFontSize18Weight600, t)!,
       primary10FontSize14Weight700:
           TextStyle.lerp(primary10FontSize14Weight700, other.primary10FontSize14Weight700, t)!,
       lightBlackFontSize14Weight500:
           TextStyle.lerp(lightBlackFontSize14Weight500, other.lightBlackFontSize14Weight500, t)!,
-      primaryFontS32Weight700:
-          TextStyle.lerp(primaryFontS32Weight700, other.primaryFontS32Weight700, t)!,
+      primaryFontS32Weight700: TextStyle.lerp(primaryFontS32Weight700, other.primaryFontS32Weight700, t)!,
       fontSize18Weight500: TextStyle.lerp(fontSize18Weight500, other.fontSize18Weight500, t)!,
     );
   }

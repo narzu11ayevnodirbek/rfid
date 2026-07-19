@@ -20,21 +20,15 @@ class BarcodePage extends StatelessWidget {
               const SizedBox(
                 height: 12,
               ),
-              FilledButton(
-                  onPressed: () {}, child: const Text('СЧИТАТЬ ШТРИХКОД')),
+              FilledButton(onPressed: () {}, child: const Text('СЧИТАТЬ ШТРИХКОД')),
               const SizedBox(
                 height: 12,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(
-                      flex: 2,
-                      child: FilledButton(
-                          onPressed: () {}, child: const Text('НАЙДЕНО'))),
-                  Flexible(
-                      child: FilledButton(
-                          onPressed: () {}, child: const Text('НАЗАД')))
+                  Flexible(flex: 2, child: FilledButton(onPressed: () {}, child: const Text('НАЙДЕНО'))),
+                  Flexible(child: FilledButton(onPressed: () {}, child: const Text('НАЗАД')))
                 ],
               )
             ],

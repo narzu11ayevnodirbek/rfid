@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../inventory/pages/barcode_page.dart';
-import '../../rfid/rfid_controller.dart';
-import '../../utils/app_dialog.dart';
-import '../../utils/app_snackbar.dart';
-import '../../utils/rfid_trigger_hint.dart';
-import '../controllers/movement_read_rfid_controller.dart';
-import '../models/movement_item.dart';
-import '../services/movement_service.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/barcode_page.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_controller.dart';
+import 'package:rfid/feature/new_feature/utils/app_dialog.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/utils/rfid_trigger_hint.dart';
+import 'package:rfid/feature/new_feature/movement/controllers/movement_read_rfid_controller.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_item.dart';
+import 'package:rfid/feature/new_feature/movement/services/movement_service.dart';
 
 class SetMovementRfidPage extends StatefulWidget {
   const SetMovementRfidPage({super.key, required this.item});
@@ -20,16 +19,8 @@ class SetMovementRfidPage extends StatefulWidget {
 }
 
 class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   if (Get.isRegistered<MovementReadRfidController>()) {
-  //     Get.find<MovementReadRfidController>().clearLastScan();
-  //   }
-  // }
-
   final RxString photo = ''.obs;
-  final MovementService _service = MovementService(); // GetX DI ishlatmasangiz shunday
+  final MovementService _service = MovementService();
 
   @override
   void initState() {
@@ -47,9 +38,6 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    print('PHOTO VALUE: "${widget.item.photo}"');
-    print('PHOTO URL: "https://mderp.uz/${widget.item.photo}"');
     final rfid = Get.find<RfidController>();
     final item = widget.item;
 
@@ -60,9 +48,7 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
           padding: const EdgeInsets.all(12),
           child: SingleChildScrollView(
             child: Obx(() {
-              final c = Get.isRegistered<MovementReadRfidController>()
-                  ? Get.find<MovementReadRfidController>()
-                  : null;
+              final c = Get.isRegistered<MovementReadRfidController>() ? Get.find<MovementReadRfidController>() : null;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -74,12 +60,6 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
                   _value(item.status),
                   _title('Фото'),
                   const SizedBox(height: 12),
-                  // Center(
-                  //   child: item.photo.isNotEmpty
-                  //       ? Image.network('https://mderp.uz/${item.photo}', height: 200)
-                  //       : const Icon(Icons.image_not_supported, size: 120),
-                  // ),
-
                   Center(
                     child: Obx(() {
                       final p = photo.value;
@@ -140,8 +120,7 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
                             await rfid.initOnce();
                             await rfid.start();
 
-                            AppSnackbar.showInfo('RFID',
-                                'Чтение только по нажатию физической кнопки на считывателе.');
+                            AppSnackbar.showInfo('RFID', 'Чтение только по нажатию физической кнопки на считывателе.');
                           },
                           style: FilledButton.styleFrom(
                             backgroundColor: Colors.black,
@@ -162,25 +141,19 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
                             final rfid = Get.find<RfidController>();
                             await rfid.stop();
 
-                            if (Get.isRegistered<
-                                MovementReadRfidController>()) {
+                            if (Get.isRegistered<MovementReadRfidController>()) {
                               final c = Get.find<MovementReadRfidController>();
                               final epc = c.lastScannedEpc;
                               if (epc != null && epc.isNotEmpty) {
-                                final result =
-                                    await c.sendMovement(epc, widget.item);
+                                final result = await c.sendMovement(epc, widget.item);
                                 if (!result.ok) {
-                                  final msg = result.errorMessage ??
-                                      'Сервер не принял запрос';
-                                  if (msg.contains('Неизвестный') ||
-                                      msg.contains('unknown')) {
+                                  final msg = result.errorMessage ?? 'Сервер не принял запрос';
+                                  if (msg.contains('Неизвестный') || msg.contains('unknown')) {
                                     await AppDialog.showError(
                                       context,
                                       title: 'Неизвестный объект',
-                                      message:
-                                          'Метка считана, но её нет в базе системы.',
-                                      reason:
-                                          'Данная RFID-метка не привязана ни к одному объекту в учёте.',
+                                      message: 'Метка считана, но её нет в базе системы.',
+                                      reason: 'Данная RFID-метка не привязана ни к одному объекту в учёте.',
                                       solution:
                                           'Проверьте маркировку объекта. Если объект должен быть в системе — сначала выполните привязку метки к объекту в разделе маркировки.',
                                     );
@@ -188,8 +161,7 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
                                     await AppDialog.showError(
                                       context,
                                       title: 'Ошибка отправки в базу',
-                                      message:
-                                          'Не удалось отправить данные о перемещении на сервер.',
+                                      message: 'Не удалось отправить данные о перемещении на сервер.',
                                       reason: msg,
                                       solution:
                                           'Проверьте подключение к интернету и повторите попытку. При повторении ошибки обратитесь к администратору.',
@@ -197,8 +169,7 @@ class _SetMovementRfidPageState extends State<SetMovementRfidPage> {
                                   }
                                   return;
                                 }
-                                AppSnackbar.showSuccess(
-                                    'Успешно', 'Данные отправлены в базу');
+                                AppSnackbar.showSuccess('Успешно', 'Данные отправлены в базу');
                               } else {
                                 await AppDialog.showError(
                                   context,

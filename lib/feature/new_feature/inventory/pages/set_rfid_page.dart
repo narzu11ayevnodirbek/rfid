@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../rfid/rfid_controller.dart';
-import '../../utils/app_dialog.dart';
-import '../../utils/app_snackbar.dart';
-import '../../utils/rfid_trigger_hint.dart';
-import '../controllers/inventory_controller.dart';
-import '../models/inventory_item.dart';
-import '../models/inventory_task_model.dart';
-import 'barcode_page.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_controller.dart';
+import 'package:rfid/feature/new_feature/utils/app_dialog.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/utils/rfid_trigger_hint.dart';
+import 'package:rfid/feature/new_feature/inventory/controllers/inventory_controller.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_item.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/barcode_page.dart';
 
 class SetRfidPage extends StatefulWidget {
   const SetRfidPage({super.key, required this.item, required this.task});
@@ -26,7 +26,6 @@ class _SetRfidPageState extends State<SetRfidPage> {
   @override
   void initState() {
     super.initState();
-    // При открытии экрана сбрасываем "уже прочитано", чтобы не показывать зелёное до нового чтения
     Get.find<InventoryController>().lastScanSuccess.value = false;
   }
 
@@ -63,7 +62,6 @@ class _SetRfidPageState extends State<SetRfidPage> {
                     'O‘qilgan RFID lar:',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  // ...inv.scannedTags.map((e) => Text(e)).toList(),
                   if (inv.lastScanSuccess.value)
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -77,7 +75,6 @@ class _SetRfidPageState extends State<SetRfidPage> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-
                   SizedBox(
                     width: 100,
                     // height: 200,
@@ -159,8 +156,7 @@ class _SetRfidPageState extends State<SetRfidPage> {
                           ),
                           child: const Text(
                             'Запустить RFID',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w800),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                           ),
                         ),
                         Spacer(),
@@ -174,7 +170,8 @@ class _SetRfidPageState extends State<SetRfidPage> {
                                     context,
                                     title: 'Нет данных',
                                     message: 'Сначала прочитайте метку RFID, нажав физическую кнопку на считывателе.',
-                                    solution: 'Нажмите «Запустить RFID», затем поднесите метку к считывателю и нажмите физическую кнопку на устройстве.',
+                                    solution:
+                                        'Нажмите «Запустить RFID», затем поднесите метку к считывателю и нажмите физическую кнопку на устройстве.',
                                   );
                                   return;
                                 }
@@ -191,8 +188,10 @@ class _SetRfidPageState extends State<SetRfidPage> {
                                     context,
                                     title: 'Ошибка отправки в базу',
                                     message: 'Не удалось отправить данные о прочитанной метке и объекте на сервер.',
-                                    reason: 'Сервер не принял запрос. Возможны проблемы с сетью, авторизацией или занятостью сервера.',
-                                    solution: 'Проверьте подключение к интернету, повторно войдите в приложение при необходимости и попробуйте снова. Если ошибка повторяется — обратитесь к администратору.',
+                                    reason:
+                                        'Сервер не принял запрос. Возможны проблемы с сетью, авторизацией или занятостью сервера.',
+                                    solution:
+                                        'Проверьте подключение к интернету, повторно войдите в приложение при необходимости и попробуйте снова. Если ошибка повторяется — обратитесь к администратору.',
                                   );
                                   return;
                                 }
@@ -204,17 +203,17 @@ class _SetRfidPageState extends State<SetRfidPage> {
                                   title: 'Ошибка отправки',
                                   message: 'Не удалось отправить данные в базу данных.',
                                   reason: e.toString(),
-                                  solution: 'Проверьте интернет-соединение и повторите попытку. При повторении ошибки обратитесь в поддержку.',
+                                  solution:
+                                      'Проверьте интернет-соединение и повторите попытку. При повторении ошибки обратитесь в поддержку.',
                                 );
                               }
                             },
                             style: FilledButton.styleFrom(
                               backgroundColor: Colors.black,
                             ),
-                            child: Text(
+                            child: const Text(
                               'Завершить',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w800),
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
                             ))
                       ],
                     ),

@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:rfid/core/base/local_source.dart';
 import 'package:rfid/infrastructure/di/injector_container.dart';
-import '../../../../../core/api/api_client.dart';
-import '../../../../core/api/api_client.dart';
-import '../models/inventory_item.dart';
-import '../models/inventory_model.dart';
-import '../models/inventory_plan_model.dart';
-import '../models/inventory_task_model.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_item.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_model.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_plan_model.dart';
+import 'package:rfid/feature/new_feature/inventory/models/inventory_task_model.dart';
 
 class InventoryService {
   InventoryService(this.localSource);
@@ -22,9 +21,7 @@ class InventoryService {
       );
 
       if (response.data is Map && response.data['success'] == true) {
-        return (response.data['data'] as List)
-            .map((e) => InventoryModel.fromJson(e))
-            .toList();
+        return (response.data['data'] as List).map((e) => InventoryModel.fromJson(e)).toList();
       }
       return [];
     } on DioException catch (e) {
@@ -42,9 +39,7 @@ class InventoryService {
       );
 
       if (response.data is Map && response.data['success'] == true) {
-        return (response.data['data'] as List)
-            .map((e) => InventoryTaskModel.fromJson(e))
-            .toList();
+        return (response.data['data'] as List).map((e) => InventoryTaskModel.fromJson(e)).toList();
       }
       return [];
     } on DioException catch (e) {
@@ -102,8 +97,6 @@ class InventoryService {
     return [];
   }
 
-  /// ТЗ: GET /api/inventory/{id} — загрузка задания на инвентаризацию.
-  /// Ответ: inventory_id, location_name, expected_items: [{ epc, name }].
   Future<InventoryPlanModel?> getPlan(int inventoryId) async {
     try {
       final response = await _dio.get(
@@ -112,8 +105,7 @@ class InventoryService {
         options: optionsWithBearer(),
       );
       if (response.data is Map && response.data['success'] == true) {
-        return InventoryPlanModel.fromJson(
-            Map<String, dynamic>.from(response.data as Map));
+        return InventoryPlanModel.fromJson(Map<String, dynamic>.from(response.data as Map));
       }
       return null;
     } on DioException catch (e) {
@@ -122,8 +114,6 @@ class InventoryService {
     }
   }
 
-  /// ТЗ: POST /api/inventory/{id}/finish — отправка итогов (JSON).
-  /// Payload: inventory_id, scanned_items, duration_seconds, device_id.
   Future<bool> finishInventory({
     required int inventoryId,
     required List<String> scannedItems,

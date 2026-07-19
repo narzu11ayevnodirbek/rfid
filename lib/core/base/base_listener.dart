@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rfid/core/base/base_state.dart';
 
-import 'base_state.dart';
-
-class BaseListener<CUBIT extends StateStreamable<BaseState<BUILDABLE, LISTENABLE>>, BUILDABLE,
-    LISTENABLE> extends StatelessWidget {
+class BaseListener<CUBIT extends StateStreamable<BaseState<BUILDABLE, LISTENABLE>>, BUILDABLE, LISTENABLE>
+    extends StatelessWidget {
   const BaseListener({
     super.key,
     required this.listener,

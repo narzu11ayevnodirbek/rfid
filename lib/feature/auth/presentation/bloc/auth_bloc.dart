@@ -8,6 +8,7 @@ import 'package:rfid/feature/auth/domain/repository/auth_params.dart';
 import 'package:rfid/feature/auth/domain/repository/auth_repository.dart';
 
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

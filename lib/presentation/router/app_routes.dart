@@ -9,9 +9,9 @@ import 'package:rfid/feature/home/presentation/pages/main/main_page.dart';
 import 'package:rfid/presentation/pages/splash/splash_page.dart';
 import 'package:rfid/infrastructure/di/injector_container.dart';
 import 'package:rfid/presentation/router/route_names.dart';
-import '../../feature/new_feature/inventory/pages/inventory_page.dart';
-import '../../feature/new_feature/marking/pages/marking_page.dart';
-import '../../feature/new_feature/movement/pages/movement_page.dart';
+import 'package:rfid/feature/new_feature/inventory/pages/inventory_page.dart';
+import 'package:rfid/feature/new_feature/marking/pages/marking_page.dart';
+import 'package:rfid/feature/new_feature/movement/pages/movement_page.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final shellRootNavigatorKey = GlobalKey<StatefulNavigationShellState>();

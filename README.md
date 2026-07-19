@@ -1,16 +1,33 @@
-# rf_id_test
+# RFID
 
-A new Flutter project.
+A modern Flutter application for RFID tag scanning and management.
+
+## Features
+
+- RFID tag scanning
+- Inventory management
+- Item tracking
+- Clean Architecture
+- BLoC State Management
+- Material 3 UI
+
+## Tech Stack
+
+- Flutter
+- Dart
+- BLoC
+- GetIt
+- Dio
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```bash
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Requirements
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter SDK
+- Android Studio
+- Android device with RFID support

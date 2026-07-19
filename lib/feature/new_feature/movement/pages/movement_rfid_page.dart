@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rfid/feature/new_feature/utils/rfid_trigger_hint.dart';
+import 'package:rfid/feature/new_feature/movement/controllers/movement_rfid_scan_controller.dart';
+import 'package:rfid/feature/new_feature/movement/models/movement_task_model.dart';
 
-import '../../utils/rfid_trigger_hint.dart';
-import '../controllers/movement_rfid_scan_controller.dart';
-import '../models/movement_task_model.dart';
-
-/// Экран перемещения: Запустить RFID → список меток с кнопкой X → Стоп → Отправить на сервер.
 class MovementRfidPage extends StatelessWidget {
   const MovementRfidPage({
     super.key,
@@ -60,9 +58,9 @@ class MovementRfidPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Obx(() => Text(
-                'Считано меток: ${c.scannedCount}',
-                style: const TextStyle(fontSize: 14),
-              )),
+                    'Считано меток: ${c.scannedCount}',
+                    style: const TextStyle(fontSize: 14),
+                  )),
               const SizedBox(height: 12),
               Expanded(
                 child: Obx(() {
@@ -97,21 +95,19 @@ class MovementRfidPage extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Obx(() => FilledButton.icon(
-                onPressed: c.isSending.value || c.scannedCount == 0
-                    ? null
-                    : () => c.submit(),
-                icon: c.isSending.value
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.send),
-                label: const Text('Отправить на сервер'),
-                style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-              )),
+                    onPressed: c.isSending.value || c.scannedCount == 0 ? null : () => c.submit(),
+                    icon: c.isSending.value
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.send),
+                    label: const Text('Отправить на сервер'),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                  )),
             ],
           ),
         ),

@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-// import 'package:rf_id_inventory_mobile/feature/components/loading_view.dart';
+// import 'package:rfid/feature/components/loading_view.dart';
 //
 // import 'base_state.dart';
 //

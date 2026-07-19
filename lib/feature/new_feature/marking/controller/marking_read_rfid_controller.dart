@@ -1,12 +1,9 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
-
-import '../../../../../core/api/api_client.dart';
-import '../../../../core/api/api_client.dart';
-import '../../rfid/rfid_bus.dart';
-import '../../rfid/rfid_session.dart';
-import '../models/marking_task_model.dart';
+import 'package:rfid/core/api/api_client.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_bus.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_session.dart';
+import 'package:rfid/feature/new_feature/marking/models/marking_task_model.dart';
 
 class MarkingReadRfidController extends GetxController {
   MarkingReadRfidController(this.task);

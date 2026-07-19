@@ -26,131 +26,114 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
         appBar: const CustomAppBar(),
         body: SafeArea(
           child: LayoutBuilder(
-              builder: (context, constraints) => SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom,
-                    ),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
-                      ),
-                      child: IntrinsicHeight(
-                        child: BlocBuilder<AuthBloc, AuthState>(
-                          buildWhen: (oldState, newState) {
-                            if (oldState.status.isLoading &&
-                                newState.status.isError) {
-                              EasyLoading.showError(newState.message);
-                            } else if (oldState.status.isLoading &&
-                                newState.status.isSuccess) {
-                              EasyLoading.showSuccess(
-                                'Добро пожаловать, ${newState.message}',
-                                duration: const Duration(seconds: 1),
-                              );
-                              Future.delayed(
-                                const Duration(seconds: 1),
-                                () {
-                                  if (!context.mounted) return;
-                                  context.pushNamed(Routes.home);
-                                },
-                              );
-                            }
-                            return true;
+            builder: (context, constraints) => SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: IntrinsicHeight(
+                  child: BlocBuilder<AuthBloc, AuthState>(
+                    buildWhen: (oldState, newState) {
+                      if (oldState.status.isLoading && newState.status.isError) {
+                        EasyLoading.showError(newState.message);
+                      } else if (oldState.status.isLoading && newState.status.isSuccess) {
+                        EasyLoading.showSuccess(
+                          'Добро пожаловать, ${newState.message}',
+                          duration: const Duration(seconds: 1),
+                        );
+                        Future.delayed(
+                          const Duration(seconds: 1),
+                          () {
+                            if (!context.mounted) return;
+                            context.pushNamed(Routes.home);
                           },
-                          builder: (context, state) => Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Login',
-                                  style: context.textStyle.regularCallout),
-                              80.kBoxHeight,
-                              Padding(
-                                padding: 32.kPaddingHorizontal,
-                                child: AnimatedBuilder(
-                                  animation: Listenable.merge(
-                                      [_loginFocusNode, _loginHasError]),
-                                  builder: (_, __) => CustomTextField(
-                                    controller: _loginController,
-                                    focusNode: _loginFocusNode,
-                                    errorText: _loginHasError.value,
-                                    title: 'Login',
-                                  ),
-                                ),
-                              ),
-                              12.kBoxHeight,
-                              AnimatedBuilder(
-                                animation: Listenable.merge([
-                                  _isObscured,
-                                  _passwordFocusNode,
-                                  _passwordHasError,
-                                ]),
-                                builder: (_, __) => Padding(
-                                  padding: 32.kPaddingHorizontal,
-                                  child: CustomTextField(
-                                    controller: _passwordController,
-                                    focusNode: _passwordFocusNode,
-                                    errorText: _passwordHasError.value,
-                                    title: 'Password',
-                                    obscureText: _isObscured.value,
-                                    suffixIcon: IconButton(
-                                      onPressed: () => _isObscured.value =
-                                          !_isObscured.value,
-                                      icon: Icon(
-                                        _isObscured.value
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                        color: context.colorScheme.primary,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              24.kBoxHeight,
-                              AnimatedBuilder(
-                                animation: Listenable.merge(
-                                    [_loginHasError, _passwordHasError]),
-                                builder: (_, __) => SizedBox(
-                                  width: context.sizeOf.width,
-                                  child: Padding(
-                                    padding: 32.kPaddingHorizontal,
-                                    child: ElevatedButton(
-                                      onPressed: (_loginHasError.value ??
-                                                      'hasError')
-                                                  .isNotEmpty ||
-                                              (_passwordHasError.value ??
-                                                      'hasError')
-                                                  .isNotEmpty
-                                          ? null
-                                          : () {
-                                              if (state.status.isLoading) {
-                                                return;
-                                              }
-                                              context.unfocus();
-                                              _bloc.add(OnAuthenticateEvent(
-                                                AuthParams(
-                                                  action: 'login',
-                                                  login: _loginController.text
-                                                      .trim(),
-                                                  password: _passwordController
-                                                      .text
-                                                      .trim(),
-                                                ),
-                                              ));
-                                            },
-                                      child: state.status.isLoading
-                                          ? const LoadingIndicator()
-                                          : const Text('Kirish'),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 12 + context.padding.bottom),
-                            ],
+                        );
+                      }
+                      return true;
+                    },
+                    builder: (context, state) => Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Login', style: context.textStyle.regularCallout),
+                        80.kBoxHeight,
+                        Padding(
+                          padding: 32.kPaddingHorizontal,
+                          child: AnimatedBuilder(
+                            animation: Listenable.merge([_loginFocusNode, _loginHasError]),
+                            builder: (_, __) => CustomTextField(
+                              controller: _loginController,
+                              focusNode: _loginFocusNode,
+                              errorText: _loginHasError.value,
+                              title: 'Login',
+                            ),
                           ),
                         ),
-                      ),
+                        12.kBoxHeight,
+                        AnimatedBuilder(
+                          animation: Listenable.merge([
+                            _isObscured,
+                            _passwordFocusNode,
+                            _passwordHasError,
+                          ]),
+                          builder: (_, __) => Padding(
+                            padding: 32.kPaddingHorizontal,
+                            child: CustomTextField(
+                              controller: _passwordController,
+                              focusNode: _passwordFocusNode,
+                              errorText: _passwordHasError.value,
+                              title: 'Password',
+                              obscureText: _isObscured.value,
+                              suffixIcon: IconButton(
+                                onPressed: () => _isObscured.value = !_isObscured.value,
+                                icon: Icon(
+                                  _isObscured.value ? Icons.visibility : Icons.visibility_off,
+                                  color: context.colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        24.kBoxHeight,
+                        AnimatedBuilder(
+                          animation: Listenable.merge([_loginHasError, _passwordHasError]),
+                          builder: (_, __) => SizedBox(
+                            width: context.sizeOf.width,
+                            child: Padding(
+                              padding: 32.kPaddingHorizontal,
+                              child: ElevatedButton(
+                                onPressed: (_loginHasError.value ?? 'hasError').isNotEmpty ||
+                                        (_passwordHasError.value ?? 'hasError').isNotEmpty
+                                    ? null
+                                    : () {
+                                        if (state.status.isLoading) {
+                                          return;
+                                        }
+                                        context.unfocus();
+                                        _bloc.add(OnAuthenticateEvent(
+                                          AuthParams(
+                                            action: 'login',
+                                            login: _loginController.text.trim(),
+                                            password: _passwordController.text.trim(),
+                                          ),
+                                        ));
+                                      },
+                                child: state.status.isLoading ? const LoadingIndicator() : const Text('Kirish'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 12 + context.padding.bottom),
+                      ],
                     ),
-                  )),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       );
 }

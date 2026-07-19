@@ -12,8 +12,7 @@ mixin ProductsMixin on State<ProductsPage> {
 
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if ((_scrollController.offset == _scrollController.position.maxScrollExtent) &&
-          !_bloc.addListLoading) {
+      if ((_scrollController.offset == _scrollController.position.maxScrollExtent) && !_bloc.addListLoading) {
         _bloc.add(AddListProductsEvent());
       }
     });

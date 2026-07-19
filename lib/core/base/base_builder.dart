@@ -2,10 +2,10 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'base_state.dart';
+import 'package:rfid/core/base/base_state.dart';
 
-class BaseBuilder<CUBIT extends StateStreamable<BaseState<BUILDABLE, LISTENABLE>>, BUILDABLE,
-    LISTENABLE> extends StatelessWidget {
+class BaseBuilder<CUBIT extends StateStreamable<BaseState<BUILDABLE, LISTENABLE>>, BUILDABLE, LISTENABLE>
+    extends StatelessWidget {
   final List<dynamic> Function(BUILDABLE) properties;
   final bool Function(BUILDABLE)? buildWhen;
   final Widget Function(BuildContext context, BUILDABLE buildable) builder;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/marking_controller.dart';
-import '../controller/marking_items_controller.dart';
-import 'marking_rfid_page.dart';
+import 'package:rfid/feature/new_feature/marking/controller/marking_controller.dart';
+import 'package:rfid/feature/new_feature/marking/controller/marking_items_controller.dart';
+import 'package:rfid/feature/new_feature/marking/pages/marking_rfid_page.dart';
 
 class MarkingTaskPage extends StatelessWidget {
   const MarkingTaskPage({super.key, required this.markingId});
@@ -28,8 +28,7 @@ class MarkingTaskPage extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  Get.find<MarkingController>().selectedMarkingId.value =
-                      markingId;
+                  Get.find<MarkingController>().selectedMarkingId.value = markingId;
                   Get.to(() => MarkingRfidPage(marking: item, task: item));
                 },
                 child: Container(
@@ -44,16 +43,14 @@ class MarkingTaskPage extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Объект: ${item.name ?? '-'}',
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 12),
+                          style: const TextStyle(color: Colors.white, fontSize: 12),
                         ),
                       ),
                       const VerticalDivider(color: Colors.grey, thickness: 2),
                       Expanded(
                         child: Text(
                           'Статус: ${item.status ?? '—'}',
-                          style: const TextStyle(
-                              color: Colors.white70, fontSize: 11),
+                          style: const TextStyle(color: Colors.white70, fontSize: 11),
                         ),
                       ),
                     ],

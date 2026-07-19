@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:rfid/infrastructure/localization/app_localizations.dart';
-
-import '../../../application/app/app_bloc.dart';
-import '../../router/app_routes.dart';
+import 'package:rfid/application/app/app_bloc.dart';
+import 'package:rfid/presentation/router/app_routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

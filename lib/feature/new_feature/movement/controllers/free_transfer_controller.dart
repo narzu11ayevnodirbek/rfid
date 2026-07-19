@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../rfid/rfid_service.dart';
-import '../../utils/app_dialog.dart';
-import '../../utils/app_snackbar.dart';
-import '../models/location_model.dart';
-import '../services/transfer_service.dart';
+import 'package:rfid/feature/new_feature/rfid/rfid_service.dart';
+import 'package:rfid/feature/new_feature/utils/app_dialog.dart';
+import 'package:rfid/feature/new_feature/utils/app_snackbar.dart';
+import 'package:rfid/feature/new_feature/movement/models/location_model.dart';
+import 'package:rfid/feature/new_feature/movement/services/transfer_service.dart';
 
-/// ТЗ: Свободное перемещение (Ad-hoc). Выбор локации, сканирование (15–20 dBm), отправка.
 class FreeTransferController extends GetxController {
   final TransferService _service = TransferService();
   final RfidService _rfid = RfidService();
@@ -17,9 +15,7 @@ class FreeTransferController extends GetxController {
   RxBool locationsLoading = true.obs;
   Rx<LocationModel?> selectedLocation = Rx<LocationModel?>(null);
 
-  /// Уникальные EPC в сессии (дедупликация).
   final RxSet<String> _scannedSet = <String>{}.obs;
-  // RxList<String> get scannedList => _scannedSet.toList().obs;
 
   int get scannedCount => _scannedSet.length;
 
@@ -67,7 +63,6 @@ class FreeTransferController extends GetxController {
     }
   }
 
-  /// Мощность 15–20 dBm по ТЗ для свободного перемещения.
   Future<void> setPowerMedium() async {
     await _rfid.setPower(18);
   }
@@ -96,7 +91,8 @@ class FreeTransferController extends GetxController {
           title: 'Ошибка RFID',
           message: 'Не удалось запустить считыватель меток.',
           reason: e.toString(),
-          solution: 'Убедитесь, что устройство подключено. Чтение выполняется только при нажатии физической кнопки на считывателе.',
+          solution:
+              'Убедитесь, что устройство подключено. Чтение выполняется только при нажатии физической кнопки на считывателе.',
         );
       } else {
         AppSnackbar.showError('RFID', 'Не удалось запустить считыватель');
@@ -166,13 +162,15 @@ class FreeTransferController extends GetxController {
             title: 'Неизвестный объект',
             message: 'Часть считанных меток не найдена в базе системы.',
             reason: 'Метки не привязаны к объектам или считаны с ошибкой.',
-            solution: 'Проверьте маркировку объектов. EPC: ${result.unknownEpcs.take(3).join(", ")}${result.unknownEpcs.length > 3 ? "..." : ""}',
+            solution:
+                'Проверьте маркировку объектов. EPC: ${result.unknownEpcs.take(3).join(", ")}${result.unknownEpcs.length > 3 ? "..." : ""}',
           );
         } else if (result.unknownEpcs.isNotEmpty) {
           AppSnackbar.showError('Неизвестный объект', 'Метка не в базе. EPC: ${result.unknownEpcs.take(2).join(", ")}');
         }
         if (result.alreadyHere.isNotEmpty) {
-          AppSnackbar.showInfo('Объект уже здесь', 'Объект числится в этой локации: ${result.alreadyHere.take(2).join(", ")}');
+          AppSnackbar.showInfo(
+              'Объект уже здесь', 'Объект числится в этой локации: ${result.alreadyHere.take(2).join(", ")}');
         }
         if (result.blocked.isNotEmpty && ctx != null) {
           await AppDialog.showError(
@@ -191,7 +189,8 @@ class FreeTransferController extends GetxController {
             title: 'Ошибка перемещения',
             message: result.message ?? 'Не удалось выполнить перемещение.',
             reason: 'Сервер отклонил запрос или произошла ошибка сети.',
-            solution: 'Проверьте подключение к интернету и повторите попытку. При повторении ошибки обратитесь к администратору.',
+            solution:
+                'Проверьте подключение к интернету и повторите попытку. При повторении ошибки обратитесь к администратору.',
           );
         } else {
           AppSnackbar.showError('Ошибка', result.message ?? 'Не удалось выполнить перемещение');
