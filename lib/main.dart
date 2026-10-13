@@ -7,7 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/rfid/rfid_controller.dart';
 
-import 'presentation/pages/app/app.dart';
+import 'package:rfid/presentation/pages/app/app.dart';
 import 'application/app/app_bloc.dart';
 import 'feature/new_feature/inventory/controllers/inventory_controller.dart';
 import 'infrastructure/di/injector_container.dart' as di;
@@ -15,8 +15,6 @@ import 'infrastructure/di/injector_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  Get.put(RfidController(), permanent: true);
 
   await di.init();
 

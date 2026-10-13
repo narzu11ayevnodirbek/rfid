@@ -32,7 +32,7 @@ class InventoryScanController extends GetxController {
 
   final RxSet<String> _scannedSet = <String>{}.obs;
 
-  RxList<String> get scannedList => _scannedSet.toList().obs;
+  List<String> get scannedList => _scannedSet.toList();
 
   final RxBool isScanning = false.obs;
   StreamSubscription<String>? _subscription;
@@ -192,9 +192,7 @@ class InventoryScanController extends GetxController {
     try {
       await _rfid.init();
       await setPowerMax();
-      await _rfidSubscription?.cancel();
-      _rfidSubscription = _rfid.onTagRead.listen(_onTagRead);
-      await _rfid.startScan();
+      await _rfid.startScan(singleShot: false);
       isScanning.value = true;
       _sessionStart ??= DateTime.now();
     } catch (e) {

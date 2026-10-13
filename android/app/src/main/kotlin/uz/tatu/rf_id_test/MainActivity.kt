@@ -41,14 +41,17 @@ class MainActivity : FlutterActivity() {
                 }
 
                 "start" -> {
-                    println("🔥 [ANDROID] METHOD start RECEIVED (ARM TRIGGER ONLY)")
-                    uhfService.setTriggerEnabled(true)   // faqat triggerga ruxsat
+                    val single = call.argument<Boolean>("singleShot") ?: false
+                    println("🔥 [ANDROID] METHOD start RECEIVED (singleShot=$single)")
+                    uhfService.setTriggerEnabled(true)
+                    uhfService.startReading(single)
                     result.success(true)
                 }
 
                 "stop" -> {
-                    println("🔥 [ANDROID] METHOD stop RECEIVED (DISARM)")
-                    uhfService.setTriggerEnabled(false)  // trigger o'chadi va o'qish ham to'xtaydi
+                    println("🔥 [ANDROID] METHOD stop RECEIVED")
+                    uhfService.setTriggerEnabled(false)
+                    uhfService.stopReading()
                     result.success(true)
                 }
 
@@ -66,8 +69,12 @@ class MainActivity : FlutterActivity() {
                 "setTriggerEnabled" -> {
                     val enabled = call.argument<Boolean>("enabled") ?: true
                     uhfService.setTriggerEnabled(enabled)
-//                    println("🎯 TRIGGER keyCode=$keyCode keyDown=$keyDown enabled=$triggerEnabled")
                     result.success(true)
+                }
+
+                "writeEpc" -> {
+                    println("🔥 [ANDROID] METHOD writeEpc RECEIVED")
+                    result.success(false)
                 }
 
             }

@@ -37,12 +37,12 @@ class MarkingReadRfidController extends GetxController {
     if (_lastEpc == n) return;
     _lastEpc = n;
     if (_scanned.contains(n)) return;
-    _scanned.add(n);
 
     readCount.value++;
 
     final ok = await _bindTag(n);
     if (ok) {
+      _scanned.add(n);
       marked.value++;
       notMarked.value = total.value - marked.value;
     }

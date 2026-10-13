@@ -29,11 +29,6 @@ class ReadRfidController extends GetxController {
   void onInit() {
     super.onInit();
 
-    _service.onTagRead.listen((epc) {
-      print('🔥 EPC FROM ANDROID → $epc');
-      RfidBus.instance.broadcast(epc);
-    });
-
     RfidSession.instance.currentMode = RfidMode.inventory;
 
     total.value = inventory.total;

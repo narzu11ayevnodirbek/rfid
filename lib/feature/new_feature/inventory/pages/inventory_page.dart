@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rfid/feature/new_feature/inventory/pages/database_page.dart';
 import 'package:rfid/feature/new_feature/inventory/controllers/inventory_controller.dart';
 import 'package:rfid/feature/new_feature/inventory/pages/inventory_items_page.dart';
 import 'package:rfid/feature/new_feature/inventory/pages/view_page.dart';
@@ -10,7 +9,9 @@ class InventoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inv = Get.put(InventoryController());
+    final inv = Get.isRegistered<InventoryController>()
+        ? Get.find<InventoryController>()
+        : Get.put(InventoryController());
 
     return Scaffold(
       appBar: AppBar(
@@ -20,9 +21,7 @@ class InventoryPage extends StatelessWidget {
             onSelected: (value) {
               if (value == 'exchange') {
                 inv.refreshInventories();
-              } else if (value == 'database') {
-                Get.to(const DatabasePage());
-              } else if (value == 'view') {
+              }  else if (value == 'view') {
                 Get.to(const ViewPage());
               } else if (value == 'signout') {
                 showDialog(
@@ -59,10 +58,7 @@ class InventoryPage extends StatelessWidget {
                 value: 'exchange',
                 child: Text('Обмен'),
               ),
-              const PopupMenuItem(
-                value: 'database',
-                child: Text('Вся БД'),
-              ),
+
               const PopupMenuItem(
                 value: 'view',
                 child: Text('Просмотр'),

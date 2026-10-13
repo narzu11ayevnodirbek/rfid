@@ -9,7 +9,9 @@ class MarkingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inv = Get.put(MarkingController());
+    final inv = Get.isRegistered<MarkingController>()
+        ? Get.find<MarkingController>()
+        : Get.put(MarkingController());
 
     return Scaffold(
       appBar: AppBar(

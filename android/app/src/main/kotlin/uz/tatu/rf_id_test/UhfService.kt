@@ -20,11 +20,8 @@ class UhfService(private val context: Context) {
 
     private val mainHandler = Handler(Looper.getMainLooper())
 
-    private val buffer = mutableListOf<String>()
-    private var lastEmitTime = 0L
-
-    private var singleShot = true          // xohlasangiz false qilib multi qoldirasiz
-    private var emittedThisPress = false   // shu bosishda 1 martagina chiqarish
+    private var singleShot = false
+    private var emittedThisPress = false
 
     val streamHandler = object : EventChannel.StreamHandler {
         override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
@@ -47,29 +44,32 @@ class UhfService(private val context: Context) {
 
         triggerEnabled = false
         stopReading()
-        inited = true;
+        inited = true
         return true
     }
 
-
     private val seen = HashSet<String>()
 
-
-    fun startReading() {
-        println("🚀 startReading called. isReading=$isReading uhfNull=${uhf==null}")
+    fun startReading(isSingleShot: Boolean = false) {
+        singleShot = isSingleShot
+        println("🚀 startReading called. isReading=$isReading singleShot=$singleShot uhfNull=${uhf==null}")
         if (isReading) return
         isReading = true
-        seen.clear()
+        synchronized(seen) { seen.clear() }
         emittedThisPress = false
 
         uhf?.setInventoryCallback { tagInfo ->
             val epc = tagInfo?.epc ?: return@setInventoryCallback
             if (epc.isBlank()) return@setInventoryCallback
-            // 1 press = 1 EPC
             if (singleShot && emittedThisPress) return@setInventoryCallback
-            println("📡 CALLBACK EPC=$epc")
-            if (seen.contains(epc)) return@setInventoryCallback
-            seen.add(epc)
+
+            val isNew: Boolean
+            synchronized(seen) {
+                isNew = !seen.contains(epc)
+                if (isNew) seen.add(epc)
+            }
+            if (!isNew) return@setInventoryCallback
+
             emittedThisPress = true
             mainHandler.post {
                 println("📡 EPC EMIT → $epc | sink=${eventSink != null}")
@@ -90,7 +90,6 @@ class UhfService(private val context: Context) {
         triggerEnabled = enabled
         if (!enabled) stopReading()
     }
-
 
     fun stopReading() {
         if (!isReading) return

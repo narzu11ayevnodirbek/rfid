@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:rfid/feature/new_feature/inventory/controllers/view_controller.dart';
 import 'package:rfid/feature/new_feature/inventory/models/tag_model.dart';
 import 'package:rfid/feature/new_feature/utils/rfid_trigger_hint.dart';
-import 'package:rfid/feature/new_feature/inventory/pages/item_info_page.dart';
 
 class ViewPage extends StatelessWidget {
   const ViewPage({super.key});
@@ -72,7 +71,7 @@ class ViewPage extends StatelessWidget {
                             style: const TextStyle(color: Colors.white70),
                           ),
                           onTap: () {
-                            Get.to(() => ItemInfoPage(item: item));
+
                           },
                         );
                       },

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:rfid/infrastructure/di/injector_container.dart';
 
 import 'package:rfid/core/api/interceptors/auth_interceptor.dart';
@@ -20,10 +21,19 @@ class ApiClient {
     final dio = Dio(options);
     dio.interceptors.addAll([
       AuthInterceptor(dio),
-      LogInterceptor(
+      PrettyDioLogger(
+        requestHeader: true,
         requestBody: true,
         responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 90,
       ),
+      // LogInterceptor(
+      //   requestBody: true,
+      //   responseBody: true,
+      // ),
     ]);
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       final client = HttpClient()..badCertificateCallback = (cert, host, port) => true;

@@ -6,7 +6,8 @@ class RfidService {
 
   Future<void> init() async => _method.invokeMethod('initTask');
 
-  Future<void> startScan() async => _method.invokeMethod('start');
+  Future<void> startScan({bool singleShot = false}) async =>
+      _method.invokeMethod('start', {'singleShot': singleShot});
 
   Future<void> stopScan() async => _method.invokeMethod('stop');
 

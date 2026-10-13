@@ -10,7 +10,9 @@ class MovementPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movement = Get.put(MovementController());
+    final movement = Get.isRegistered<MovementController>()
+        ? Get.find<MovementController>()
+        : Get.put(MovementController());
 
     return Scaffold(
       appBar: AppBar(

@@ -77,7 +77,6 @@ class InventoryController extends GetxController {
     if (!_scanActive) return;
     if (!scannedTags.contains(epc)) {
       scannedTags.add(epc);
-      AppSnackbar.showInfo('RFID', 'Метка считана: $epc');
     }
 
     _buffer.add(epc);

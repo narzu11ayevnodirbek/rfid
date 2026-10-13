@@ -27,7 +27,7 @@ class RfidController extends GetxController {
 
   Future<void> init() async => _service.init();
 
-  Future<void> start() async => _service.startScan();
+  Future<void> start({bool singleShot = false}) async => _service.startScan(singleShot: singleShot);
 
   Future<void> stop() async => _service.stopScan();
 

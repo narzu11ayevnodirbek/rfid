@@ -36,24 +36,23 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                   minHeight: constraints.maxHeight,
                 ),
                 child: IntrinsicHeight(
-                  child: BlocBuilder<AuthBloc, AuthState>(
-                    buildWhen: (oldState, newState) {
-                      if (oldState.status.isLoading && newState.status.isError) {
-                        EasyLoading.showError(newState.message);
-                      } else if (oldState.status.isLoading && newState.status.isSuccess) {
+                  child: BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state.status.isError) {
+                        EasyLoading.showError(state.message);
+                      } else if (state.status.isSuccess) {
                         EasyLoading.showSuccess(
-                          'Добро пожаловать, ${newState.message}',
+                          'Добро пожаловать, ${state.message}',
                           duration: const Duration(seconds: 1),
                         );
                         Future.delayed(
                           const Duration(seconds: 1),
                           () {
                             if (!context.mounted) return;
-                            context.pushNamed(Routes.home);
+                            context.go(Routes.inventory);
                           },
                         );
                       }
-                      return true;
                     },
                     builder: (context, state) => Column(
                       mainAxisAlignment: MainAxisAlignment.center,
