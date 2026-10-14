@@ -17,8 +17,8 @@ abstract final class AppRoutes {
   static const String readerDiagnostics = '/settings/reader';
   static const String freeTransfer = '/movement/free-transfer';
 
-  static String inventoryTasks(String inventoryId) =>
-      '$inventory/${_id(inventoryId)}/tasks';
+  static String inventoryDetails(String inventoryId) =>
+      '$inventory/${_id(inventoryId)}';
 
   static String inventoryScan(String inventoryId) =>
       '$inventory/${_id(inventoryId)}/scan';

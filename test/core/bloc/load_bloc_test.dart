@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rfid/core/bloc/list_bloc.dart';
+import 'package:rfid/core/bloc/load_bloc.dart';
 import 'package:rfid/core/bloc/load_state.dart';
 import 'package:rfid/core/error/failure.dart';
 import 'package:rfid/core/error/result.dart';
@@ -15,7 +15,7 @@ class _NumbersBloc extends ListBloc<int> {
   int fetchCount = 0;
 
   @override
-  Future<Result<List<int>>> fetchItems() async => _responses[fetchCount++];
+  Future<Result<List<int>>> load() async => _responses[fetchCount++];
 }
 
 void main() {
@@ -32,7 +32,7 @@ void main() {
     build: () => _NumbersBloc([
       const Success([1, 2]),
     ]),
-    act: (bloc) => bloc.add(const ListLoadRequested()),
+    act: (bloc) => bloc.add(const LoadRequested()),
     expect: () => const [
       LoadInProgress<List<int>>(),
       LoadSuccess([1, 2]),
@@ -46,9 +46,9 @@ void main() {
       const Success([3]),
     ]),
     act: (bloc) async {
-      bloc.add(const ListLoadRequested());
+      bloc.add(const LoadRequested());
       await pumpEventQueue();
-      bloc.add(const ListLoadRequested());
+      bloc.add(const LoadRequested());
     },
     expect: () => const [
       LoadInProgress<List<int>>(),
@@ -65,7 +65,7 @@ void main() {
       const Success([1, 2]),
     ]),
     act: (bloc) async {
-      bloc.add(const ListLoadRequested());
+      bloc.add(const LoadRequested());
       await pumpEventQueue();
       await bloc.refresh();
     },
@@ -83,7 +83,7 @@ void main() {
       const Failed(failure),
     ]),
     act: (bloc) async {
-      bloc.add(const ListLoadRequested());
+      bloc.add(const LoadRequested());
       await pumpEventQueue();
       await bloc.refresh();
     },
@@ -101,7 +101,7 @@ void main() {
         const Success([1, 2]),
       ],
       invalidations: invalidations.stream,
-    )..add(const ListLoadRequested());
+    )..add(const LoadRequested());
     await pumpEventQueue();
 
     invalidations.add(null);
