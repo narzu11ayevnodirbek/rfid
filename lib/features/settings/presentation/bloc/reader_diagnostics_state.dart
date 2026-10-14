@@ -36,7 +36,7 @@ class ReaderDiagnosticsState extends Equatable {
   }) {
     return ReaderDiagnosticsState(
       moduleStatus: moduleStatus ?? this.moduleStatus,
-      moduleFailure: moduleStatus == ModuleStatus.failed
+      moduleFailure: (moduleStatus ?? this.moduleStatus) == ModuleStatus.failed
           ? moduleFailure ?? this.moduleFailure
           : null,
       powerDbm: powerDbm ?? this.powerDbm,

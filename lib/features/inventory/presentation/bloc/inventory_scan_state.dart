@@ -70,7 +70,7 @@ class InventoryScanState extends Equatable {
       selectedList: selectedList ?? this.selectedList,
       restoredDraftCount: restoredDraftCount ?? this.restoredDraftCount,
       submitStatus: submitStatus ?? this.submitStatus,
-      submitFailure: submitStatus == SubmitStatus.failed
+      submitFailure: (submitStatus ?? this.submitStatus) == SubmitStatus.failed
           ? submitFailure ?? this.submitFailure
           : null,
     );
