@@ -32,6 +32,9 @@ dependencies:
   # Localization (used by the generated l10n classes)
   intl: ^0.20.0
 
+  # Icon font referenced by Flutter's own Cupertino widgets
+  cupertino_icons: ^1.0.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
