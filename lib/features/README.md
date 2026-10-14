@@ -1,6 +1,6 @@
 # lib/features
 
-Har papka — foydalanuvchi koʻradigan bitta boʻlim. Hammasi bir xil tuzilgan:
+Har papka — foydalanuvchi ko‘radigan bitta bo‘lim. Hammasi bir xil tuzilgan:
 
 ```
 <feature>/
@@ -12,10 +12,10 @@ Har papka — foydalanuvchi koʻradigan bitta boʻlim. Hammasi bir xil tuzilgan:
 | Feature | Ekranlar |
 |---|---|
 | `auth/` | login; `SessionBloc` — kim tizimda ekani |
-| `inventory/` | inventarizatsiyalar roʻyxati → tafsilot (topshiriqlar) → reja bilan skan |
-| `marking/` | markirovkalar → topshiriqlar → obyektlar → metka bogʻlash |
-| `movement/` | koʻchirish topshiriqlari → paketli skan; erkin koʻchirish |
-| `item_lookup/` | metka boʻyicha obyektni topish |
-| `settings/` | til, oʻquvchi diagnostikasi, chiqish |
+| `inventory/` | inventarizatsiyalar ro‘yxati → tafsilot (topshiriqlar) → reja bilan skan |
+| `marking/` | markirovkalar → topshiriqlar → obyektlar → metka bog‘lash |
+| `movement/` | ko‘chirish topshiriqlari → paketli skan; erkin ko‘chirish |
+| `item_lookup/` | metka bo‘yicha obyektni topish |
+| `settings/` | til, o‘quvchi diagnostikasi, chiqish |
 
-Yangi feature qoʻshish retsepti: [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md#yangi-feature-qoʻshish-retsept).
+Yangi feature qo‘shish retsepti: [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md#yangi-feature-qo‘shish-retsept).

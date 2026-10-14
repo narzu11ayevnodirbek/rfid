@@ -3,7 +3,7 @@ import 'dart:ui';
 /// Languages the app is translated to, in the order shown in Settings.
 enum AppLanguage {
   russian('ru', 'Русский'),
-  uzbek('uz', 'Oʻzbekcha');
+  uzbek('uz', 'O‘zbekcha');
 
   const AppLanguage(this.code, this.nativeName);
 

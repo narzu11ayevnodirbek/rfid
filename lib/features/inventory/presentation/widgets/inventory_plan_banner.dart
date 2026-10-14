@@ -15,6 +15,15 @@ class InventoryPlanBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final banner = _buildBanner(context);
+    if (banner == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+      child: banner,
+    );
+  }
+
+  Widget? _buildBanner(BuildContext context) {
     final l10n = context.l10n;
     final failure = state.planFailure;
 
@@ -49,11 +58,8 @@ class InventoryPlanBanner extends StatelessWidget {
       );
     }
     if (state.isPlanEmpty) {
-      return Padding(
-        padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-        child: InfoBanner(message: l10n.inventoryPlanEmpty),
-      );
+      return InfoBanner(message: l10n.inventoryPlanEmpty);
     }
-    return const SizedBox.shrink();
+    return null;
   }
 }

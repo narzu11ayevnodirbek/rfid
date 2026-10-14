@@ -1,12 +1,12 @@
 # Backend API
 
-Backend: PHP, standart manzil `https://mderp.uz/` (`--dart-define=API_BASE_URL` bilan oʻzgartiriladi). Barcha yoʻllar `lib/core/network/api_endpoints.dart` da.
+Backend: PHP, standart manzil `https://mderp.uz/` (`--dart-define=API_BASE_URL` bilan o‘zgartiriladi). Barcha yo‘llar `lib/core/network/api_endpoints.dart` da.
 
-> **Holat.** Quyidagi shakllar ilovaning ishlab turgan eski kodidan tiklangan. Ishlab chiquvchining kompyuteri ulangan tarmoq `mderp.uz` ni bloklagani (FortiGuard "Newly Observed Domain") uchun real javoblar bilan solishtirib boʻlmadi. Ochiq tarmoqda [`tool/api_probe.py`](../tool/api_probe.py) ni ishga tushirib tekshiring (faqat GET soʻrovlar yuboradi) va farq boʻlsa shu faylni hamda tegishli `*_model.dart` ni yangilang.
+> **Holat.** Quyidagi shakllar ilovaning ishlab turgan eski kodidan tiklangan. Ishlab chiquvchining kompyuteri ulangan tarmoq `mderp.uz` ni bloklagani (FortiGuard "Newly Observed Domain") uchun real javoblar bilan solishtirib bo‘lmadi. Ochiq tarmoqda [`tool/api_probe.py`](../tool/api_probe.py) ni ishga tushirib tekshiring (faqat GET so‘rovlar yuboradi) va farq bo‘lsa shu faylni hamda tegishli `*_model.dart` ni yangilang.
 
 ## Umumiy qoidalar
 
-**Autentifikatsiya.** Login javobidagi token keyingi har bir soʻrovga `Authorization: Bearer <token>` sarlavhasi bilan qoʻshiladi (`AuthTokenInterceptor`).
+**Autentifikatsiya.** Login javobidagi token keyingi har bir so‘rovga `Authorization: Bearer <token>` sarlavhasi bilan qo‘shiladi (`AuthTokenInterceptor`).
 
 **Konvert.** Har bir javob:
 
@@ -15,13 +15,13 @@ Backend: PHP, standart manzil `https://mderp.uz/` (`--dart-define=API_BASE_URL` 
 { "success": false, "message": "..." }   // yoki "error"
 ```
 
-`success` `true` boʻlmasa, ilova buni xato deb biladi va `message` / `error` / `recommendation` matnini foydalanuvchiga koʻrsatadi (`ApiEnvelopeParser`).
+`success` `true` bo‘lmasa, ilova buni xato deb biladi va `message` / `error` / `recommendation` matnini foydalanuvchiga ko‘rsatadi (`ApiEnvelopeParser`).
 
 **HTTP 401** sessiyani tugatadi: ilova login ekraniga qaytadi.
 
-**Turlar.** ID va sanoqlar goh son, goh matn boʻlib keladi. Ilova ularni `JsonReader` orqali oʻqiydi, shuning uchun ikkalasi ham ishlaydi. Quyida `id` deb yozilgan joyda `"12"` yoki `12` boʻlishi mumkin.
+**Turlar.** ID va sanoqlar goh son, goh matn bo‘lib keladi. Ilova ularni `JsonReader` orqali o‘qiydi, shuning uchun ikkalasi ham ishlaydi. Quyida `id` deb yozilgan joyda `"12"` yoki `12` bo‘lishi mumkin.
 
-**Soʻrov tanasi** — JSON (`Content-Type: application/json`).
+**So‘rov tanasi** — JSON (`Content-Type: application/json`).
 
 ## Auth
 
@@ -37,13 +37,13 @@ Javob:
 { "success": true, "token": "...", "user": { "id": "3", "login": "operator", "username": "Ism Familiya" } }
 ```
 
-`token` boʻlmasa, javob xato hisoblanadi. Chiqish (logout) endpointi yoʻq — token faqat qurilmadan oʻchiriladi.
+`token` bo‘lmasa, javob xato hisoblanadi. Chiqish (logout) endpointi yo‘q — token faqat qurilmadan o‘chiriladi.
 
 ## Inventarizatsiya
 
 ### `GET api/inventory.php`
 
-`data[]`: `id`, `name` (raqam), `type`, `user_name`, `created_at`, `status_code`, `status_label`, `found`, `not_found`, `total`. Ilova `status_code == "closed"` boʻlganlarini koʻrsatmaydi.
+`data[]`: `id`, `name` (raqam), `type`, `user_name`, `created_at`, `status_code`, `status_label`, `found`, `not_found`, `total`. Ilova `status_code == "closed"` bo‘lganlarini ko‘rsatmaydi.
 
 ### `GET api/inventory_tasks.php?inventory_id={id}`
 
@@ -51,7 +51,7 @@ Javob:
 
 ### `GET api/inventory_get_plan.php?id={inventoryId}`
 
-Kutilgan obyektlar (reja). Maydonlar ildizda (ilova `data` ichida boʻlsa ham oʻqiydi):
+Kutilgan obyektlar (reja). Maydonlar ildizda (ilova `data` ichida bo‘lsa ham o‘qiydi):
 
 ```json
 { "success": true, "inventory_id": 12, "location_name": "Ombor 1",
@@ -66,13 +66,13 @@ Ilova rejani qurilmada saqlaydi; server javob bermasa, saqlangan nusxa ishlatila
 { "inventory_id": 12, "scanned_items": ["E280...", "..."], "duration_seconds": 340, "device_id": "TSD" }
 ```
 
-`inventory_id` son sifatida yuboriladi (eski ilova ham shunday yuborgan). Javobdan faqat `success` oʻqiladi.
+`inventory_id` son sifatida yuboriladi (eski ilova ham shunday yuborgan). Javobdan faqat `success` o‘qiladi.
 
 ## Obyektlar katalogi
 
 ### `GET api/items.php`
 
-`data[]`: `id`, `name`, `code`, `location`, `responsible`, `rfid` (EPC), `photo_path`, `has_rfid`, `price`, `status`, `created_at`. "Metka boʻyicha qidirish" butun roʻyxatni bir marta yuklab, EPC boʻyicha qurilmaning oʻzida qidiradi (EPC boʻyicha qidirish endpointi yoʻq).
+`data[]`: `id`, `name`, `code`, `location`, `responsible`, `rfid` (EPC), `photo_path`, `has_rfid`, `price`, `status`, `created_at`. "Metka bo‘yicha qidirish" butun ro‘yxatni bir marta yuklab, EPC bo‘yicha qurilmaning o‘zida qidiradi (EPC bo‘yicha qidirish endpointi yo‘q).
 
 ## Markirovka
 
@@ -91,7 +91,7 @@ Ilova rejani qurilmada saqlaydi; server javob bermasa, saqlangan nusxa ishlatila
                "status": "...", "photo": "uploads/100.jpg", "rfid": "" } ] }
 ```
 
-Obyektda `item_id` yoki `id`, `inventory_number` yoki `barcode`, `photo` yoki `photo_path` kelishi mumkin — ilova ikkalasini ham qabul qiladi. `rfid` boʻsh boʻlmasa, obyekt "bogʻlangan" hisoblanadi.
+Obyektda `item_id` yoki `id`, `inventory_number` yoki `barcode`, `photo` yoki `photo_path` kelishi mumkin — ilova ikkalasini ham qabul qiladi. `rfid` bo‘sh bo‘lmasa, obyekt "bog‘langan" hisoblanadi.
 
 ### `GET api/get_marking_items.php?marking_id={id}`
 
@@ -103,9 +103,9 @@ Obyektda `item_id` yoki `id`, `inventory_number` yoki `barcode`, `photo` yoki `p
 { "marking_id": "3", "task_id": "10", "item_id": "100", "rfid": "E280..." }
 ```
 
-Xatoda `message` / `error` / `recommendation` koʻrsatiladi.
+Xatoda `message` / `error` / `recommendation` ko‘rsatiladi.
 
-## Koʻchirish
+## Ko‘chirish
 
 ### `GET api/get_movement_tasks_for_mobile.php`
 
@@ -126,7 +126,7 @@ Javob:
 
 ### `GET api/locations.php`
 
-`data[]`: `id`, `name`, `type`, `parent_id`, `path`, `description`. Roʻyxatda `path` boʻlsa, oʻsha koʻrsatiladi.
+`data[]`: `id`, `name`, `type`, `parent_id`, `path`, `description`. Ro‘yxatda `path` bo‘lsa, o‘sha ko‘rsatiladi.
 
 ### `POST api/transfer_free.php`
 
@@ -141,7 +141,7 @@ Javob:
   "errors": { "unknown_epcs": [...], "already_here": [...], "blocked": [...] } }
 ```
 
-`errors` roʻyxatlari elementi matn ham, obyekt ham boʻlishi mumkin (`name` / `epc` / `item_id` / `status`); ilova ikkalasini matnga aylantiradi.
+`errors` ro‘yxatlari elementi matn ham, obyekt ham bo‘lishi mumkin (`name` / `epc` / `item_id` / `status`); ilova ikkalasini matnga aylantiradi.
 
 ## Ishlatilmaydigan endpointlar
 

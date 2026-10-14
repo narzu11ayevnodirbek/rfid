@@ -55,11 +55,14 @@ class StatTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.xxs),
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.labelMedium,
+              FittedBox(
+                // Four tiles share a narrow handheld screen: shrink, never cut.
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  style: theme.textTheme.labelMedium,
+                ),
               ),
             ],
           ),

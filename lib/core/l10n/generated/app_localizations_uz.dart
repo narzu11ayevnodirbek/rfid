@@ -24,16 +24,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get commonClose => 'Yopish';
 
   @override
-  String get commonRemove => 'Oʻchirish';
+  String get commonRemove => 'O‘chirish';
 
   @override
-  String get commonEmptyList => 'Roʻyxat boʻsh';
+  String get commonEmptyList => 'Ro‘yxat bo‘sh';
 
   @override
-  String get commonRefreshFailed => 'Maʼlumotlarni yangilab boʻlmadi';
+  String get commonRefreshFailed => 'Ma’lumotlarni yangilab bo‘lmadi';
 
   @override
-  String get commonSearchByTag => 'Metka boʻyicha qidirish';
+  String get commonSearchByTag => 'Metka bo‘yicha qidirish';
 
   @override
   String commonCreatedAt(String date) {
@@ -47,13 +47,13 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get failureNetwork =>
-      'Server bilan aloqa yoʻq. Internetni tekshirib, qayta urinib koʻring.';
+      'Server bilan aloqa yo‘q. Internetni tekshirib, qayta urinib ko‘ring.';
 
   @override
   String get failureUnauthorized => 'Sessiya tugadi. Qaytadan kiring.';
 
   @override
-  String get failureServer => 'Server soʻrovni rad etdi.';
+  String get failureServer => 'Server so‘rovni rad etdi.';
 
   @override
   String failureServerWithCode(int code) {
@@ -65,18 +65,18 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get failureUnexpected =>
-      'Nimadir notoʻgʻri ketdi. Qayta urinib koʻring.';
+      'Nimadir noto‘g‘ri ketdi. Qayta urinib ko‘ring.';
 
   @override
-  String get failureRfidUnavailable => 'Bu qurilmada RFID oʻquvchi topilmadi.';
+  String get failureRfidUnavailable => 'Bu qurilmada RFID o‘quvchi topilmadi.';
 
   @override
   String get failureRfidInitFailed =>
-      'RFID oʻquvchini yoqib boʻlmadi. Ilovani qayta ishga tushiring.';
+      'RFID o‘quvchini yoqib bo‘lmadi. Ilovani qayta ishga tushiring.';
 
   @override
   String get failureRfidCommandFailed =>
-      'RFID oʻquvchi buyruqni bajarmadi. Qayta urinib koʻring.';
+      'RFID o‘quvchi buyruqni bajarmadi. Qayta urinib ko‘ring.';
 
   @override
   String get tabInventory => 'Inventarizatsiya';
@@ -85,7 +85,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get tabMarking => 'Markirovka';
 
   @override
-  String get tabMovement => 'Koʻchirish';
+  String get tabMovement => 'Ko‘chirish';
 
   @override
   String get tabSettings => 'Sozlamalar';
@@ -106,13 +106,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get loginSubmit => 'Kirish';
 
   @override
-  String get loginFieldRequired => 'Maydonni toʻldiring';
+  String get loginFieldRequired => 'Maydonni to‘ldiring';
 
   @override
-  String get loginInvalidCredentials => 'Login yoki parol notoʻgʻri';
+  String get loginInvalidCredentials => 'Login yoki parol noto‘g‘ri';
 
   @override
-  String get loginShowPassword => 'Parolni koʻrsatish';
+  String get loginShowPassword => 'Parolni ko‘rsatish';
 
   @override
   String get loginHidePassword => 'Parolni yashirish';
@@ -121,44 +121,44 @@ class AppLocalizationsUz extends AppLocalizations {
   String get scanStart => 'RFID ni yoqish';
 
   @override
-  String get scanStop => 'Toʻxtatish';
+  String get scanStop => 'To‘xtatish';
 
   @override
   String get scanClear => 'Tozalash';
 
   @override
-  String get scanStatusReading => 'Oʻqilmoqda';
+  String get scanStatusReading => 'O‘qilmoqda';
 
   @override
-  String get scanStatusArmed => 'Oʻquvchi yoqilgan';
+  String get scanStatusArmed => 'O‘quvchi yoqilgan';
 
   @override
-  String get scanStatusIdle => 'Oʻquvchi oʻchiq';
+  String get scanStatusIdle => 'O‘quvchi o‘chiq';
 
   @override
   String get scanHint =>
-      '«RFID ni yoqish» tugmasini bosing va qurilmani metkalarga yaqinlashtiring. Korpusdagi tugma ham oʻqishni yoqadi.';
+      '«RFID ni yoqish» tugmasini bosing va qurilmani metkalarga yaqinlashtiring. Korpusdagi tugma ham o‘qishni yoqadi.';
 
   @override
   String scanTagCount(int count) {
-    return 'Oʻqilgan metkalar: $count';
+    return 'O‘qilgan metkalar: $count';
   }
 
   @override
-  String get scanNoTags => 'Hozircha oʻqilgan metkalar yoʻq';
+  String get scanNoTags => 'Hozircha o‘qilgan metkalar yo‘q';
 
   @override
-  String get scanClearTitle => 'Roʻyxat tozalansinmi?';
+  String get scanClearTitle => 'Ro‘yxat tozalansinmi?';
 
   @override
   String get scanClearMessage =>
-      'Barcha oʻqilgan metkalar roʻyxatdan oʻchiriladi.';
+      'Barcha o‘qilgan metkalar ro‘yxatdan o‘chiriladi.';
 
   @override
   String get scanLeaveTitle => 'Yubormasdan chiqilsinmi?';
 
   @override
-  String get scanLeaveMessage => 'Oʻqilgan metkalar yuborilmagan va yoʻqoladi.';
+  String get scanLeaveMessage => 'O‘qilgan metkalar yuborilmagan va yo‘qoladi.';
 
   @override
   String get scanLeaveConfirm => 'Chiqish';
@@ -176,19 +176,19 @@ class AppLocalizationsUz extends AppLocalizations {
   String get statExtra => 'Ortiqcha';
 
   @override
-  String get statScanned => 'Oʻqildi';
+  String get statScanned => 'O‘qildi';
 
   @override
-  String get statBound => 'Bogʻlangan';
+  String get statBound => 'Bog‘langan';
 
   @override
-  String get statUnbound => 'Bogʻlanmagan';
+  String get statUnbound => 'Bog‘lanmagan';
 
   @override
   String get inventoryListTitle => 'Inventarizatsiya';
 
   @override
-  String get inventoryListEmpty => 'Faol inventarizatsiyalar yoʻq';
+  String get inventoryListEmpty => 'Faol inventarizatsiyalar yo‘q';
 
   @override
   String inventoryNumber(String name) {
@@ -204,18 +204,18 @@ class AppLocalizationsUz extends AppLocalizations {
   String get inventoryTasksTitle => 'Topshiriqlar';
 
   @override
-  String get inventoryTasksEmpty => 'Bu inventarizatsiyada topshiriqlar yoʻq';
+  String get inventoryTasksEmpty => 'Bu inventarizatsiyada topshiriqlar yo‘q';
 
   @override
   String get inventoryStartScan => 'Skanerlashni boshlash';
 
   @override
   String get inventoryPlanFromCache =>
-      'Server bilan aloqa yoʻq — saqlangan reja koʻrsatilmoqda.';
+      'Server bilan aloqa yo‘q — saqlangan reja ko‘rsatilmoqda.';
 
   @override
   String get inventoryPlanEmpty =>
-      'Server kutilgan obyektlarni qaytarmadi. Barcha oʻqilgan metkalar «Ortiqcha»ga tushadi.';
+      'Server kutilgan obyektlarni qaytarmadi. Barcha o‘qilgan metkalar «Ortiqcha»ga tushadi.';
 
   @override
   String inventoryDraftRestored(int count) {
@@ -244,7 +244,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get inventoryFinishFailed =>
-      'Natijalarni yuborib boʻlmadi. Qoralama saqlandi — keyinroq yuboring.';
+      'Natijalarni yuborib bo‘lmadi. Qoralama saqlandi — keyinroq yuboring.';
 
   @override
   String get inventoryNothingMissing => 'Barcha obyektlar topildi';
@@ -253,17 +253,17 @@ class AppLocalizationsUz extends AppLocalizations {
   String get inventoryNothingFound => 'Hozircha hech narsa topilmadi';
 
   @override
-  String get inventoryNoExtra => 'Ortiqcha metkalar yoʻq';
+  String get inventoryNoExtra => 'Ortiqcha metkalar yo‘q';
 
   @override
-  String get itemLookupTitle => 'Metka boʻyicha qidirish';
+  String get itemLookupTitle => 'Metka bo‘yicha qidirish';
 
   @override
-  String get itemLookupEmpty => 'Obyektni koʻrish uchun metkani oʻqing';
+  String get itemLookupEmpty => 'Obyektni ko‘rish uchun metkani o‘qing';
 
   @override
   String itemLookupUnknownTags(int count) {
-    return 'Bazada obyekti yoʻq metkalar: $count';
+    return 'Bazada obyekti yo‘q metkalar: $count';
   }
 
   @override
@@ -273,23 +273,23 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String itemResponsible(String name) {
-    return 'Masʼul: $name';
+    return 'Mas’ul: $name';
   }
 
   @override
   String get markingListTitle => 'Markirovka';
 
   @override
-  String get markingListEmpty => 'Markirovkalar yoʻq';
+  String get markingListEmpty => 'Markirovkalar yo‘q';
 
   @override
   String get markingTasksTitle => 'Markirovka topshiriqlari';
 
   @override
-  String get markingTasksEmpty => 'Topshiriqlar yoʻq';
+  String get markingTasksEmpty => 'Topshiriqlar yo‘q';
 
   @override
-  String get markingItemsEmpty => 'Topshiriqda obyektlar yoʻq';
+  String get markingItemsEmpty => 'Topshiriqda obyektlar yo‘q';
 
   @override
   String get markingItemTitle => 'TMQ birligi';
@@ -307,36 +307,36 @@ class AppLocalizationsUz extends AppLocalizations {
   String get markingItemPhoto => 'Rasm';
 
   @override
-  String get markingItemBound => 'Metka allaqachon bogʻlangan';
+  String get markingItemBound => 'Metka allaqachon bog‘langan';
 
   @override
-  String get markingLastTag => 'Oʻqilgan metka';
+  String get markingLastTag => 'O‘qilgan metka';
 
   @override
   String get markingBindHint =>
-      'Qurilmani shu obyekt metkasiga yaqinlashtiring. Oxirgi oʻqilgan metka bogʻlanadi.';
+      'Qurilmani shu obyekt metkasiga yaqinlashtiring. Oxirgi o‘qilgan metka bog‘lanadi.';
 
   @override
-  String get markingBindSubmit => 'Metkani bogʻlash';
+  String get markingBindSubmit => 'Metkani bog‘lash';
 
   @override
-  String get markingTagBound => 'Metka bogʻlandi';
+  String get markingTagBound => 'Metka bog‘landi';
 
   @override
-  String get markingBindFailedTitle => 'Metkani bogʻlab boʻlmadi';
+  String get markingBindFailedTitle => 'Metkani bog‘lab bo‘lmadi';
 
   @override
-  String get movementListTitle => 'Koʻchirish';
+  String get movementListTitle => 'Ko‘chirish';
 
   @override
-  String get movementListEmpty => 'Koʻchirish topshiriqlari yoʻq';
+  String get movementListEmpty => 'Ko‘chirish topshiriqlari yo‘q';
 
   @override
-  String get movementFreeTransferTitle => 'Erkin koʻchirish';
+  String get movementFreeTransferTitle => 'Erkin ko‘chirish';
 
   @override
   String get movementFreeTransferSubtitle =>
-      'Istalgan obyektlarni tanlangan joyga koʻchirish';
+      'Istalgan obyektlarni tanlangan joyga ko‘chirish';
 
   @override
   String get movementFrom => 'Qayerdan';
@@ -348,7 +348,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get movementSubmit => 'Yuborish';
 
   @override
-  String get movementTargetLocation => 'Qayerga koʻchiramiz?';
+  String get movementTargetLocation => 'Qayerga ko‘chiramiz?';
 
   @override
   String get movementSelectLocation => 'Joyni tanlang';
@@ -357,17 +357,17 @@ class AppLocalizationsUz extends AppLocalizations {
   String get movementLocationRequired => 'Avval joyni tanlang';
 
   @override
-  String get movementMove => 'Koʻchirish';
+  String get movementMove => 'Ko‘chirish';
 
   @override
-  String get movementResultTitle => 'Koʻchirish natijasi';
+  String get movementResultTitle => 'Ko‘chirish natijasi';
 
   @override
-  String get movementFailedTitle => 'Koʻchirish bajarilmadi';
+  String get movementFailedTitle => 'Ko‘chirish bajarilmadi';
 
   @override
   String movementMovedCount(int count) {
-    return 'Koʻchirilgan obyektlar: $count';
+    return 'Ko‘chirilgan obyektlar: $count';
   }
 
   @override
@@ -382,12 +382,12 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String movementBlocked(int count) {
-    return 'Koʻchirib boʻlmaydi (hisobdan chiqarilgan, taʼmirda): $count';
+    return 'Ko‘chirib bo‘lmaydi (hisobdan chiqarilgan, ta’mirda): $count';
   }
 
   @override
   String movementNotInSource(int count) {
-    return 'Boshlangʻich joyda emas: $count';
+    return 'Boshlang‘ich joyda emas: $count';
   }
 
   @override
@@ -397,7 +397,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsLanguage => 'Til';
 
   @override
-  String get settingsReaderDiagnostics => 'Oʻquvchi diagnostikasi';
+  String get settingsReaderDiagnostics => 'O‘quvchi diagnostikasi';
 
   @override
   String get settingsReaderDiagnosticsSubtitle =>
@@ -419,7 +419,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsUnknownUser => 'Foydalanuvchi';
 
   @override
-  String get diagnosticsTitle => 'Oʻquvchi diagnostikasi';
+  String get diagnosticsTitle => 'O‘quvchi diagnostikasi';
 
   @override
   String get diagnosticsModule => 'RFID modul';
@@ -431,6 +431,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get diagnosticsModuleNotReady => 'Tekshirilmagan';
 
   @override
+  String get diagnosticsModuleFailed => 'Mavjud emas';
+
+  @override
   String get diagnosticsCheckModule => 'Tekshirish';
 
   @override
@@ -439,7 +442,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get diagnosticsPowerRejected => 'Oʻquvchi quvvatni qabul qilmadi';
+  String get diagnosticsPowerRejected => 'O‘quvchi quvvatni qabul qilmadi';
 
   @override
   String diagnosticsLastKey(int code) {
@@ -448,5 +451,5 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get diagnosticsNoKey =>
-      'Kodini koʻrish uchun korpusdagi tugmani bosing';
+      'Kodini ko‘rish uchun korpusdagi tugmani bosing';
 }

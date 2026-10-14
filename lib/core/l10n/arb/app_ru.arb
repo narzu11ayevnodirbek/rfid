@@ -155,6 +155,7 @@
   "diagnosticsModule": "RFID-модуль",
   "diagnosticsModuleReady": "Готов к работе",
   "diagnosticsModuleNotReady": "Не проверен",
+  "diagnosticsModuleFailed": "Недоступен",
   "diagnosticsCheckModule": "Проверить",
   "diagnosticsPower": "Мощность: {dbm} dBm",
   "@diagnosticsPower": { "placeholders": { "dbm": { "type": "int" } } },

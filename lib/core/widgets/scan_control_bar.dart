@@ -58,8 +58,14 @@ class ScanControlBar extends StatelessWidget {
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
-                  child: Text(statusText, style: theme.textTheme.titleSmall),
+                  child: Text(
+                    statusText,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.titleSmall,
+                  ),
                 ),
+                const SizedBox(width: AppSpacing.sm),
                 Text(
                   l10n.scanTagCount(scan.tags.length),
                   style: theme.textTheme.labelLarge,

@@ -431,6 +431,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get diagnosticsModuleNotReady => 'Не проверен';
 
   @override
+  String get diagnosticsModuleFailed => 'Недоступен';
+
+  @override
   String get diagnosticsCheckModule => 'Проверить';
 
   @override

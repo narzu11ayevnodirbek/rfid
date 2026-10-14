@@ -21,10 +21,7 @@ class ModuleStatusCard extends StatelessWidget {
     final failure = state.moduleFailure;
     final (tone, label) = switch (state.moduleStatus) {
       ModuleStatus.ready => (StatusTone.success, l10n.diagnosticsModuleReady),
-      ModuleStatus.failed => (
-          StatusTone.danger,
-          l10n.diagnosticsModuleNotReady
-        ),
+      ModuleStatus.failed => (StatusTone.danger, l10n.diagnosticsModuleFailed),
       ModuleStatus.unknown || ModuleStatus.checking => (
           StatusTone.neutral,
           l10n.diagnosticsModuleNotReady

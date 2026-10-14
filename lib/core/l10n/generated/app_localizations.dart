@@ -854,6 +854,12 @@ abstract class AppLocalizations {
   /// **'Не проверен'**
   String get diagnosticsModuleNotReady;
 
+  /// No description provided for @diagnosticsModuleFailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Недоступен'**
+  String get diagnosticsModuleFailed;
+
   /// No description provided for @diagnosticsCheckModule.
   ///
   /// In ru, this message translates to:
