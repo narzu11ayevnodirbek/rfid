@@ -13,7 +13,7 @@ import io.flutter.plugin.common.MethodChannel
  * - `initialize` → `true`, or error `UNAVAILABLE` / `INIT_FAILED`
  * - `setPower {dbm}` → whether the module accepted it
  * - `startScanning {readImmediately}` → whether the reader is armed
- * - `stopScanning`, `setKeyEventReporting {enabled}`, `release` → `true`
+ * - `stopScanning`, `setKeyEventReporting {enabled}` → `true`
  *
  * Events (channel `uz.tatu.rfid/reader_events`), one map each:
  * - `{type: "tag", epc}`
@@ -72,11 +72,6 @@ class RfidChannel(context: Context, messenger: BinaryMessenger) :
 
             "setKeyEventReporting" -> {
                 reportsKeyEvents = call.argument<Boolean>("enabled") ?: false
-                result.success(true)
-            }
-
-            "release" -> {
-                reader.release()
                 result.success(true)
             }
 

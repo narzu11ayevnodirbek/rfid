@@ -38,7 +38,6 @@
 | `startScanning` | `readImmediately: bool` | trigger "armed" bo‘ldimi (`bool`) |
 | `stopScanning` | — | `true`; o‘qishni to‘xtatadi, triggerni o‘chiradi |
 | `setKeyEventReporting` | `enabled: bool` | `true`; diagnostika uchun tugma hodisalarini yoqadi |
-| `release` | — | `true`; modulni o‘chiradi |
 | boshqa | — | `notImplemented` |
 
 ### Hodisalar — `uz.tatu.rfid/reader_events`

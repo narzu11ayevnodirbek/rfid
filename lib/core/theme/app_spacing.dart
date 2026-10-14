@@ -30,5 +30,4 @@ abstract final class AppRadius {
 abstract final class AppSizes {
   /// Large enough to hit with a glove on a handheld terminal.
   static const double buttonHeight = 52;
-  static const double iconBadge = 40;
 }

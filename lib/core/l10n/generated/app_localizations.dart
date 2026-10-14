@@ -122,23 +122,11 @@ abstract class AppLocalizations {
   /// **'Понятно'**
   String get commonOk;
 
-  /// No description provided for @commonClose.
-  ///
-  /// In ru, this message translates to:
-  /// **'Закрыть'**
-  String get commonClose;
-
   /// No description provided for @commonRemove.
   ///
   /// In ru, this message translates to:
   /// **'Удалить'**
   String get commonRemove;
-
-  /// No description provided for @commonEmptyList.
-  ///
-  /// In ru, this message translates to:
-  /// **'Список пуст'**
-  String get commonEmptyList;
 
   /// No description provided for @commonRefreshFailed.
   ///
@@ -404,12 +392,6 @@ abstract class AppLocalizations {
   /// **'Лишние'**
   String get statExtra;
 
-  /// No description provided for @statScanned.
-  ///
-  /// In ru, this message translates to:
-  /// **'Считано'**
-  String get statScanned;
-
   /// No description provided for @statBound.
   ///
   /// In ru, this message translates to:
@@ -481,18 +463,6 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Восстановлено из черновика: {count}'**
   String inventoryDraftRestored(int count);
-
-  /// No description provided for @inventorySaveDraft.
-  ///
-  /// In ru, this message translates to:
-  /// **'Сохранить черновик'**
-  String get inventorySaveDraft;
-
-  /// No description provided for @inventoryDraftSaved.
-  ///
-  /// In ru, this message translates to:
-  /// **'Черновик сохранён'**
-  String get inventoryDraftSaved;
 
   /// No description provided for @inventoryFinish.
   ///
@@ -625,12 +595,6 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Статус'**
   String get markingItemStatus;
-
-  /// No description provided for @markingItemPhoto.
-  ///
-  /// In ru, this message translates to:
-  /// **'Фото'**
-  String get markingItemPhoto;
 
   /// No description provided for @markingItemBound.
   ///

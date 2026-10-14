@@ -21,13 +21,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get commonOk => 'Tushunarli';
 
   @override
-  String get commonClose => 'Yopish';
-
-  @override
   String get commonRemove => 'O‘chirish';
-
-  @override
-  String get commonEmptyList => 'Ro‘yxat bo‘sh';
 
   @override
   String get commonRefreshFailed => 'Ma’lumotlarni yangilab bo‘lmadi';
@@ -176,9 +170,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String get statExtra => 'Ortiqcha';
 
   @override
-  String get statScanned => 'O‘qildi';
-
-  @override
   String get statBound => 'Bog‘langan';
 
   @override
@@ -221,12 +212,6 @@ class AppLocalizationsUz extends AppLocalizations {
   String inventoryDraftRestored(int count) {
     return 'Qoralamadan tiklandi: $count';
   }
-
-  @override
-  String get inventorySaveDraft => 'Qoralamani saqlash';
-
-  @override
-  String get inventoryDraftSaved => 'Qoralama saqlandi';
 
   @override
   String get inventoryFinish => 'Yakunlash';
@@ -302,9 +287,6 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get markingItemStatus => 'Holati';
-
-  @override
-  String get markingItemPhoto => 'Rasm';
 
   @override
   String get markingItemBound => 'Metka allaqachon bog‘langan';

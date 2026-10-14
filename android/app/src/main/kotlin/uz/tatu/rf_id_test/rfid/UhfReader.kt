@@ -110,16 +110,11 @@ class UhfReader(
         listener.onReadingChanged(false)
     }
 
-    /** Powers the module off; [initialize] is needed to use it again. */
-    fun release() {
+    /** Powers the module off for good, when the activity goes away. */
+    fun shutdown() {
         disarm()
         module?.free()
         module = null
-    }
-
-    /** Releases the module for good, when the activity goes away. */
-    fun shutdown() {
-        release()
         worker.shutdown()
     }
 

@@ -78,12 +78,6 @@ class PlatformRfidReader implements RfidReader {
   Future<void> setKeyEventReporting({required bool enabled}) =>
       _invoke<bool>('setKeyEventReporting', {'enabled': enabled});
 
-  @override
-  Future<void> release() async {
-    await _invoke<bool>('release');
-    _isInitialized = false;
-  }
-
   void _listenToPlatformOnce() {
     _platformSubscription ??= _platformEvents.receiveBroadcastStream().listen(
           _onPlatformEvent,

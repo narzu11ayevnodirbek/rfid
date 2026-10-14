@@ -54,7 +54,4 @@ abstract interface class RfidReader {
 
   /// Turns [HardwareKeyPressed] events on or off.
   Future<void> setKeyEventReporting({required bool enabled});
-
-  /// Powers the module off. [initialize] must be called again to use it.
-  Future<void> release();
 }

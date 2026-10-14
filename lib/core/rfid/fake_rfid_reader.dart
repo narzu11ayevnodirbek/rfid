@@ -81,12 +81,6 @@ class FakeRfidReader implements RfidReader {
     reportsKeyEvents = enabled;
   }
 
-  @override
-  Future<void> release() async {
-    await stopScanning();
-    isInitialized = false;
-  }
-
   /// Pretends the radio read [epc]. Ignored unless scanning, like hardware.
   void simulateTag(String epc) {
     if (!isScanning) return;

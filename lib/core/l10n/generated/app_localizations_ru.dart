@@ -21,13 +21,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonOk => 'Понятно';
 
   @override
-  String get commonClose => 'Закрыть';
-
-  @override
   String get commonRemove => 'Удалить';
-
-  @override
-  String get commonEmptyList => 'Список пуст';
 
   @override
   String get commonRefreshFailed => 'Не удалось обновить данные';
@@ -176,9 +170,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get statExtra => 'Лишние';
 
   @override
-  String get statScanned => 'Считано';
-
-  @override
   String get statBound => 'Привязано';
 
   @override
@@ -221,12 +212,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String inventoryDraftRestored(int count) {
     return 'Восстановлено из черновика: $count';
   }
-
-  @override
-  String get inventorySaveDraft => 'Сохранить черновик';
-
-  @override
-  String get inventoryDraftSaved => 'Черновик сохранён';
 
   @override
   String get inventoryFinish => 'Завершить';
@@ -302,9 +287,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get markingItemStatus => 'Статус';
-
-  @override
-  String get markingItemPhoto => 'Фото';
 
   @override
   String get markingItemBound => 'Метка уже привязана';
