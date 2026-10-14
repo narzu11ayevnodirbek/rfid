@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "inventory_id": 124,
+  "location_name": "location_name 1",
+  "expected_items": [
+    {
+      "epc": "E28068940000500000000000",
+      "name": "name 1"
+    }
+  ]
+}

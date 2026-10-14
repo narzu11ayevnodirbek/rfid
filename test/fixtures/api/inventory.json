@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "126",
+      "name": "name 2",
+      "type": "location",
+      "count_excess": "1",
+      "user_id": "9",
+      "created_at": "2026-08-13 12:19:05",
+      "updated_at": "2026-08-13 12:34:25",
+      "closed_at": "2026-08-13 12:34:25",
+      "user_name": null,
+      "found": "0",
+      "not_found": "0",
+      "total": "0",
+      "status_label": "Закрыта",
+      "status_code": "closed"
+    },
+    {
+      "id": "124",
+      "name": "name 3",
+      "type": "location",
+      "count_excess": "0",
+      "user_id": "9",
+      "created_at": "2026-04-07 11:12:51",
+      "updated_at": "2026-07-14 07:36:40",
+      "closed_at": "2026-07-14 07:36:40",
+      "user_name": null,
+      "found": "1",
+      "not_found": "0",
+      "total": "1",
+      "status_label": "Закрыта",
+      "status_code": "closed"
+    }
+  ],
+  "count": 2,
+  "total": 2,
+  "limit": 50,
+  "offset": 0
+}
