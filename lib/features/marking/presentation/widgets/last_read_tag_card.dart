@@ -27,7 +27,7 @@ class LastReadTagCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.xs),
-            SelectableText(
+            Text(
               epc,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontFamily: 'monospace',
