@@ -440,6 +440,24 @@ abstract class AppLocalizations {
   /// **'У этой инвентаризации нет заданий'**
   String get inventoryTasksEmpty;
 
+  /// No description provided for @taskStatusPending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ожидает'**
+  String get taskStatusPending;
+
+  /// No description provided for @taskStatusInProgress.
+  ///
+  /// In ru, this message translates to:
+  /// **'В работе'**
+  String get taskStatusInProgress;
+
+  /// No description provided for @taskStatusCompleted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завершено'**
+  String get taskStatusCompleted;
+
   /// No description provided for @inventoryStartScan.
   ///
   /// In ru, this message translates to:

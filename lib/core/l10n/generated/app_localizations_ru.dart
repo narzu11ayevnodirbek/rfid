@@ -198,6 +198,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get inventoryTasksEmpty => 'У этой инвентаризации нет заданий';
 
   @override
+  String get taskStatusPending => 'Ожидает';
+
+  @override
+  String get taskStatusInProgress => 'В работе';
+
+  @override
+  String get taskStatusCompleted => 'Завершено';
+
+  @override
   String get inventoryStartScan => 'Начать сканирование';
 
   @override

@@ -2,7 +2,7 @@
 
 Backend: PHP, manzili `.env` dagi `API_BASE_URL` (`https://mderp.uz/`). Barcha yo‘llar `lib/core/network/api_endpoints.dart` da.
 
-> **Holat.** Har bir endpoint yonida qanday tekshirilgani yozilgan: **✓ real javob** — telefonda ishlayotgan ilovaning logidagi haqiqiy javob bilan solishtirilgan; **kod** — shakl eski ishlab turgan koddan tiklangan. Real javoblarni [`tool/api_probe.py`](../tool/api_probe.py) (faqat GET, login/parolni `.env` dan oladi) yoki debug konsoldagi `← 200 GET ...` loglari orqali tekshirish mumkin.
+> **Holat.** Har bir endpoint yonida qanday tekshirilgani yozilgan: **✓ real javob** — telefon orqali olingan haqiqiy javob bilan solishtirilgan (namunalar, shaxsiy maʼlumotsiz: `test/fixtures/api/`, testi: `test/features/real_api_responses_test.dart`); **kod** — shakl eski ishlab turgan koddan tiklangan. POST endpointlar serverdagi maʼlumotni o‘zgartirgani uchun sinab ko‘rilmagan; markirovka topshiriqlari esa serverda hozircha markirovka yo‘qligi sababli tekshirilmagan. Real javoblarni [`tool/api_probe.py`](../tool/api_probe.py) (faqat GET, login/parolni `.env` dan oladi) yoki debug konsoldagi `← 200 GET ...` loglari orqali tekshirish mumkin.
 
 ## Umumiy qoidalar
 
@@ -17,7 +17,9 @@ Backend: PHP, manzili `.env` dagi `API_BASE_URL` (`https://mderp.uz/`). Barcha y
 
 `success` `true` bo‘lmasa, ilova buni xato deb biladi va `message` / `error` / `recommendation` matnini foydalanuvchiga ko‘rsatadi (`ApiEnvelopeParser`).
 
-**HTTP 401** sessiyani tugatadi: ilova login ekraniga qaytadi.
+**HTTP 401** sessiyani tugatadi: ilova login ekraniga qaytadi. Token yo‘q yoki noto‘g‘ri bo‘lsa server `401 {"error": "..."}` qaytaradi (✓ real javob).
+
+**Sahifalash.** `inventory.php` va `markings.php` javobida `count`, `total`, `limit: 50`, `offset` bor — server bir martada eng ko‘pi bilan 50 ta yozuv beradi. Ilova hozircha faqat birinchi sahifani o‘qiydi (eski ilova ham shunday qilgan).
 
 **Debug log.** Debug build'da har so‘rov konsolga chiqadi: `→ GET url`, `← 200 GET url (196 ms, 1.4 KB)` va javob formatlangan JSON sifatida. `password` va `token` `***` bilan yashiriladi, 20 KB dan katta javoblarning faqat boshi ko‘rsatiladi (`lib/core/network/api_log_interceptor.dart`).
 
@@ -29,7 +31,7 @@ Backend: PHP, manzili `.env` dagi `API_BASE_URL` (`https://mderp.uz/`). Barcha y
 
 ## Auth
 
-### `POST api/auth.php?action=login`
+### `POST api/auth.php?action=login` — ✓ real javob (2026-10-14)
 
 ```json
 { "login": "operator", "password": "..." }
@@ -45,15 +47,15 @@ Javob:
 
 ## Inventarizatsiya
 
-### `GET api/inventory.php`
+### `GET api/inventory.php` — ✓ real javob (2026-10-14)
 
-`data[]`: `id`, `name` (raqam), `type`, `user_name`, `created_at`, `status_code`, `status_label`, `found`, `not_found`, `total`. Ilova `status_code == "closed"` bo‘lganlarini ko‘rsatmaydi.
+`data[]`: `id`, `name` (raqam), `type`, `count_excess`, `user_id`, `user_name` (`null` bo‘lishi mumkin), `created_at`, `updated_at`, `closed_at`, `status_code`, `status_label`, `found`, `not_found`, `total` — hammasi matn. Ilova `status_code == "closed"` bo‘lganlarini ko‘rsatmaydi.
 
-### `GET api/inventory_tasks.php?inventory_id={id}`
+### `GET api/inventory_tasks.php?inventory_id={id}` — ✓ real javob (2026-10-14)
 
-`data[]`: `id`, `inventory_id`, `location`, `status`, `common_status`, `found`, `total`, `last_name`, `first_name`, `middle_name`.
+`data[]`: `id`, `owner_id`, `inventory_id`, `employee_id`, `location`, `status` (kod: `pending`, ...), `common_status` (ko‘pincha `null`), `found`, `total`, `task_type`, `mol_name`, `last_name`, `first_name`, `middle_name`, `created_at`, `updated_at`. Ilova holat kodini tarjima qilib ko‘rsatadi (`pending` → "Ожидает").
 
-### `GET api/inventory_get_plan.php?id={inventoryId}`
+### `GET api/inventory_get_plan.php?id={inventoryId}` — ✓ real javob (2026-10-14)
 
 Kutilgan obyektlar (reja). Maydonlar ildizda (ilova `data` ichida bo‘lsa ham o‘qiydi):
 
@@ -64,7 +66,7 @@ Kutilgan obyektlar (reja). Maydonlar ildizda (ilova `data` ichida bo‘lsa ham o
 
 Ilova rejani qurilmada saqlaydi; server javob bermasa, saqlangan nusxa ishlatiladi.
 
-### `POST api/inventory_finish.php`
+### `POST api/inventory_finish.php` — kod
 
 ```json
 { "inventory_id": 12, "scanned_items": ["E280...", "..."], "duration_seconds": 340, "device_id": "TSD" }
@@ -74,17 +76,17 @@ Ilova rejani qurilmada saqlaydi; server javob bermasa, saqlangan nusxa ishlatila
 
 ## Obyektlar katalogi
 
-### `GET api/items.php`
+### `GET api/items.php` — ✓ real javob (2026-10-14)
 
 `data[]`: `id`, `name`, `code`, `location`, `responsible`, `rfid` (EPC), `photo_path`, `has_rfid`, `price`, `status`, `created_at`. "Metka bo‘yicha qidirish" butun ro‘yxatni bir marta yuklab, EPC bo‘yicha qurilmaning o‘zida qidiradi (EPC bo‘yicha qidirish endpointi yo‘q).
 
 ## Markirovka
 
-### `GET api/markings.php`
+### `GET api/markings.php` — ✓ real javob (2026-10-14)
 
 `data[]`: `id`, `name`, `type`, `code`, `status`, `description`, `responsible_id`, `responsible_person`, `created_at`, `updated_at`, `closed_at`.
 
-### `GET api/get_marking_tasks_for_mobile.php?marking_id={id}`
+### `GET api/get_marking_tasks_for_mobile.php?marking_id={id}` — kod
 
 `data[]` — topshiriqlar, obyektlari ichida:
 
@@ -97,11 +99,11 @@ Ilova rejani qurilmada saqlaydi; server javob bermasa, saqlangan nusxa ishlatila
 
 Obyektda `item_id` yoki `id`, `inventory_number` yoki `barcode`, `photo` yoki `photo_path` kelishi mumkin — ilova ikkalasini ham qabul qiladi. `rfid` bo‘sh bo‘lmasa, obyekt "bog‘langan" hisoblanadi.
 
-### `GET api/get_marking_items.php?marking_id={id}`
+### `GET api/get_marking_items.php?marking_id={id}` — kod
 
 `data[]` — markirovkaning barcha obyektlari. Ilova bu endpointdan faqat obyekt rasmini (`photo` / `photo_path`) topish uchun foydalanadi.
 
-### `POST api/process_marking_scan.php`
+### `POST api/process_marking_scan.php` — kod
 
 ```json
 { "marking_id": "3", "task_id": "10", "item_id": "100", "rfid": "E280..." }
@@ -111,11 +113,11 @@ Xatoda `message` / `error` / `recommendation` ko‘rsatiladi.
 
 ## Ko‘chirish
 
-### `GET api/get_movement_tasks_for_mobile.php`
+### `GET api/get_movement_tasks_for_mobile.php` — ✓ real javob (2026-10-14)
 
 `data[]`: `id`, `movement_id`, `name`, `movement_name`, `status`, `source_location`, `destination`, `executor_name`, `created_at`, `moved`, `total`, `moved_count`, `items_count`, `items[]`.
 
-### `POST api/process_movement_batch.php`
+### `POST api/process_movement_batch.php` — kod
 
 ```json
 { "movement_id": 40, "scanned_epcs": ["E280...", "..."] }
@@ -128,11 +130,11 @@ Javob:
   "errors": { "unknown_epcs": ["E2..."], "not_in_source": [ {"name": "..."} ] } }
 ```
 
-### `GET api/locations.php`
+### `GET api/locations.php` — ✓ real javob (2026-10-14)
 
-`data[]`: `id`, `name`, `type`, `parent_id`, `path`, `description`. Ro‘yxatda `path` bo‘lsa, o‘sha ko‘rsatiladi.
+`data[]`: `id`, `parent_id`, `name`, `type` (`building`, `floor`, `room`, `block`, `row`, `section`), `description`, `path`, `full_path` (hozir `path` bilan bir xil), `location_rfid`, `created_at`, `updated_at`. Ro‘yxatda `path` ko‘rsatiladi. Taxminan 450 ta joy.
 
-### `POST api/transfer_free.php`
+### `POST api/transfer_free.php` — kod
 
 ```json
 { "new_location_id": 9, "scanned_epcs": ["E280..."], "user_id": 12, "timestamp": "2025-03-04 05:06:07" }

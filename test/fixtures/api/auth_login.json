@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "token": "test-token",
+  "user": {
+    "id": "3",
+    "login": "login 1",
+    "username": "username 1",
+    "role": "superadmin"
+  }
+}

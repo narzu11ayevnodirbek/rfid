@@ -13,7 +13,7 @@ class StorageLocationModel extends StorageLocation {
     return StorageLocationModel(
       id: reader.string('id'),
       name: reader.string('name'),
-      path: reader.string('path'),
+      path: reader.firstString(const ['path', 'full_path']),
     );
   }
 }

@@ -198,6 +198,15 @@ class AppLocalizationsUz extends AppLocalizations {
   String get inventoryTasksEmpty => 'Bu inventarizatsiyada topshiriqlar yo‘q';
 
   @override
+  String get taskStatusPending => 'Kutilmoqda';
+
+  @override
+  String get taskStatusInProgress => 'Jarayonda';
+
+  @override
+  String get taskStatusCompleted => 'Yakunlangan';
+
+  @override
   String get inventoryStartScan => 'Skanerlashni boshlash';
 
   @override
