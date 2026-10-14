@@ -112,7 +112,10 @@ class PlatformRfidReader implements RfidReader {
     return epc.isEmpty ? null : TagRead(epc);
   }
 
-  Future<T?> _invoke<T>(String method, [Map<String, Object?>? arguments]) async {
+  Future<T?> _invoke<T>(
+    String method, [
+    Map<String, Object?>? arguments,
+  ]) async {
     try {
       return await _methods.invokeMethod<T>(method, arguments);
     } on MissingPluginException {

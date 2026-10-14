@@ -30,7 +30,8 @@ void main() {
     test('maps a refused request to ServerFailure with the server text',
         () async {
       final result = await guard<int>(
-        () async => throw const ApiException(message: 'Занято', statusCode: 200),
+        () async =>
+            throw const ApiException(message: 'Занято', statusCode: 200),
       );
 
       expect(

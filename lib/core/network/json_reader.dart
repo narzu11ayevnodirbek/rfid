@@ -43,8 +43,7 @@ class JsonReader {
   }
 
   /// The value as an integer: accepts `12`, `12.0` and `"12"`.
-  int integer(String key, {int fallback = 0}) =>
-      integerOrNull(key) ?? fallback;
+  int integer(String key, {int fallback = 0}) => integerOrNull(key) ?? fallback;
 
   int? integerOrNull(String key) {
     final value = _json[key];

@@ -43,8 +43,7 @@ final class ListRefreshRequested extends ListEvent {
 abstract class ListBloc<T> extends Bloc<ListEvent, LoadState<List<T>>> {
   /// [invalidations] fires when the list on the server may have changed, for
   /// example after a successful submit on a detail screen.
-  ListBloc({Stream<void>? invalidations})
-      : super(LoadInProgress<List<T>>()) {
+  ListBloc({Stream<void>? invalidations}) : super(LoadInProgress<List<T>>()) {
     on<ListLoadRequested>(_onLoadRequested);
     on<ListRefreshRequested>(_onRefreshRequested);
     _invalidationSubscription = invalidations?.listen(

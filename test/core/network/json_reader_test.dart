@@ -34,7 +34,10 @@ void main() {
       const reader = JsonReader({'photo': '', 'photo_path': 'uploads/a.jpg'});
 
       expect(reader.stringOrNull('photo'), isNull);
-      expect(reader.firstString(const ['photo', 'photo_path']), 'uploads/a.jpg');
+      expect(
+        reader.firstString(const ['photo', 'photo_path']),
+        'uploads/a.jpg',
+      );
       expect(reader.firstString(const ['x', 'y'], fallback: '?'), '?');
     });
 
