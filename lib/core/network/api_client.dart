@@ -1,21 +1,21 @@
+import 'dart:convert';
+import 'dart:isolate';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:rfid/core/config/app_config.dart';
 import 'package:rfid/core/network/api_envelope_parser.dart';
+import 'package:rfid/core/network/api_log_interceptor.dart';
 import 'package:rfid/core/network/auth_token_interceptor.dart';
+import 'package:rfid/core/network/json_body_decoder.dart';
 import 'package:rfid/core/network/json_reader.dart';
 
-/// The single entry point to the backend.
-///
-/// Data sources call [get] and [post] with a path from `ApiEndpoints` and get
-/// back the decoded response body, already checked for `success: true`.
-/// Failures are thrown (`DioException`, `ApiException`, `FormatException`) and
-/// turned into `Failure`s by `guard` in the repository layer.
+/// The single entry point to the backend. Returns the body already checked
+/// for `success: true`; failures are thrown and turned into `Failure`s by
+/// `guard` in the repositories.
 class ApiClient {
   ApiClient(this._dio);
 
-  /// Builds the client used by the app.
   factory ApiClient.create({
     required String? Function() readToken,
     required void Function(String rejectedToken) onUnauthorized,
@@ -24,6 +24,7 @@ class ApiClient {
       BaseOptions(
         baseUrl: AppConfig.apiBaseUrl,
         contentType: Headers.jsonContentType,
+        responseType: ResponseType.plain,
         connectTimeout: AppConfig.connectTimeout,
         receiveTimeout: AppConfig.receiveTimeout,
         sendTimeout: AppConfig.receiveTimeout,
@@ -35,23 +36,15 @@ class ApiClient {
         onUnauthorized: onUnauthorized,
       ),
     );
-    // Request logs contain tokens and passwords, so never in release builds.
-    if (kDebugMode) {
-      dio.interceptors.add(
-        PrettyDioLogger(requestBody: true, compact: true, maxWidth: 100),
-      );
-    }
+    if (kDebugMode) dio.interceptors.add(ApiLogInterceptor());
     return ApiClient(dio);
   }
 
   final Dio _dio;
 
   Future<JsonMap> get(String path, {Map<String, dynamic>? query}) async {
-    final response = await _dio.get<Object?>(path, queryParameters: query);
-    return ApiEnvelopeParser.parse(
-      response.data,
-      statusCode: response.statusCode,
-    );
+    final response = await _dio.get<String>(path, queryParameters: query);
+    return _parse(response);
   }
 
   Future<JsonMap> post(
@@ -59,14 +52,35 @@ class ApiClient {
     Object? body,
     Map<String, dynamic>? query,
   }) async {
-    final response = await _dio.post<Object?>(
+    final response = await _dio.post<String>(
       path,
       data: body,
       queryParameters: query,
     );
-    return ApiEnvelopeParser.parse(
-      response.data,
-      statusCode: response.statusCode,
+    return _parse(response);
+  }
+
+  /// Decodes the body and runs [convert] in one background isolate, so
+  /// multi-megabyte responses never block the UI.
+  ///
+  /// [convert] must be a top-level or static function.
+  Future<T> getInBackground<T>(
+    String path,
+    T Function(JsonMap body) convert, {
+    Map<String, dynamic>? query,
+  }) async {
+    final response = await _dio.get<String>(path, queryParameters: query);
+    final body = response.data ?? '';
+    final statusCode = response.statusCode;
+    return Isolate.run(
+      () => convert(
+        ApiEnvelopeParser.parse(jsonDecode(body), statusCode: statusCode),
+      ),
     );
+  }
+
+  Future<JsonMap> _parse(Response<String> response) async {
+    final decoded = await JsonBodyDecoder.decode(response.data ?? '');
+    return ApiEnvelopeParser.parse(decoded, statusCode: response.statusCode);
   }
 }

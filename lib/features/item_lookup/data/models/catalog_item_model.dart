@@ -26,4 +26,7 @@ class CatalogItemModel extends CatalogItem {
       photoPath: reader.firstString(const ['photo_path', 'photo']),
     );
   }
+
+  static List<CatalogItemModel> listFromBody(JsonMap body) =>
+      JsonReader(body).mapList('data').map(CatalogItemModel.fromJson).toList();
 }

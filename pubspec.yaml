@@ -23,7 +23,6 @@ dependencies:
 
   # Network
   dio: ^5.8.0+1
-  pretty_dio_logger: ^1.4.0
 
   # Local storage
   hive: ^2.2.3

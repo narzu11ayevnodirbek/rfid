@@ -4,17 +4,8 @@ import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/core/widgets/empty_state_view.dart';
 import 'package:rfid/core/widgets/load_bloc_view.dart';
 
-/// The body of every list screen backed by a [ListBloc]: loading, error with
-/// retry, empty message, pull-to-refresh and the cards themselves.
-///
-/// A list page only describes one card:
-///
-/// ```dart
-/// ListBlocView<InventoryListBloc, Inventory>(
-///   emptyMessage: l10n.inventoryListEmpty,
-///   itemBuilder: (context, inventory) => InventoryCard(inventory: inventory),
-/// )
-/// ```
+/// Body of a list screen backed by a [ListBloc]: loading, error with retry,
+/// empty message, pull-to-refresh and the cards.
 class ListBlocView<B extends ListBloc<T>, T> extends StatelessWidget {
   const ListBlocView({
     super.key,
@@ -27,32 +18,30 @@ class ListBlocView<B extends ListBloc<T>, T> extends StatelessWidget {
   final Widget Function(BuildContext context, T item) itemBuilder;
   final String emptyMessage;
   final IconData emptyIcon;
-
-  /// Shown above the cards, scrolling with them.
   final Widget? header;
 
   @override
   Widget build(BuildContext context) {
     return LoadBlocView<B, List<T>>(
-      builder: (context, items) => ListView(
-        padding: AppSpacing.list,
-        // Scrollable even when short, so pull-to-refresh always works.
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: [
-          if (header != null) ...[
-            header!,
-            const SizedBox(height: AppSpacing.md),
-          ],
-          if (items.isEmpty) ...[
-            const SizedBox(height: AppSpacing.xxl),
-            EmptyStateView(message: emptyMessage, icon: emptyIcon),
-          ],
-          for (final (index, item) in items.indexed) ...[
-            if (index > 0) const SizedBox(height: AppSpacing.sm),
-            itemBuilder(context, item),
-          ],
-        ],
-      ),
+      builder: (context, items) {
+        final leading = [
+          if (header != null) header!,
+          if (items.isEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: AppSpacing.xxl),
+              child: EmptyStateView(message: emptyMessage, icon: emptyIcon),
+            ),
+        ];
+        return ListView.separated(
+          padding: AppSpacing.list,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: leading.length + items.length,
+          separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+          itemBuilder: (context, index) => index < leading.length
+              ? leading[index]
+              : itemBuilder(context, items[index - leading.length]),
+        );
+      },
     );
   }
 }

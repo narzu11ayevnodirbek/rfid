@@ -32,12 +32,7 @@ Future<Result<T>> guard<T>(Future<T> Function() request) async {
 /// Maps a transport error to a [Failure].
 Failure failureFromDioException(DioException error) {
   final response = error.response;
-  if (response == null) {
-    // Dio reports a body it could not decode as an "unknown" error.
-    final cause = error.error;
-    if (cause is FormatException) return ParsingFailure(cause.message);
-    return const NetworkFailure();
-  }
+  if (response == null) return const NetworkFailure();
 
   final message = ApiEnvelopeParser.messageOf(response.data);
   if (response.statusCode == 401) return UnauthorizedFailure(message: message);
