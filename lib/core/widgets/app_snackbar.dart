@@ -4,10 +4,6 @@ import 'package:rfid/core/l10n/failure_localizer.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 
-/// Short messages at the bottom of the screen.
-///
-/// A new message replaces the current one, so fast scans or repeated taps
-/// never queue up a stack of snackbars.
 extension AppSnackbar on BuildContext {
   void showInfoMessage(String message) => _show(message, StatusTone.neutral);
 

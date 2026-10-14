@@ -3,7 +3,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// One line of a [showMessageDialog], with its own colour.
 class MessageDialogLine {
   const MessageDialogLine(this.text, {this.tone = StatusTone.neutral});
 
@@ -11,8 +10,6 @@ class MessageDialogLine {
   final StatusTone tone;
 }
 
-/// A dialog that reports the outcome of an action (success, partial result,
-/// error) and is closed with one button.
 Future<void> showMessageDialog(
   BuildContext context, {
   required String title,

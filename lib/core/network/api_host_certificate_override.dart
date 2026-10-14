@@ -1,15 +1,8 @@
 import 'dart:io';
 
-/// Accepts an unverifiable TLS certificate for one host only.
-///
-/// Installed in `bootstrap()` when `AppConfig.trustApiHostCertificate` is on.
-/// It covers both API calls and photos loaded with `Image.network`, because
-/// both create their HTTP client through [HttpOverrides].
-///
-/// This weakens transport security for that host: anyone on the network path
-/// can read or change the traffic. It exists because the legacy app could not
-/// verify the server certificate. Remove it once the server has a certificate
-/// the device trusts.
+/// Accepts an unverifiable TLS certificate for the API host only. Anyone on
+/// the network path can then read or change that traffic: switch it off
+/// (TRUST_API_HOST_CERTIFICATE=false) once the server certificate is trusted.
 class ApiHostCertificateOverride extends HttpOverrides {
   ApiHostCertificateOverride(this.trustedHost);
 

@@ -1,7 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory_task.dart';
 
-/// [InventoryTask] as returned by `api/inventory_tasks.php`.
 class InventoryTaskModel extends InventoryTask {
   const InventoryTaskModel({
     required super.id,

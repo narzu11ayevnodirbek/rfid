@@ -3,7 +3,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// "12 of 40" with a bar under it. Turns green when everything is done.
 class LabeledProgressBar extends StatelessWidget {
   const LabeledProgressBar({
     super.key,

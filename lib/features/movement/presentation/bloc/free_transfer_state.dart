@@ -14,7 +14,6 @@ class FreeTransferState extends Equatable {
   final LoadState<List<StorageLocation>> locations;
   final StorageLocation? selectedLocation;
 
-  /// The user tried to send without choosing where to.
   final bool showLocationRequired;
   final TagScanState scan;
   final SubmitStatus submitStatus;

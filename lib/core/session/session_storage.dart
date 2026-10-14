@@ -4,22 +4,15 @@ import 'dart:convert';
 import 'package:rfid/core/session/user.dart';
 import 'package:rfid/core/storage/key_value_store.dart';
 
-/// Why the last session ended. Lets the login screen explain what happened.
 enum SessionEndReason { signedOut, expired }
 
-/// Holds the current session (token + user), persists it and announces
-/// every change on [changes].
-///
-/// The network layer reads the token from here and reports rejected tokens
-/// with [expire]; `SessionBloc` listens to [changes] and the router reacts to
-/// the bloc. That keeps `core/network` free of any UI dependency.
 class SessionStorage {
   SessionStorage(this._store) {
     _token = _store.readString(_tokenKey);
     _user = _decodeUser(_store.readString(_userKey));
   }
 
-  /// Same key as the legacy app, so an update keeps the user signed in.
+  // Same key as the legacy app, so an update keeps the user signed in.
   static const String _tokenKey = 'auth_token';
   static const String _userKey = 'auth_user';
 
@@ -32,15 +25,12 @@ class SessionStorage {
 
   String? get token => _token;
 
-  /// `null` for a session restored from a legacy install, which stored only
-  /// the token.
   User? get user => _user;
 
   bool get isAuthenticated => (_token ?? '').isNotEmpty;
 
   SessionEndReason? get lastEndReason => _lastEndReason;
 
-  /// Fires after every [start], [end] and [expire] that changed the session.
   Stream<void> get changes => _changes.stream;
 
   Future<void> start({required String token, required User user}) async {
@@ -52,13 +42,10 @@ class SessionStorage {
     _changes.add(null);
   }
 
-  /// Ends the session because the user asked to sign out.
   Future<void> end() => _clear(SessionEndReason.signedOut);
 
-  /// Ends the session because the server rejected [rejectedToken].
-  ///
-  /// Ignored when the token is no longer the current one: a slow request from
-  /// a previous session must not sign out the user who has just signed in.
+  /// Ignored when [rejectedToken] is no longer current: a late 401 from a
+  /// previous session must not sign out the user who has just signed in.
   Future<void> expire(String rejectedToken) async {
     if (rejectedToken != _token) return;
     await _clear(SessionEndReason.expired);

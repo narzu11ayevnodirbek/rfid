@@ -9,11 +9,6 @@ import 'package:rfid/features/auth/domain/repositories/auth_repository.dart';
 part 'session_event.dart';
 part 'session_state.dart';
 
-/// Whether someone is signed in. Lives as long as the app.
-///
-/// It mirrors [SessionStorage]: sign-in, sign-out and a token rejected by
-/// the server (401) all change the storage, this bloc follows, and the
-/// router redirects to or away from the login screen.
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
   SessionBloc({
     required SessionStorage storage,

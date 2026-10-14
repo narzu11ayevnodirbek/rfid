@@ -3,8 +3,6 @@ import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/widgets/list_card.dart';
 import 'package:rfid/features/marking/domain/entities/marking_item.dart';
 
-/// An item of a marking task. Items that already have a tag are not
-/// tappable.
 class MarkingItemCard extends StatelessWidget {
   const MarkingItemCard({super.key, required this.item, this.onTap});
 

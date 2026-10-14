@@ -7,7 +7,6 @@ import 'package:rfid/core/theme/app_theme.dart';
 import 'package:rfid/features/auth/presentation/bloc/session_bloc.dart';
 import 'package:rfid/features/settings/presentation/bloc/settings_bloc.dart';
 
-/// Root widget: app-wide blocs, theme, language and navigation.
 class RfidApp extends StatefulWidget {
   const RfidApp({
     super.key,
@@ -23,7 +22,6 @@ class RfidApp extends StatefulWidget {
 }
 
 class _RfidAppState extends State<RfidApp> {
-  // Created once: rebuilding the router would reset navigation.
   late final GoRouter _router = createAppRouter(widget.sessionBloc);
 
   @override

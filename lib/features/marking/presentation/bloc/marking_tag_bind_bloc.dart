@@ -16,10 +16,6 @@ import 'package:rfid/features/marking/domain/repositories/marking_repository.dar
 part 'marking_tag_bind_event.dart';
 part 'marking_tag_bind_state.dart';
 
-/// Binding one tag to one item: read the tag on the item, confirm.
-///
-/// The most recently read tag wins, so if a neighbouring tag was read by
-/// mistake, reading the right one again replaces it.
 class MarkingTagBindBloc
     extends Bloc<MarkingTagBindEvent, MarkingTagBindState> {
   MarkingTagBindBloc({
@@ -73,7 +69,6 @@ class MarkingTagBindBloc
           Success(:final value) => LoadSuccess(value),
           Failed(:final failure) => LoadFailure(failure),
         },
-        // A missing photo is not worth an error: fall back to the item's own.
         photoPath: photo.valueOrNull ?? item.valueOrNull?.photoPath ?? '',
       ),
     );

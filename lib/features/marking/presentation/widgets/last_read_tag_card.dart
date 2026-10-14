@@ -3,7 +3,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// The tag that will be bound, large enough to check at a glance.
 class LastReadTagCard extends StatelessWidget {
   const LastReadTagCard({super.key, required this.epc});
 

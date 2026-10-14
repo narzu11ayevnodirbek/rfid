@@ -16,7 +16,6 @@ class LoginState extends Equatable {
   final String password;
   final bool isPasswordVisible;
 
-  /// Empty fields are highlighted only after the first submit attempt.
   final bool showValidationErrors;
   final LoginStatus status;
   final Failure? failure;

@@ -17,9 +17,6 @@ import 'package:rfid/features/movement/domain/repositories/movement_repository.d
 part 'free_transfer_event.dart';
 part 'free_transfer_state.dart';
 
-/// Move any scanned items to a chosen location, without a task.
-///
-/// The screen stays open after a send so the next batch can be scanned.
 class FreeTransferBloc extends Bloc<FreeTransferEvent, FreeTransferState> {
   FreeTransferBloc({
     required MovementRepository repository,

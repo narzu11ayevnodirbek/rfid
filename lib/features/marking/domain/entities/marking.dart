@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// A marking campaign: putting RFID tags on a set of items.
 class Marking extends Equatable {
   const Marking({
     required this.id,

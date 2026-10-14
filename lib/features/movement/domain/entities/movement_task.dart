@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// Items to be moved from one location to another by the user.
 class MovementTask extends Equatable {
   const MovementTask({
     required this.id,
@@ -17,7 +16,6 @@ class MovementTask extends Equatable {
 
   final String id;
 
-  /// The movement document; scanned tags are sent against this id.
   final String movementId;
   final String name;
   final String status;

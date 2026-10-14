@@ -17,11 +17,9 @@ class ReaderDiagnosticsState extends Equatable {
   final Failure? moduleFailure;
   final int powerDbm;
 
-  /// Answer of the reader to the last power change; `null` before the first.
   final bool? isPowerAccepted;
   final TagScanState scan;
 
-  /// Android key code of the last hardware key, to configure the trigger.
   final int? lastKeyCode;
   final bool isKeyDown;
 

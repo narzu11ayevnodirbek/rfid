@@ -3,7 +3,6 @@ import 'package:rfid/core/error/result.dart';
 import 'package:rfid/features/marking/domain/entities/marking_task.dart';
 import 'package:rfid/features/marking/domain/repositories/marking_repository.dart';
 
-/// Tasks of one marking. Reloads after a tag was bound.
 class MarkingTaskListBloc extends ListBloc<MarkingTask> {
   MarkingTaskListBloc(this._repository, {required this.markingId})
       : super(invalidations: _repository.changes);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// A field of a detail screen: small label above its value.
 class LabeledValue extends StatelessWidget {
   const LabeledValue({super.key, required this.label, required this.value});
 

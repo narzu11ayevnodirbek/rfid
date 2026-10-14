@@ -1,7 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/movement/domain/entities/movement_task.dart';
 
-/// [MovementTask] as returned by `api/get_movement_tasks_for_mobile.php`.
 class MovementTaskModel extends MovementTask {
   const MovementTaskModel({
     required super.id,

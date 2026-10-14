@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rfid/core/l10n/app_language.dart';
 import 'package:rfid/features/settings/presentation/bloc/settings_bloc.dart';
 
-/// Switches the language of the whole app at once.
 class LanguageSelector extends StatelessWidget {
   const LanguageSelector({super.key});
 

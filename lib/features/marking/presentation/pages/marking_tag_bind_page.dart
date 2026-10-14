@@ -15,7 +15,6 @@ import 'package:rfid/features/marking/presentation/bloc/marking_tag_bind_bloc.da
 import 'package:rfid/features/marking/presentation/widgets/last_read_tag_card.dart';
 import 'package:rfid/features/marking/presentation/widgets/marking_item_details.dart';
 
-/// Reads the tag stuck on an item and binds it to the item.
 class MarkingTagBindPage extends StatelessWidget {
   const MarkingTagBindPage({super.key});
 

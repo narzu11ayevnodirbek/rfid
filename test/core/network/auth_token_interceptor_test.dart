@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rfid/core/network/auth_token_interceptor.dart';
 
-/// Answers every request with a fixed status, without touching the network.
 class _FixedStatusAdapter implements HttpClientAdapter {
   _FixedStatusAdapter(this.statusCode);
 
@@ -78,7 +77,6 @@ void main() {
   });
 
   test('does not report a 401 for a request sent without a token', () async {
-    // A wrong password on the login request must not end any session.
     await expectLater(
       buildDio(_FixedStatusAdapter(401)).post<Object?>('api/auth.php'),
       throwsA(isA<DioException>()),

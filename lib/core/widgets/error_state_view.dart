@@ -4,7 +4,6 @@ import 'package:rfid/core/l10n/failure_localizer.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/widgets/empty_state_view.dart';
 
-/// Explains a [Failure] and offers to try again.
 class ErrorStateView extends StatelessWidget {
   const ErrorStateView({
     super.key,

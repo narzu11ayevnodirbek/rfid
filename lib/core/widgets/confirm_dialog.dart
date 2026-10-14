@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 
-/// Asks the user to confirm an action. Resolves to `true` only when the
-/// confirm button was pressed.
 Future<bool> showConfirmDialog(
   BuildContext context, {
   required String title,
@@ -39,18 +37,6 @@ Future<bool> showConfirmDialog(
   return confirmed ?? false;
 }
 
-/// Runs [onConfirmed] after the user confirms. Lets a button ask first
-/// without putting any branching in the page:
-///
-/// ```dart
-/// onPressed: () => confirmThen(
-///   context,
-///   title: l10n.settingsSignOutTitle,
-///   message: l10n.settingsSignOutMessage,
-///   confirmLabel: l10n.settingsSignOutConfirm,
-///   onConfirmed: () => bloc.add(const SessionSignOutRequested()),
-/// ),
-/// ```
 Future<void> confirmThen(
   BuildContext context, {
   required String title,

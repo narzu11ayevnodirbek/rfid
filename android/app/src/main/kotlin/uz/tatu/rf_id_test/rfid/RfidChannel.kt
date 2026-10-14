@@ -6,22 +6,7 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-/**
- * Connects [UhfReader] to Dart (`lib/core/rfid/platform_rfid_reader.dart`).
- *
- * Methods (channel `uz.tatu.rfid/reader`):
- * - `initialize` → `true`, or error `UNAVAILABLE` / `INIT_FAILED`
- * - `setPower {dbm}` → whether the module accepted it
- * - `startScanning {readImmediately}` → whether the reader is armed
- * - `stopScanning`, `setKeyEventReporting {enabled}` → `true`
- *
- * Events (channel `uz.tatu.rfid/reader_events`), one map each:
- * - `{type: "tag", epc}`
- * - `{type: "reading", value}`
- * - `{type: "key", code, down}` while key event reporting is on
- *
- * The full contract is in `docs/RFID.md`.
- */
+// Channel contract: docs/RFID.md
 class RfidChannel(context: Context, messenger: BinaryMessenger) :
     MethodChannel.MethodCallHandler,
     EventChannel.StreamHandler,
@@ -79,10 +64,6 @@ class RfidChannel(context: Context, messenger: BinaryMessenger) :
         }
     }
 
-    /**
-     * Handles a hardware key. Returns `true` when the key was the trigger and
-     * the reader is armed, so the activity does not pass it on.
-     */
     fun onKey(keyCode: Int, isDown: Boolean, repeatCount: Int): Boolean {
         if (reportsKeyEvents && repeatCount == 0) {
             sink?.success(mapOf("type" to "key", "code" to keyCode, "down" to isDown))
@@ -96,7 +77,6 @@ class RfidChannel(context: Context, messenger: BinaryMessenger) :
         return true
     }
 
-    /** The app went to the background: stop the radio, stay armed. */
     fun pauseReading() = reader.stopReading()
 
     fun dispose() {

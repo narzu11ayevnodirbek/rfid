@@ -13,8 +13,6 @@ import 'package:rfid/core/rfid/tag_scan_state.dart';
 part 'reader_diagnostics_event.dart';
 part 'reader_diagnostics_state.dart';
 
-/// Checks the hardware on the device: module power-on, radio power, reading
-/// and the key code of the trigger. Meant for setting up a new handheld.
 class ReaderDiagnosticsBloc
     extends Bloc<ReaderDiagnosticsEvent, ReaderDiagnosticsState> {
   ReaderDiagnosticsBloc(this._reader, {TagScanSession? scanSession})
@@ -100,7 +98,6 @@ class ReaderDiagnosticsBloc
     Emitter<ReaderDiagnosticsState> emit,
   ) async {
     await _scan.toggle();
-    // The session starts with the profile power; keep the slider's value.
     if (_scan.state.isScanning) {
       await _onPowerApplied(const ReaderDiagnosticsPowerApplied(), emit);
     }

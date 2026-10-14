@@ -1,7 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/movement/domain/entities/storage_location.dart';
 
-/// [StorageLocation] as returned by `api/locations.php`.
 class StorageLocationModel extends StorageLocation {
   const StorageLocationModel({
     required super.id,

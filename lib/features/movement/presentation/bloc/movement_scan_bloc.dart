@@ -17,7 +17,6 @@ import 'package:rfid/features/movement/domain/repositories/movement_repository.d
 part 'movement_scan_event.dart';
 part 'movement_scan_state.dart';
 
-/// Collect the items of a movement task and send them in one batch.
 class MovementScanBloc extends Bloc<MovementScanEvent, MovementScanState> {
   MovementScanBloc({
     required MovementRepository repository,

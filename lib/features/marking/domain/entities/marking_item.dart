@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// An item that needs a tag.
 class MarkingItem extends Equatable {
   const MarkingItem({
     required this.id,
@@ -17,7 +16,6 @@ class MarkingItem extends Equatable {
   final String status;
   final String photoPath;
 
-  /// EPC of the tag bound to the item; empty while it has none.
   final String boundEpc;
 
   bool get isBound => boundEpc.isNotEmpty;

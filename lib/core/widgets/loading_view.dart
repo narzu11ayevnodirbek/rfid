@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Full-area loading indicator.
 class LoadingView extends StatelessWidget {
   const LoadingView({super.key});
 

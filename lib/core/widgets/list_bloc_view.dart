@@ -4,8 +4,6 @@ import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/core/widgets/empty_state_view.dart';
 import 'package:rfid/core/widgets/load_bloc_view.dart';
 
-/// Body of a list screen backed by a [ListBloc]: loading, error with retry,
-/// empty message, pull-to-refresh and the cards.
 class ListBlocView<B extends ListBloc<T>, T> extends StatelessWidget {
   const ListBlocView({
     super.key,

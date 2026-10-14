@@ -6,7 +6,6 @@ import 'package:rfid/core/widgets/stat_tile.dart';
 import 'package:rfid/core/widgets/status_badge.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory.dart';
 
-/// Header of the inventory details: status, type, date and counters.
 class InventorySummaryCard extends StatelessWidget {
   const InventorySummaryCard({super.key, required this.inventory});
 

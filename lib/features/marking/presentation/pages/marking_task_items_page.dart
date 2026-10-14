@@ -12,7 +12,6 @@ import 'package:rfid/features/marking/domain/entities/marking_task.dart';
 import 'package:rfid/features/marking/presentation/bloc/marking_task_items_bloc.dart';
 import 'package:rfid/features/marking/presentation/widgets/marking_item_card.dart';
 
-/// Items of a marking task: which ones still need a tag.
 class MarkingTaskItemsPage extends StatelessWidget {
   const MarkingTaskItemsPage({super.key});
 

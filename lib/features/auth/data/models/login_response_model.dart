@@ -1,11 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/auth/data/models/user_model.dart';
 
-/// Body of a successful `POST api/auth.php?action=login`:
-///
-/// ```json
-/// { "success": true, "token": "...", "user": { "id": "1", "login": "...", "username": "..." } }
-/// ```
 class LoginResponseModel {
   const LoginResponseModel({required this.token, required this.user});
 

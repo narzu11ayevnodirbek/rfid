@@ -6,24 +6,11 @@ import android.os.Looper
 import com.rscja.deviceapi.RFIDWithUHFUART
 import java.util.concurrent.Executors
 
-/**
- * The Chainway UHF module (DeviceAPI `RFIDWithUHFUART`) with the state the app
- * needs around it.
- *
- * - "Armed" means the user pressed Start in the app: the hardware trigger is
- *   allowed to read.
- * - "Reading" means the radio is on right now.
- *
- * Call everything from the main thread. Powering the module on blocks for a
- * moment, so [initialize] does that on a worker thread and answers on the
- * main thread.
- */
 class UhfReader(
     private val context: Context,
     private val listener: Listener,
 ) {
     interface Listener {
-        /** A tag was read; each EPC is reported once per reading burst. */
         fun onTagRead(epc: String)
 
         fun onReadingChanged(isReading: Boolean)
@@ -43,6 +30,7 @@ class UhfReader(
     var isReading = false
         private set
 
+    // Powering the module on blocks for a moment, so it runs on a worker thread.
     fun initialize(onResult: (InitResult) -> Unit) {
         if (module != null) {
             onResult(InitResult.READY)
@@ -54,7 +42,6 @@ class UhfReader(
                 instance = RFIDWithUHFUART.getInstance()
                 if (instance.init(context)) InitResult.READY else InitResult.INIT_FAILED
             } catch (error: Throwable) {
-                // Not a Chainway device, or the vendor library is missing.
                 InitResult.UNAVAILABLE
             }
             mainHandler.post {
@@ -70,7 +57,6 @@ class UhfReader(
     fun setPower(dbm: Int): Boolean =
         module?.setPower(dbm.coerceIn(MIN_POWER_DBM, MAX_POWER_DBM)) ?: false
 
-    /** Lets the trigger read and, if [readImmediately], starts reading now. */
     fun arm(readImmediately: Boolean): Boolean {
         if (module == null) return false
         isArmed = true
@@ -110,7 +96,6 @@ class UhfReader(
         listener.onReadingChanged(false)
     }
 
-    /** Powers the module off for good, when the activity goes away. */
     fun shutdown() {
         disarm()
         module?.free()

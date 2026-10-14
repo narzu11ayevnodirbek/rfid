@@ -1,7 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/marking/domain/entities/marking.dart';
 
-/// [Marking] as returned by `api/markings.php`.
 class MarkingModel extends Marking {
   const MarkingModel({
     required super.id,

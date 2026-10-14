@@ -2,7 +2,6 @@ import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/marking/data/models/marking_item_model.dart';
 import 'package:rfid/features/marking/domain/entities/marking_task.dart';
 
-/// [MarkingTask] as returned by `api/get_marking_tasks_for_mobile.php`.
 class MarkingTaskModel extends MarkingTask {
   const MarkingTaskModel({
     required super.id,

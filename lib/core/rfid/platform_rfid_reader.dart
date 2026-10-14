@@ -7,14 +7,6 @@ import 'package:rfid/core/rfid/epc.dart';
 import 'package:rfid/core/rfid/rfid_reader.dart';
 import 'package:rfid/core/rfid/rfid_scan_settings.dart';
 
-/// [RfidReader] backed by the Chainway SDK through platform channels.
-///
-/// The Kotlin side lives in `android/app/src/main/kotlin/.../rfid/`; the
-/// channel contract is documented in `docs/RFID.md`.
-///
-/// The event channel is listened to exactly once, here, and re-broadcast on
-/// [events]. Opening it from several places (as the legacy app did) lets one
-/// listener silence the others, because the native side keeps a single sink.
 class PlatformRfidReader implements RfidReader {
   PlatformRfidReader({
     MethodChannel methodChannel = const MethodChannel(_methodChannelName),
@@ -78,10 +70,11 @@ class PlatformRfidReader implements RfidReader {
   Future<void> setKeyEventReporting({required bool enabled}) =>
       _invoke<bool>('setKeyEventReporting', {'enabled': enabled});
 
+  // The native side keeps a single event sink: listen once and re-broadcast,
+  // otherwise one listener cancelling would silence the others.
   void _listenToPlatformOnce() {
     _platformSubscription ??= _platformEvents.receiveBroadcastStream().listen(
           _onPlatformEvent,
-          // A broken event must not kill the only subscription.
           onError: (Object _) {},
         );
   }
@@ -113,7 +106,6 @@ class PlatformRfidReader implements RfidReader {
     try {
       return await _methods.invokeMethod<T>(method, arguments);
     } on MissingPluginException {
-      // Not running on the handheld (or the native side is missing).
       throw const RfidException(RfidFailureReason.unavailable);
     } on PlatformException catch (error) {
       throw RfidException(

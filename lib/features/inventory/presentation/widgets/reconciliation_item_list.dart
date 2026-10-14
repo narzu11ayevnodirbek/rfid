@@ -7,7 +7,6 @@ import 'package:rfid/core/widgets/empty_state_view.dart';
 import 'package:rfid/core/widgets/scanned_tag_tile.dart';
 import 'package:rfid/features/inventory/presentation/bloc/inventory_scan_bloc.dart';
 
-/// The items of the selected counter: missing, found or extra.
 class ReconciliationItemList extends StatelessWidget {
   const ReconciliationItemList({super.key, required this.state});
 

@@ -5,7 +5,6 @@ import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/widgets/stat_tile.dart';
 import 'package:rfid/features/inventory/presentation/bloc/inventory_scan_bloc.dart';
 
-/// Expected / found / missing / extra. Tapping a counter shows its list.
 class ReconciliationStatRow extends StatelessWidget {
   const ReconciliationStatRow({super.key, required this.state});
 

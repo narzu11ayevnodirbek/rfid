@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// The single place where the look of the app is defined.
-///
-/// Material widgets (buttons, cards, inputs, app bars, ...) are styled here,
-/// so pages use them as they are and never set colours or font sizes inline.
 abstract final class AppTheme {
   static ThemeData light() => _build(AppColors.light, StatusColors.light);
 

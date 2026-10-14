@@ -4,7 +4,6 @@ sealed class MovementScanEvent {
   const MovementScanEvent();
 }
 
-/// Load (or reload after a failure) the task shown in the header.
 final class MovementScanTaskRequested extends MovementScanEvent {
   const MovementScanTaskRequested();
 }

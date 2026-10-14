@@ -14,7 +14,6 @@ import 'package:rfid/features/item_lookup/domain/repositories/item_repository.da
 part 'item_lookup_event.dart';
 part 'item_lookup_state.dart';
 
-/// "What is this?": read tags and show the catalogue items they belong to.
 class ItemLookupBloc extends Bloc<ItemLookupEvent, ItemLookupState> {
   ItemLookupBloc({
     required ItemRepository repository,
@@ -40,7 +39,6 @@ class ItemLookupBloc extends Bloc<ItemLookupEvent, ItemLookupState> {
   final TagScanSession _scan;
   late final StreamSubscription<TagScanState> _scanSubscription;
 
-  /// Catalogue indexed by EPC, built once per load.
   Map<String, CatalogItem> _itemsByEpc = const {};
 
   Future<void> _onCatalogRequested(

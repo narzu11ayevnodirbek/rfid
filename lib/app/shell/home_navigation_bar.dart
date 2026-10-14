@@ -13,8 +13,8 @@ class HomeNavigationDestination {
   final String label;
 }
 
-/// Bottom navigation whose labels always stay on one line, so every tab keeps
-/// the same height even with long words or a large system font.
+/// Labels always stay on one line, so every tab keeps the same height with
+/// long words or a large system font.
 class HomeNavigationBar extends StatelessWidget {
   const HomeNavigationBar({
     super.key,
@@ -79,8 +79,6 @@ class _HomeNavigationItem extends StatelessWidget {
     final textScaler = MediaQuery.textScalerOf(context).clamp(
       maxScaleFactor: 1.3,
     );
-    // Same height for every label, so a shrunk long label does not shift
-    // its icon.
     final labelHeight =
         textScaler.scale(labelStyle.fontSize!) * (labelStyle.height ?? 1.2);
 

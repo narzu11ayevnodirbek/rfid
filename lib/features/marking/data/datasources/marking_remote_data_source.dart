@@ -4,20 +4,16 @@ import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/marking/data/models/marking_model.dart';
 import 'package:rfid/features/marking/data/models/marking_task_model.dart';
 
-/// Marking requests. See `docs/API.md` for the exact shapes.
 class MarkingRemoteDataSource {
   const MarkingRemoteDataSource(this._api);
 
   final ApiClient _api;
 
-  /// `GET api/markings.php`
   Future<List<MarkingModel>> getMarkings() async {
     final json = await _api.get(ApiEndpoints.markings);
     return JsonReader(json).mapList('data').map(MarkingModel.fromJson).toList();
   }
 
-  /// `GET api/get_marking_tasks_for_mobile.php?marking_id=` — tasks with
-  /// their items embedded.
   Future<List<MarkingTaskModel>> getTasks(String markingId) async {
     final json = await _api.get(
       ApiEndpoints.markingTasks,
@@ -29,8 +25,6 @@ class MarkingRemoteDataSource {
         .toList();
   }
 
-  /// `GET api/get_marking_items.php?marking_id=` — the only endpoint that
-  /// returns photos, so the item is looked up in the whole marking.
   Future<String> getItemPhotoPath({
     required String markingId,
     required String itemId,
@@ -48,7 +42,6 @@ class MarkingRemoteDataSource {
     return '';
   }
 
-  /// `POST api/process_marking_scan.php`
   Future<void> bindTag({
     required String markingId,
     required String taskId,

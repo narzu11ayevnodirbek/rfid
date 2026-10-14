@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/features/movement/domain/entities/storage_location.dart';
 
-/// Where the items go.
 class LocationPicker extends StatelessWidget {
   const LocationPicker({
     super.key,

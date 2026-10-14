@@ -15,7 +15,6 @@ import 'package:rfid/features/inventory/presentation/widgets/inventory_plan_bann
 import 'package:rfid/features/inventory/presentation/widgets/reconciliation_item_list.dart';
 import 'package:rfid/features/inventory/presentation/widgets/reconciliation_stat_row.dart';
 
-/// Counting an inventory against its plan.
 class InventoryScanPage extends StatelessWidget {
   const InventoryScanPage({super.key});
 

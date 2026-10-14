@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/config/app_config.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// Photo of an inventory item, or a placeholder when there is none.
-///
-/// [path] is what the API returns: an absolute URL or a server-relative path.
 class ItemPhoto extends StatelessWidget {
   const ItemPhoto({super.key, required this.path, this.height = 200});
 

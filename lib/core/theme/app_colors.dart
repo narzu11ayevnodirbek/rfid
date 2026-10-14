@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Brand colour and the colour schemes derived from it.
 abstract final class AppColors {
-  /// The teal of the legacy app, kept as the brand colour.
   static const Color brand = Color(0xFF00495F);
 
   static final ColorScheme light = ColorScheme.fromSeed(
@@ -15,13 +13,8 @@ abstract final class AppColors {
   );
 }
 
-/// Meaning of a coloured element: found, missing, warning, ...
 enum StatusTone { neutral, info, success, warning, danger }
 
-/// Colours for [StatusTone], available as `context.statusColors`.
-///
-/// Material's `ColorScheme` has no "success" or "warning", so they live in
-/// this theme extension next to it.
 @immutable
 class StatusColors extends ThemeExtension<StatusColors> {
   const StatusColors({required this.foregrounds, required this.backgrounds});
@@ -63,10 +56,8 @@ class StatusColors extends ThemeExtension<StatusColors> {
   final Map<StatusTone, Color> foregrounds;
   final Map<StatusTone, Color> backgrounds;
 
-  /// Text and icon colour for [tone].
   Color foreground(StatusTone tone) => foregrounds[tone]!;
 
-  /// Fill colour behind [foreground].
   Color background(StatusTone tone) => backgrounds[tone]!;
 
   @override

@@ -1,7 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory.dart';
 
-/// [Inventory] as returned by `api/inventory.php`.
 class InventoryModel extends Inventory {
   const InventoryModel({
     required super.id,
@@ -16,7 +15,6 @@ class InventoryModel extends Inventory {
     required super.totalCount,
   });
 
-  /// Stands in for an inventory that is no longer in the user's list.
   const InventoryModel.placeholder(String id)
       : this(
           id: id,

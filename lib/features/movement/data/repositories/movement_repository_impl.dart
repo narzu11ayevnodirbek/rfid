@@ -18,7 +18,6 @@ class MovementRepositoryImpl implements MovementRepository {
 
   final MovementRemoteDataSource _remote;
 
-  /// Free transfers are signed with the user id.
   final SessionStorage _session;
   final DateTime Function() _now;
   final StreamController<void> _changes = StreamController<void>.broadcast();

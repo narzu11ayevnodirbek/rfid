@@ -1,6 +1,5 @@
 part of 'inventory_scan_bloc.dart';
 
-/// Which part of the result the list shows.
 enum ReconciliationList { missing, found, extra }
 
 class InventoryScanState extends Equatable {
@@ -21,12 +20,9 @@ class InventoryScanState extends Equatable {
 
   final String inventoryId;
 
-  /// `null` until the inventory list was loaded once.
   final String? inventoryName;
   final bool isLoadingPlan;
 
-  /// `null` while loading or when it could not be loaded at all; scanning
-  /// still works then and every tag counts as extra.
   final InventoryPlan? plan;
   final bool isPlanFromCache;
   final Failure? planFailure;
@@ -34,7 +30,6 @@ class InventoryScanState extends Equatable {
   final InventoryReconciliation reconciliation;
   final ReconciliationList selectedList;
 
-  /// Tags put back from a draft when the screen opened.
   final int restoredDraftCount;
   final SubmitStatus submitStatus;
   final Failure? submitFailure;

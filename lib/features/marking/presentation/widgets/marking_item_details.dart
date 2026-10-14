@@ -5,7 +5,6 @@ import 'package:rfid/core/widgets/item_photo.dart';
 import 'package:rfid/core/widgets/labeled_value.dart';
 import 'package:rfid/features/marking/domain/entities/marking_item.dart';
 
-/// Photo and fields of the item that gets a tag.
 class MarkingItemDetails extends StatelessWidget {
   const MarkingItemDetails({
     super.key,

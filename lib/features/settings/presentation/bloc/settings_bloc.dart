@@ -6,8 +6,6 @@ import 'package:rfid/features/settings/domain/repositories/settings_repository.d
 part 'settings_event.dart';
 part 'settings_state.dart';
 
-/// App-wide preferences. Provided above `MaterialApp`, which takes its
-/// locale from here.
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc(this._repository)
       : super(SettingsState(language: _repository.readLanguage())) {

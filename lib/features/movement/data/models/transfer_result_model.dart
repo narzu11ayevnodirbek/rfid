@@ -1,16 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/features/movement/domain/entities/transfer_result.dart';
 
-/// [TransferResult] from `api/process_movement_batch.php` and
-/// `api/transfer_free.php`:
-///
-/// ```json
-/// { "success": true, "message": "...", "moved_count": 3,
-///   "errors": { "unknown_epcs": ["E2..."], "not_in_source": [...],
-///               "already_here": [{"name": "..."}], "blocked": [...] } }
-/// ```
-///
-/// Problem lists contain either plain values or objects; both become text.
 class TransferResultModel extends TransferResult {
   const TransferResultModel({
     required super.movedCount,

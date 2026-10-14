@@ -4,7 +4,6 @@ sealed class FreeTransferEvent {
   const FreeTransferEvent();
 }
 
-/// Load (or reload after a failure) the list of locations.
 final class FreeTransferLocationsRequested extends FreeTransferEvent {
   const FreeTransferLocationsRequested();
 }

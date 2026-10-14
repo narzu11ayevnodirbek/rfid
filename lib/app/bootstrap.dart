@@ -32,8 +32,6 @@ Future<void> bootstrap() async {
 
   runApp(
     RfidApp(
-      // The saved session is restored here, so the first screen is already
-      // the right one (login or inventory) and no splash screen is needed.
       sessionBloc: SessionBloc(storage: sl(), repository: sl()),
       settingsBloc: SettingsBloc(sl()),
     ),

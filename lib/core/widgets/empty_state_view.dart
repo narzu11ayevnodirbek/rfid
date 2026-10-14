@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// Centered icon and message for "nothing to show here".
 class EmptyStateView extends StatelessWidget {
   const EmptyStateView({
     super.key,
@@ -13,7 +12,6 @@ class EmptyStateView extends StatelessWidget {
   final String message;
   final IconData icon;
 
-  /// Optional button under the message.
   final Widget? action;
 
   @override

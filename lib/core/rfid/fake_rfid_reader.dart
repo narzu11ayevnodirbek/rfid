@@ -5,11 +5,6 @@ import 'package:rfid/core/error/failure.dart';
 import 'package:rfid/core/rfid/epc.dart';
 import 'package:rfid/core/rfid/rfid_reader.dart';
 
-/// [RfidReader] without hardware, for tests and for running the app on an
-/// emulator or desktop (`--dart-define=FAKE_RFID=true`).
-///
-/// While scanning it reads [demoTags] one by one when [demoInterval] is set;
-/// tests call [simulateTag] instead.
 class FakeRfidReader implements RfidReader {
   FakeRfidReader({
     this.demoTags = const [
@@ -26,7 +21,6 @@ class FakeRfidReader implements RfidReader {
   final List<String> demoTags;
   final Duration? demoInterval;
 
-  /// When set, [initialize] throws an `RfidException` with this reason.
   final RfidFailureReason? initializeFailure;
 
   final StreamController<RfidReaderEvent> _events =
@@ -81,13 +75,11 @@ class FakeRfidReader implements RfidReader {
     reportsKeyEvents = enabled;
   }
 
-  /// Pretends the radio read [epc]. Ignored unless scanning, like hardware.
   void simulateTag(String epc) {
     if (!isScanning) return;
     _events.add(TagRead(Epc.normalize(epc)));
   }
 
-  /// Pretends the operator pressed or released a hardware key.
   void simulateKey(int keyCode, {required bool isDown}) {
     if (!reportsKeyEvents) return;
     _events.add(HardwareKeyPressed(keyCode: keyCode, isDown: isDown));

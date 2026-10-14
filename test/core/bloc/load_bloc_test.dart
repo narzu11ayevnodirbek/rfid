@@ -10,7 +10,6 @@ import 'package:rfid/core/error/result.dart';
 class _NumbersBloc extends ListBloc<int> {
   _NumbersBloc(this._responses, {super.invalidations});
 
-  /// Answers handed out one per fetch, in order.
   final List<Result<List<int>>> _responses;
   int fetchCount = 0;
 

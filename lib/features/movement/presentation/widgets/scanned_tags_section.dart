@@ -4,7 +4,6 @@ import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/core/widgets/empty_state_view.dart';
 import 'package:rfid/core/widgets/scanned_tag_tile.dart';
 
-/// Tags collected for a move, newest first, each removable.
 class ScannedTagsSection extends StatelessWidget {
   const ScannedTagsSection({
     super.key,

@@ -1,16 +1,13 @@
 import 'dart:ui';
 
-/// Languages the app is translated to, in the order shown in Settings.
 enum AppLanguage {
   russian('ru', 'Русский'),
   uzbek('uz', 'O‘zbekcha');
 
   const AppLanguage(this.code, this.nativeName);
 
-  /// Language code stored in settings and used for the [Locale].
   final String code;
 
-  /// Name written in the language itself, so anyone can find their own.
   final String nativeName;
 
   Locale get locale => Locale(code);

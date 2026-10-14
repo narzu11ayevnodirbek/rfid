@@ -15,7 +15,6 @@ class MarkingTagBindState extends Equatable {
   final SubmitStatus submitStatus;
   final Failure? submitFailure;
 
-  /// The tag that will be bound: the one read most recently.
   String? get tagToBind => scan.lastTag;
 
   bool get canSubmit =>

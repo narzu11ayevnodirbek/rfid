@@ -4,7 +4,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/features/auth/presentation/bloc/session_bloc.dart';
 
-/// Who is signed in.
 class AccountCard extends StatelessWidget {
   const AccountCard({super.key});
 

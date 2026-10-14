@@ -4,7 +4,6 @@ sealed class ItemLookupEvent {
   const ItemLookupEvent();
 }
 
-/// Load (or reload after a failure) the catalogue.
 final class ItemLookupCatalogRequested extends ItemLookupEvent {
   const ItemLookupCatalogRequested();
 }

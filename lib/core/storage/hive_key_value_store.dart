@@ -2,11 +2,10 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rfid/core/storage/key_value_store.dart';
 
-/// [KeyValueStore] backed by a Hive box in the app documents directory.
 class HiveKeyValueStore implements KeyValueStore {
   HiveKeyValueStore._(this._box);
 
-  /// Same box as the legacy app, so an update keeps the user signed in.
+  // Same box as the legacy app, so an update keeps the user signed in.
   static const String _boxName = 'rf_id_inventory_box';
 
   static Future<HiveKeyValueStore> open() async {

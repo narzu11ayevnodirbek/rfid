@@ -16,7 +16,6 @@ class SessionState extends Equatable {
   final bool isAuthenticated;
   final User? user;
 
-  /// Why the previous session ended; the login screen explains an expiry.
   final SessionEndReason? endReason;
 
   @override

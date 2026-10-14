@@ -2,7 +2,6 @@ import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/core/rfid/epc.dart';
 import 'package:rfid/features/marking/domain/entities/marking_item.dart';
 
-/// [MarkingItem] as nested in a marking task (`items[]`).
 class MarkingItemModel extends MarkingItem {
   const MarkingItemModel({
     required super.id,

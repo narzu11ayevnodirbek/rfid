@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// A number with a label under it ("Found 12").
-///
-/// When [onTap] is set the tile works like a tab: [isSelected] highlights it.
 class StatTile extends StatelessWidget {
   const StatTile({
     super.key,
@@ -56,7 +53,7 @@ class StatTile extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.xxs),
               FittedBox(
-                // Four tiles share a narrow handheld screen: shrink, never cut.
+                // Four tiles share a narrow screen: shrink the label, never cut it.
                 fit: BoxFit.scaleDown,
                 child: Text(
                   label,
@@ -72,7 +69,6 @@ class StatTile extends StatelessWidget {
   }
 }
 
-/// [StatTile]s side by side, equal width.
 class StatTileRow extends StatelessWidget {
   const StatTileRow({super.key, required this.tiles});
 

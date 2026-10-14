@@ -26,14 +26,10 @@ import 'package:rfid/features/movement/domain/repositories/movement_repository.d
 import 'package:rfid/features/settings/data/repositories/settings_repository_impl.dart';
 import 'package:rfid/features/settings/domain/repositories/settings_repository.dart';
 
-/// The service locator. Used only inside `lib/app/`: everything else gets
-/// its dependencies through constructors, which keeps it testable.
+/// Used only inside `lib/app/`; everything else gets its dependencies
+/// through constructors.
 final GetIt sl = GetIt.instance;
 
-/// Registers every dependency of the app. Called once from `bootstrap()`.
-///
-/// To add a feature: write a `_registerX()` with its data sources and
-/// repository, and call it below.
 Future<void> setUpServiceLocator() async {
   final store = await HiveKeyValueStore.open();
   final session = SessionStorage(store);

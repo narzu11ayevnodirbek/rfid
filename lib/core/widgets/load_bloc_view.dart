@@ -6,10 +6,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/widgets/app_snackbar.dart';
 import 'package:rfid/core/widgets/load_state_view.dart';
 
-/// The body of a screen backed by a [LoadBloc]: spinner, error with retry,
-/// pull-to-refresh, and a snackbar when a refresh fails.
-///
-/// [builder] must return a scrollable widget (for pull-to-refresh).
 class LoadBlocView<B extends LoadBloc<T>, T> extends StatelessWidget {
   const LoadBlocView({super.key, required this.builder});
 

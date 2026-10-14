@@ -1,13 +1,6 @@
-/// Every screen's location, in one place.
-///
-/// Pages navigate with these (`context.push(AppRoutes.inventoryScan(id))`)
-/// and `app_router.dart` uses the same patterns to build the routes, so a
-/// path is never typed twice. Locations carry ids only; each screen loads
-/// what it needs from its repository.
 abstract final class AppRoutes {
   static const String login = '/login';
 
-  // Bottom navigation tabs.
   static const String inventory = '/inventory';
   static const String marking = '/marking';
   static const String movement = '/movement';

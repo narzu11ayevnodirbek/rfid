@@ -7,7 +7,6 @@ import 'package:rfid/core/widgets/list_card.dart';
 import 'package:rfid/core/widgets/status_badge.dart';
 import 'package:rfid/features/movement/domain/entities/movement_task.dart';
 
-/// A movement task: from where to where, and how much is done.
 class MovementTaskCard extends StatelessWidget {
   const MovementTaskCard({super.key, required this.task});
 

@@ -18,7 +18,6 @@ class InventoryRepositoryImpl implements InventoryRepository {
   final InventoryLocalDataSource _local;
   final StreamController<void> _changes = StreamController<void>.broadcast();
 
-  /// Last list from the server, to show names on screens opened by id.
   List<Inventory> _inventories = const [];
 
   @override
@@ -33,7 +32,6 @@ class InventoryRepositoryImpl implements InventoryRepository {
   @override
   Future<Result<InventoryDetails>> getDetails(String inventoryId) =>
       guard(() async {
-        // Reload the list too: it carries the inventory's counters.
         final (inventories, tasks) = await (
           _remote.getInventories(),
           _remote.getTasks(inventoryId),
@@ -41,7 +39,6 @@ class InventoryRepositoryImpl implements InventoryRepository {
         _inventories = inventories;
         final inventory = inventories.firstWhere(
           (inventory) => inventory.id == inventoryId,
-          // Not in the user's list any more: still show its tasks.
           orElse: () => InventoryModel.placeholder(inventoryId),
         );
         return InventoryDetails(inventory: inventory, tasks: tasks);

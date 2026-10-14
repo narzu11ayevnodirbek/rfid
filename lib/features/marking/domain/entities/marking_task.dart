@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:rfid/features/marking/domain/entities/marking_item.dart';
 
-/// The part of a marking assigned to one employee, with its items.
 class MarkingTask extends Equatable {
   const MarkingTask({
     required this.id,

@@ -11,7 +11,6 @@ import 'package:rfid/features/inventory/presentation/bloc/inventory_details_bloc
 import 'package:rfid/features/inventory/presentation/widgets/inventory_summary_card.dart';
 import 'package:rfid/features/inventory/presentation/widgets/inventory_task_card.dart';
 
-/// An inventory, the progress of its tasks and the "start scanning" button.
 class InventoryDetailsPage extends StatelessWidget {
   const InventoryDetailsPage({super.key});
 

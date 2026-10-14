@@ -6,9 +6,6 @@ import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/core/widgets/confirm_dialog.dart';
 
-/// Reader status, tag counter and the Start/Stop (and optional Clear)
-/// buttons. Every scan screen uses this, so the reader always looks and
-/// behaves the same way.
 class ScanControlBar extends StatelessWidget {
   const ScanControlBar({
     super.key,
@@ -21,10 +18,8 @@ class ScanControlBar extends StatelessWidget {
   final TagScanState scan;
   final VoidCallback onToggle;
 
-  /// Shows a Clear button (asks for confirmation first) when set.
   final VoidCallback? onClear;
 
-  /// Replaces the default hint shown while the reader is off.
   final String? hint;
 
   @override

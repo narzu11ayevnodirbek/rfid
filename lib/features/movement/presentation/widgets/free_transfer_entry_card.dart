@@ -4,7 +4,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/routing/app_routes.dart';
 import 'package:rfid/core/widgets/list_card.dart';
 
-/// Shortcut to moving items without a task, above the task list.
 class FreeTransferEntryCard extends StatelessWidget {
   const FreeTransferEntryCard({super.key});
 

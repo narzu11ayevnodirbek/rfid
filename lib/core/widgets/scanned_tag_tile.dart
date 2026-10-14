@@ -3,8 +3,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// One row of a scanned-tags list: the item name when it is known, the EPC
-/// in monospace, and an optional remove button.
 class ScannedTagTile extends StatelessWidget {
   const ScannedTagTile({
     super.key,
@@ -16,7 +14,6 @@ class ScannedTagTile extends StatelessWidget {
 
   final String epc;
 
-  /// Name of the item the tag belongs to, if known.
   final String? title;
   final StatusTone tone;
   final VoidCallback? onRemove;

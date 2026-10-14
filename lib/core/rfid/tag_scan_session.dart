@@ -7,22 +7,8 @@ import 'package:rfid/core/rfid/rfid_reader.dart';
 import 'package:rfid/core/rfid/rfid_scan_settings.dart';
 import 'package:rfid/core/rfid/tag_scan_state.dart';
 
-/// One screen's use of the reader: start, stop and the distinct tags read.
-///
-/// Each scan bloc owns a session (composition, not inheritance), forwards
-/// [states] into its own state and calls [dispose] in `close()`, which stops
-/// the reader whenever the screen goes away.
-///
-/// ```dart
-/// _scanSubscription = _scan.states.listen((s) => add(ScanStateChanged(s)));
-/// ...
-/// @override
-/// Future<void> close() async {
-///   await _scanSubscription.cancel();
-///   await _scan.dispose();
-///   return super.close();
-/// }
-/// ```
+/// One screen's use of the reader. The owning bloc must call [dispose] in
+/// `close()`, which stops the reader when the screen goes away.
 class TagScanSession {
   TagScanSession({
     required RfidReader reader,
@@ -47,8 +33,6 @@ class TagScanSession {
 
   Stream<TagScanState> get states => _states.stream;
 
-  /// Powers the reader, applies [powerProfile] and starts scanning.
-  /// A failure is reported in [TagScanState.failure], never thrown.
   Future<void> start() async {
     if (_isDisposed || _state.isScanning || _state.isBusy) return;
     _emit(_state.copyWith(isBusy: true, clearFailure: true));
@@ -84,25 +68,21 @@ class TagScanSession {
 
   Future<void> toggle() => _state.isScanning ? stop() : start();
 
-  /// Forgets one tag, so it can be read again.
   void remove(String epc) {
     if (!_seen.remove(epc)) return;
     _emit(_state.copyWith(tags: List.unmodifiable(_seen)));
   }
 
-  /// Forgets all tags.
   void clear() {
     _seen.clear();
     _emit(_state.copyWith(tags: const [], clearLastTag: true));
   }
 
-  /// Puts back tags from a saved draft.
   void restore(Iterable<String> epcs) {
     _seen.addAll(epcs);
     _emit(_state.copyWith(tags: List.unmodifiable(_seen)));
   }
 
-  /// Stops the reader and releases the session. Safe to call twice.
   Future<void> dispose() async {
     if (_isDisposed) return;
     await stop();
@@ -114,7 +94,6 @@ class TagScanSession {
   void _onReaderEvent(RfidReaderEvent event) {
     switch (event) {
       case TagRead(:final epc):
-        // Tags only count while the operator has the session switched on.
         if (!_state.isScanning) return;
         final isNew = _seen.add(epc);
         if (isNew) _onNewTag();

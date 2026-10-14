@@ -4,7 +4,6 @@ import 'package:rfid/core/widgets/list_card.dart';
 import 'package:rfid/core/widgets/status_badge.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory_task.dart';
 
-/// Progress of one task (location) of an inventory.
 class InventoryTaskCard extends StatelessWidget {
   const InventoryTaskCard({super.key, required this.task});
 

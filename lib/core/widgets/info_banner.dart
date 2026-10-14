@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// A coloured note above the content: "showing cached data", "session
-/// expired", ...
 class InfoBanner extends StatelessWidget {
   const InfoBanner({
     super.key,

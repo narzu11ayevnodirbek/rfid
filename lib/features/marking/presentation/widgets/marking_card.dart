@@ -6,7 +6,6 @@ import 'package:rfid/core/widgets/list_card.dart';
 import 'package:rfid/core/widgets/status_badge.dart';
 import 'package:rfid/features/marking/domain/entities/marking.dart';
 
-/// A marking in the list; opens its tasks.
 class MarkingCard extends StatelessWidget {
   const MarkingCard({super.key, required this.marking});
 

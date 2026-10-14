@@ -14,11 +14,10 @@ class MarkingRepositoryImpl implements MarkingRepository {
   final MarkingRemoteDataSource _remote;
   final StreamController<void> _changes = StreamController<void>.broadcast();
 
-  /// Last tasks loaded per marking.
   final Map<String, List<MarkingTask>> _tasksByMarking = {};
 
-  /// Tags bound from this device (item id → EPC). Applied on top of server
-  /// data in case the task list does not report bindings right away.
+  // Tags bound from this device, applied on top of server data in case the
+  // task list reports a binding late.
   final Map<String, String> _boundHere = {};
 
   @override

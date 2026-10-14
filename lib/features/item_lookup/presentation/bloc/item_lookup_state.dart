@@ -11,10 +11,8 @@ class ItemLookupState extends Equatable {
   final LoadState<List<CatalogItem>> catalog;
   final TagScanState scan;
 
-  /// Items whose tag was read, most recent first.
   final List<CatalogItem> foundItems;
 
-  /// Tags that belong to no item of the catalogue.
   final int unknownTagCount;
 
   ItemLookupState copyWith({

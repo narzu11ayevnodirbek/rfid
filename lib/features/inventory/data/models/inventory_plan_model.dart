@@ -2,14 +2,6 @@ import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/core/rfid/epc.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory_plan.dart';
 
-/// [InventoryPlan] as returned by `api/inventory_get_plan.php`:
-///
-/// ```json
-/// { "success": true, "inventory_id": 5, "location_name": "...",
-///   "expected_items": [ { "epc": "E280...", "name": "..." } ] }
-/// ```
-///
-/// Also the format of the copy cached on the device ([toJson]).
 class InventoryPlanModel extends InventoryPlan {
   const InventoryPlanModel({
     required super.inventoryId,
@@ -21,7 +13,6 @@ class InventoryPlanModel extends InventoryPlan {
     JsonMap json, {
     required String inventoryId,
   }) {
-    // Accept the fields either at the root or inside `data`.
     final reader = JsonReader(JsonReader(json).mapOrNull('data') ?? json);
     return InventoryPlanModel(
       inventoryId: reader.string('inventory_id', fallback: inventoryId),

@@ -6,7 +6,6 @@ import 'package:rfid/core/widgets/labeled_progress_bar.dart';
 import 'package:rfid/core/widgets/list_card.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory.dart';
 
-/// An inventory in the list; opens its details.
 class InventoryCard extends StatelessWidget {
   const InventoryCard({super.key, required this.inventory});
 

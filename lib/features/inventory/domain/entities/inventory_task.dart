@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// The part of an inventory assigned to one employee, usually one location.
 class InventoryTask extends Equatable {
   const InventoryTask({
     required this.id,

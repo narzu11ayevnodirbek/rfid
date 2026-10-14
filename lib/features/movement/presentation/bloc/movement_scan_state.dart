@@ -13,7 +13,6 @@ class MovementScanState extends Equatable {
   final TagScanState scan;
   final SubmitStatus submitStatus;
 
-  /// What the server reported after the last successful send.
   final TransferResult? result;
   final Failure? submitFailure;
 

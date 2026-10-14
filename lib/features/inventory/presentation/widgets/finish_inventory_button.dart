@@ -4,7 +4,6 @@ import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/widgets/confirm_dialog.dart';
 import 'package:rfid/features/inventory/presentation/bloc/inventory_scan_bloc.dart';
 
-/// Sends the result after showing what will be sent.
 class FinishInventoryButton extends StatelessWidget {
   const FinishInventoryButton({super.key, required this.state});
 

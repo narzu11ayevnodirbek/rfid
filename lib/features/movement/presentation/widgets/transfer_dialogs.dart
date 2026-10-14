@@ -6,7 +6,6 @@ import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/widgets/message_dialog.dart';
 import 'package:rfid/features/movement/domain/entities/transfer_result.dart';
 
-/// Reports what the server did with the batch: moved items and problems.
 Future<void> showTransferResultDialog(
   BuildContext context,
   TransferResult result,
@@ -44,7 +43,6 @@ Future<void> showTransferResultDialog(
   );
 }
 
-/// Reports a batch the server did not accept at all.
 Future<void> showTransferFailedDialog(BuildContext context, Failure failure) {
   final l10n = context.l10n;
   return showMessageDialog(

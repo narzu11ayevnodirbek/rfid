@@ -3,7 +3,6 @@ import 'package:rfid/core/bloc/load_state.dart';
 import 'package:rfid/core/widgets/error_state_view.dart';
 import 'package:rfid/core/widgets/loading_view.dart';
 
-/// Shows a spinner, an error with "Retry", or the loaded content.
 class LoadStateView<T> extends StatelessWidget {
   const LoadStateView({
     super.key,

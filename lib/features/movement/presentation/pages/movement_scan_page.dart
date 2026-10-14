@@ -12,7 +12,6 @@ import 'package:rfid/features/movement/presentation/bloc/movement_scan_bloc.dart
 import 'package:rfid/features/movement/presentation/widgets/scanned_tags_section.dart';
 import 'package:rfid/features/movement/presentation/widgets/transfer_dialogs.dart';
 
-/// Collect the items of a movement task and send them.
 class MovementScanPage extends StatelessWidget {
   const MovementScanPage({super.key});
 

@@ -7,10 +7,6 @@ import 'package:rfid/features/auth/domain/repositories/auth_repository.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
-/// The login form.
-///
-/// On success it only starts the session; `SessionBloc` notices and the
-/// router leaves the login screen by itself.
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(this._repository) : super(const LoginState()) {
     on<LoginLoginChanged>(

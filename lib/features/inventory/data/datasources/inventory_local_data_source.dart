@@ -5,8 +5,6 @@ import 'package:rfid/core/storage/key_value_store.dart';
 import 'package:rfid/features/inventory/data/models/inventory_plan_model.dart';
 import 'package:rfid/features/inventory/domain/entities/inventory_draft.dart';
 
-/// Inventory data kept on the device: the last plan of each inventory (to
-/// keep working offline) and drafts of unfinished scans.
 class InventoryLocalDataSource {
   const InventoryLocalDataSource(this._store);
 
@@ -49,7 +47,7 @@ class InventoryLocalDataSource {
   Future<void> deleteDraft(String inventoryId) =>
       _store.delete(_draftKey(inventoryId));
 
-  /// A damaged entry is treated as missing rather than crashing the screen.
+  // A damaged entry is treated as missing.
   static JsonMap? _decode(String? source) {
     if (source == null) return null;
     try {

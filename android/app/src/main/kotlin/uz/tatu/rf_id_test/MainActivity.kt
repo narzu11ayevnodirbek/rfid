@@ -5,10 +5,6 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import uz.tatu.rf_id_test.rfid.RfidChannel
 
-/**
- * Hosts the Flutter app and wires the RFID reader to it: platform channels,
- * the hardware trigger and the activity lifecycle.
- */
 class MainActivity : FlutterActivity() {
 
     private var rfid: RfidChannel? = null

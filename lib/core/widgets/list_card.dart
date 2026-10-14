@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// The card used by every list in the app: a title, up to a few lines of
-/// details and an optional [footer] (for example a progress bar).
 class ListCard extends StatelessWidget {
   const ListCard({
     super.key,
@@ -18,11 +16,9 @@ class ListCard extends StatelessWidget {
   final String title;
   final String? subtitle;
 
-  /// Secondary lines in small text, shown under [subtitle].
   final List<String> details;
   final Widget? leading;
 
-  /// Defaults to a chevron when the card is tappable.
   final Widget? trailing;
   final Widget? footer;
   final VoidCallback? onTap;

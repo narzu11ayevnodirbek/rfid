@@ -8,7 +8,6 @@ import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/core/widgets/status_badge.dart';
 import 'package:rfid/features/settings/presentation/bloc/reader_diagnostics_bloc.dart';
 
-/// Whether the RFID module powers on.
 class ModuleStatusCard extends StatelessWidget {
   const ModuleStatusCard({super.key, required this.state});
 
@@ -76,7 +75,6 @@ class ModuleStatusCard extends StatelessWidget {
   }
 }
 
-/// Radio power slider.
 class PowerCard extends StatelessWidget {
   const PowerCard({super.key, required this.state});
 
@@ -124,7 +122,6 @@ class PowerCard extends StatelessWidget {
   }
 }
 
-/// Key code of the last hardware key, to set up the trigger on a new model.
 class HardwareKeyCard extends StatelessWidget {
   const HardwareKeyCard({super.key, required this.state});
 

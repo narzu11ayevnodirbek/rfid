@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 
-/// Small coloured label, for example the status of an inventory.
 class StatusBadge extends StatelessWidget {
   const StatusBadge({
     super.key,

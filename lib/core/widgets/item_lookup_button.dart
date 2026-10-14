@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/routing/app_routes.dart';
 
-/// App bar action that opens "find item by tag". Shown on every tab.
 class ItemLookupButton extends StatelessWidget {
   const ItemLookupButton({super.key});
 

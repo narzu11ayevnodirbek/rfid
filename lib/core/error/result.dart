@@ -1,14 +1,5 @@
 import 'package:rfid/core/error/failure.dart';
 
-/// The outcome of an operation that can fail: a value or a [Failure].
-///
-/// ```dart
-/// final result = await repository.getInventories();
-/// switch (result) {
-///   case Success(:final value): emit(LoadSuccess(value));
-///   case Failed(:final failure): emit(LoadFailure(failure));
-/// }
-/// ```
 sealed class Result<T> {
   const Result();
 

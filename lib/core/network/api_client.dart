@@ -10,9 +10,8 @@ import 'package:rfid/core/network/auth_token_interceptor.dart';
 import 'package:rfid/core/network/json_body_decoder.dart';
 import 'package:rfid/core/network/json_reader.dart';
 
-/// The single entry point to the backend. Returns the body already checked
-/// for `success: true`; failures are thrown and turned into `Failure`s by
-/// `guard` in the repositories.
+/// Returns bodies already checked for `success: true`; failures are thrown
+/// and turned into `Failure`s by `guard()` in the repositories.
 class ApiClient {
   ApiClient(this._dio);
 
@@ -60,10 +59,8 @@ class ApiClient {
     return _parse(response);
   }
 
-  /// Decodes the body and runs [convert] in one background isolate, so
-  /// multi-megabyte responses never block the UI.
-  ///
-  /// [convert] must be a top-level or static function.
+  /// Decodes and converts the body in one background isolate. [convert] must
+  /// be a top-level or static function.
   Future<T> getInBackground<T>(
     String path,
     T Function(JsonMap body) convert, {

@@ -1,10 +1,6 @@
 import 'package:rfid/core/error/failure.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 
-/// Turns a [Failure] into a sentence for the user.
-///
-/// Texts sent by the server are shown as they are (they come in the server's
-/// language); everything else comes from the translation files.
 extension FailureLocalizer on Failure {
   String localizedMessage(AppLocalizations l10n) => switch (this) {
         NetworkFailure() => l10n.failureNetwork,

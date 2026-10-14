@@ -1,8 +1,5 @@
 import 'package:rfid/core/storage/key_value_store.dart';
 
-/// [KeyValueStore] that forgets everything when the app closes.
-///
-/// Used by tests and by widget previews that must not touch the disk.
 class InMemoryKeyValueStore implements KeyValueStore {
   InMemoryKeyValueStore([Map<String, String>? initial])
       : _values = {...?initial};

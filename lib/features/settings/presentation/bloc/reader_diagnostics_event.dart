@@ -4,7 +4,6 @@ sealed class ReaderDiagnosticsEvent {
   const ReaderDiagnosticsEvent();
 }
 
-/// The screen opened: report hardware keys and check the module.
 final class ReaderDiagnosticsStarted extends ReaderDiagnosticsEvent {
   const ReaderDiagnosticsStarted();
 }
@@ -14,14 +13,12 @@ final class ReaderDiagnosticsModuleCheckRequested
   const ReaderDiagnosticsModuleCheckRequested();
 }
 
-/// The slider moved. Only the shown value changes.
 final class ReaderDiagnosticsPowerSelected extends ReaderDiagnosticsEvent {
   const ReaderDiagnosticsPowerSelected(this.dbm);
 
   final int dbm;
 }
 
-/// The slider was released: send the selected power to the reader.
 final class ReaderDiagnosticsPowerApplied extends ReaderDiagnosticsEvent {
   const ReaderDiagnosticsPowerApplied();
 }

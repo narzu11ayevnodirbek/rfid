@@ -10,7 +10,6 @@ import 'package:rfid/core/widgets/scan_control_bar.dart';
 import 'package:rfid/features/item_lookup/presentation/bloc/item_lookup_bloc.dart';
 import 'package:rfid/features/item_lookup/presentation/widgets/catalog_item_card.dart';
 
-/// Read tags to see which items they belong to.
 class ItemLookupPage extends StatelessWidget {
   const ItemLookupPage({super.key});
 

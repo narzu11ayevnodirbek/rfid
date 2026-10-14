@@ -7,7 +7,6 @@ import 'package:rfid/core/theme/app_colors.dart';
 import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/features/auth/presentation/bloc/login_bloc.dart';
 
-/// Login and password fields with the submit button.
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 

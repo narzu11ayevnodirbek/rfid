@@ -4,7 +4,6 @@ import 'package:rfid/core/widgets/item_photo.dart';
 import 'package:rfid/core/widgets/list_card.dart';
 import 'package:rfid/features/item_lookup/domain/entities/catalog_item.dart';
 
-/// A catalogue item found by its tag.
 class CatalogItemCard extends StatelessWidget {
   const CatalogItemCard({super.key, required this.item});
 

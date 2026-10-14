@@ -4,11 +4,7 @@ import 'package:rfid/core/error/failure.dart';
 import 'package:rfid/core/error/result.dart';
 import 'package:rfid/core/network/api_envelope_parser.dart';
 
-/// Runs [request] and converts everything it can throw into a [Failure].
-///
-/// This is the only place where exceptions become failures. Data sources
-/// throw, repositories wrap each call in `guard`, and nothing above the
-/// repository layer needs a try/catch.
+/// The only place where exceptions become failures.
 Future<Result<T>> guard<T>(Future<T> Function() request) async {
   try {
     return Success(await request());
@@ -29,7 +25,6 @@ Future<Result<T>> guard<T>(Future<T> Function() request) async {
   }
 }
 
-/// Maps a transport error to a [Failure].
 Failure failureFromDioException(DioException error) {
   final response = error.response;
   if (response == null) return const NetworkFailure();

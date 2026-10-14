@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-/// Debug log of every request: pretty JSON, secrets hidden, large bodies cut
-/// so the console stays fast.
+/// Debug log: pretty JSON, password and token hidden, large bodies cut.
 class ApiLogInterceptor extends Interceptor {
   ApiLogInterceptor({void Function(String line)? log})
       : _log = log ?? debugPrint;

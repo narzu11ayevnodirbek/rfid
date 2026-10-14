@@ -5,13 +5,11 @@ import 'package:rfid/features/movement/data/models/movement_task_model.dart';
 import 'package:rfid/features/movement/data/models/storage_location_model.dart';
 import 'package:rfid/features/movement/data/models/transfer_result_model.dart';
 
-/// Movement requests. See `docs/API.md` for the exact shapes.
 class MovementRemoteDataSource {
   const MovementRemoteDataSource(this._api);
 
   final ApiClient _api;
 
-  /// `GET api/get_movement_tasks_for_mobile.php`
   Future<List<MovementTaskModel>> getTasks() async {
     final json = await _api.get(ApiEndpoints.movementTasks);
     return JsonReader(json)
@@ -20,7 +18,6 @@ class MovementRemoteDataSource {
         .toList();
   }
 
-  /// `POST api/process_movement_batch.php`
   Future<TransferResultModel> moveForTask({
     required String movementId,
     required List<String> scannedEpcs,
@@ -35,7 +32,6 @@ class MovementRemoteDataSource {
     return TransferResultModel.fromJson(json);
   }
 
-  /// `GET api/locations.php`
   Future<List<StorageLocationModel>> getLocations() async {
     final json = await _api.get(ApiEndpoints.locations);
     return JsonReader(json)
@@ -44,7 +40,6 @@ class MovementRemoteDataSource {
         .toList();
   }
 
-  /// `POST api/transfer_free.php`
   Future<TransferResultModel> moveFreely({
     required String locationId,
     required List<String> scannedEpcs,
@@ -63,7 +58,7 @@ class MovementRemoteDataSource {
     return TransferResultModel.fromJson(json);
   }
 
-  /// `2025-10-06 09:30:00` in UTC, the format the backend stores.
+  // The backend stores UTC as `yyyy-MM-dd HH:mm:ss`.
   static String _mysqlUtc(DateTime time) {
     final utc = time.toUtc();
     String two(int value) => value.toString().padLeft(2, '0');

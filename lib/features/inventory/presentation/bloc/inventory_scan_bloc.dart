@@ -16,10 +16,6 @@ import 'package:rfid/features/inventory/domain/repositories/inventory_repository
 part 'inventory_scan_event.dart';
 part 'inventory_scan_state.dart';
 
-/// Counting an inventory: scan the room, compare with the plan, send.
-///
-/// Every change of the scanned tags is saved as a draft (debounced), so the
-/// count survives leaving the screen, a crash or a failed send.
 class InventoryScanBloc extends Bloc<InventoryScanEvent, InventoryScanState> {
   InventoryScanBloc({
     required InventoryRepository repository,
@@ -51,7 +47,6 @@ class InventoryScanBloc extends Bloc<InventoryScanEvent, InventoryScanState> {
   final InventoryRepository _repository;
   final TagScanSession _scan;
 
-  /// How long to wait after the last tag before writing the draft.
   final Duration draftSaveDelay;
 
   late final StreamSubscription<TagScanState> _scanSubscription;

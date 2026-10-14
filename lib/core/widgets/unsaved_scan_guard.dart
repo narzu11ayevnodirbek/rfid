@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rfid/core/l10n/l10n.dart';
 import 'package:rfid/core/widgets/confirm_dialog.dart';
 
-/// Asks before leaving a scan screen whose tags were not sent yet.
 class UnsavedScanGuard extends StatelessWidget {
   const UnsavedScanGuard({
     super.key,

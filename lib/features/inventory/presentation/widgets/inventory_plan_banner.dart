@@ -7,7 +7,6 @@ import 'package:rfid/core/theme/app_spacing.dart';
 import 'package:rfid/core/widgets/info_banner.dart';
 import 'package:rfid/features/inventory/presentation/bloc/inventory_scan_bloc.dart';
 
-/// Explains when the plan is not the fresh one from the server.
 class InventoryPlanBanner extends StatelessWidget {
   const InventoryPlanBanner({super.key, required this.state});
 

@@ -11,7 +11,6 @@ import 'package:rfid/features/movement/presentation/widgets/location_picker.dart
 import 'package:rfid/features/movement/presentation/widgets/scanned_tags_section.dart';
 import 'package:rfid/features/movement/presentation/widgets/transfer_dialogs.dart';
 
-/// Move any scanned items to a chosen location.
 class FreeTransferPage extends StatelessWidget {
   const FreeTransferPage({super.key});
 

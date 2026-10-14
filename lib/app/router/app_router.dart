@@ -35,11 +35,6 @@ import 'package:rfid/features/settings/presentation/bloc/reader_diagnostics_bloc
 import 'package:rfid/features/settings/presentation/pages/reader_diagnostics_page.dart';
 import 'package:rfid/features/settings/presentation/pages/settings_page.dart';
 
-/// Every screen of the app and the bloc it gets.
-///
-/// Each route creates its bloc with `BlocProvider`, so the bloc lives exactly
-/// as long as the screen (a scan bloc stops the reader when it closes).
-/// Locations come from [AppRoutes]; detail screens receive ids only.
 GoRouter createAppRouter(SessionBloc sessionBloc) {
   final rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -81,8 +76,6 @@ GoRouter createAppRouter(SessionBloc sessionBloc) {
   );
 }
 
-/// Signed-out users only see the login screen; signed-in users never do.
-/// Returns where to go instead of [location], or `null` to stay.
 @visibleForTesting
 String? redirectForSession({
   required bool isSignedIn,

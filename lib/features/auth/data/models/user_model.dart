@@ -1,7 +1,6 @@
 import 'package:rfid/core/network/json_reader.dart';
 import 'package:rfid/core/session/user.dart';
 
-/// [User] as returned by `api/auth.php`.
 class UserModel extends User {
   const UserModel({
     required super.id,
