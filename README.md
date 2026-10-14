@@ -32,28 +32,36 @@ Flutter 3.41 / Dart 3.11 da tekshirilgan.
 ## Tez boshlash
 
 ```sh
+cp .env.example .env   # qiymatlarni to‘ldiring
 flutter pub get
-flutter run                              # Chainway terminalida
-flutter run --dart-define=FAKE_RFID=true # emulyator yoki oddiy telefonda
+flutter run --dart-define-from-file=.env
 ```
 
-`FAKE_RFID=true` bilan haqiqiy o‘quvchi o‘rniga soxtasi ishlaydi: "RFID ni yoqish" bosilganda bir necha namunaviy metka "o‘qiladi". Shu bilan barcha ekranlarni terminalsiz ko‘rish mumkin.
+VS Code'da **F5** yetarli: `.vscode/launch.json` `.env` ni o‘zi ulaydi.
 
-### Sozlash (`--dart-define`)
+Emulyator yoki oddiy telefonda `.env` da `FAKE_RFID=true` qiling: "RFID ni yoqish" bosilganda haqiqiy o‘quvchi o‘rniga bir necha namunaviy metka "o‘qiladi".
 
-| Nomi | Standart | Ma’nosi |
-|---|---|---|
-| `API_BASE_URL` | `https://mderp.uz/` | Backend manzili, oxirida `/` bo‘lishi shart |
-| `TRUST_API_HOST_CERTIFICATE` | `true` | API hostining tekshirib bo‘lmaydigan TLS sertifikatini qabul qilish. Serverda to‘g‘ri sertifikat o‘rnatilgach `false` qiling |
-| `FAKE_RFID` | `false` | Soxta RFID o‘quvchi |
+### Sozlash (`.env`)
 
-Hammasi bitta faylda: [`lib/core/config/app_config.dart`](lib/core/config/app_config.dart).
+Barcha sozlama va maxfiy qiymatlar `.env` faylida turadi. U git'ga kirmaydi, namunasi esa `.env.example` da.
+
+| Nomi | Ma’nosi |
+|---|---|
+| `API_BASE_URL` | Backend manzili, oxirida `/` bo‘lishi shart. Bo‘lmasa, ilova ishga tushmaydi va sababini aytadi |
+| `TRUST_API_HOST_CERTIFICATE` | `true` — API hostining tekshirib bo‘lmaydigan TLS sertifikatini qabul qilish. Serverda to‘g‘ri sertifikat o‘rnatilgach `false` qiling |
+| `FAKE_RFID` | `true` — soxta RFID o‘quvchi |
+| `RFID_API_LOGIN`, `RFID_API_PASSWORD` | Faqat `tool/api_probe.py` uchun |
+| `YANDEX_API_KEY`, `GEOCODER_API_KEY` | Ilovada ishlatilmaydi, yo‘qolmasligi uchun saqlangan |
+
+Ilova bu qiymatlarni `lib/core/config/app_config.dart` orqali o‘qiydi.
+
+> `.env` sirlarni git'dan saqlaydi, lekin APK ichiga kirgan qiymatni (masalan, `API_BASE_URL`) ilovadan baribir chiqarib olish mumkin. Mobil ilovaga haqiqiy maxfiy kalit qo‘ymang.
 
 ### Build
 
 ```sh
-flutter build apk --release                 # bitta "fat" APK (~57 MB, barcha ABI)
-flutter build apk --release --split-per-abi # har ABI uchun alohida, ancha kichik
+flutter build apk --release --dart-define-from-file=.env                 # bitta "fat" APK (~57 MB, barcha ABI)
+flutter build apk --release --split-per-abi --dart-define-from-file=.env # har ABI uchun alohida, ancha kichik
 ```
 
 Chainway terminallari `arm64-v8a` yoki `armeabi-v7a`; odatda `app-arm64-v8a-release.apk` yetarli.
@@ -89,7 +97,7 @@ lib/
   main.dart            → app/bootstrap.dart ni chaqiradi
   app/                 ilovani yig‘ish: DI, router, pastki menyu
   core/                featurelar umumiy foydalanadigan narsalar
-    config/            sozlamalar (--dart-define)
+    config/            sozlamalar (.env dan)
     network/           ApiClient, endpointlar, JSON o‘qish
     error/             Result, Failure, guard()
     session/           token va foydalanuvchi

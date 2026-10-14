@@ -6,12 +6,16 @@ each response: keys, value types, list sizes and the values of enum-like
 fields. Personal data is not printed. Raw responses can be saved with --out
 (keep that folder outside the repository: it contains real data).
 
+Credentials and the backend root are read from the environment or, if not
+set there, from the project's .env (RFID_API_LOGIN, RFID_API_PASSWORD,
+API_BASE_URL).
+
 Usage:
-    RFID_API_LOGIN=... RFID_API_PASSWORD=... python3 tool/api_probe.py
-    python3 tool/api_probe.py --base-url https://mderp.uz/ --out /tmp/api
+    python3 tool/api_probe.py
+    python3 tool/api_probe.py --out /tmp/api
 
 Options:
-    --base-url URL   backend root (default https://mderp.uz/)
+    --base-url URL   backend root (default: API_BASE_URL from .env)
     --out DIR        save raw JSON responses into DIR
     --verify-tls     verify the server certificate (off by default, like the app)
 """
@@ -31,17 +35,19 @@ ENUM_KEYS = {"status", "status_code", "status_label", "type", "common_status", "
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--base-url", default="https://mderp.uz/")
+    parser.add_argument("--base-url")
     parser.add_argument("--out")
     parser.add_argument("--verify-tls", action="store_true")
     args = parser.parse_args()
 
-    login = os.environ.get("RFID_API_LOGIN")
-    password = os.environ.get("RFID_API_PASSWORD")
+    dotenv = load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+    login = os.environ.get("RFID_API_LOGIN") or dotenv.get("RFID_API_LOGIN")
+    password = os.environ.get("RFID_API_PASSWORD") or dotenv.get("RFID_API_PASSWORD")
+    base_url = args.base_url or dotenv.get("API_BASE_URL") or "https://mderp.uz/"
     if not login or not password:
-        sys.exit("Set RFID_API_LOGIN and RFID_API_PASSWORD")
+        sys.exit("Set RFID_API_LOGIN and RFID_API_PASSWORD (environment or .env)")
 
-    client = Client(args.base_url, verify_tls=args.verify_tls, out=args.out)
+    client = Client(base_url, verify_tls=args.verify_tls, out=args.out)
 
     auth = client.call("auth", "POST", "api/auth.php", query={"action": "login"},
                        body={"login": login, "password": password}, redact=("token",))
@@ -72,6 +78,19 @@ def main():
 
     client.call("movement_tasks", "GET", "api/get_movement_tasks_for_mobile.php", token=token)
     client.call("locations", "GET", "api/locations.php", token=token)
+
+
+def load_dotenv(path):
+    values = {}
+    if not path.exists():
+        return values
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip('"').strip("'")
+    return values
 
 
 class Client:

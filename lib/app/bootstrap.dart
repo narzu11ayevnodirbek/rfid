@@ -9,8 +9,13 @@ import 'package:rfid/core/network/api_host_certificate_override.dart';
 import 'package:rfid/features/auth/presentation/bloc/session_bloc.dart';
 import 'package:rfid/features/settings/presentation/bloc/settings_bloc.dart';
 
-/// Everything that has to happen before the first frame.
 Future<void> bootstrap() async {
+  if (!AppConfig.isConfigured) {
+    throw StateError(
+      'API_BASE_URL is not set. Run with --dart-define-from-file=.env '
+      '(copy .env.example to .env first).',
+    );
+  }
   WidgetsFlutterBinding.ensureInitialized();
 
   if (AppConfig.trustApiHostCertificate) {

@@ -4,8 +4,8 @@ Featurelar umumiy foydalanadigan kod. Bu yerdagi hech narsa biror featureni impo
 
 | Papka | Ichida |
 |---|---|
-| `config/` | `AppConfig`: backend manzili va `--dart-define` bayroqlari |
-| `network/` | `ApiClient` (yagona Dio), `ApiEndpoints`, `ApiEnvelopeParser` (`success` konverti), `JsonReader` (string/int aralash JSON), token interceptor, TLS istisnosi |
+| `config/` | `AppConfig`: `.env` dagi qiymatlar (`--dart-define-from-file=.env`) |
+| `network/` | `ApiClient` (yagona Dio), `ApiEndpoints`, `ApiEnvelopeParser` (`success` konverti), `JsonReader` (string/int aralash JSON), `JsonBodyDecoder` (katta javob fon isolate'da), `ApiLogInterceptor` (debug log), token interceptor, TLS istisnosi |
 | `error/` | `Failure` turlari, `Result` (`Success`/`Failed`), `guard()` — exception'larni failure'ga aylantiradigan yagona joy |
 | `session/` | `SessionStorage` (token + foydalanuvchi, o‘zgarishlar oqimi), `User` |
 | `storage/` | `KeyValueStore` interfeysi, Hive va xotiradagi amalga oshirilishi |

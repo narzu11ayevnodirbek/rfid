@@ -1,8 +1,8 @@
 # Backend API
 
-Backend: PHP, standart manzil `https://mderp.uz/` (`--dart-define=API_BASE_URL` bilan o‘zgartiriladi). Barcha yo‘llar `lib/core/network/api_endpoints.dart` da.
+Backend: PHP, manzili `.env` dagi `API_BASE_URL` (`https://mderp.uz/`). Barcha yo‘llar `lib/core/network/api_endpoints.dart` da.
 
-> **Holat.** Quyidagi shakllar ilovaning ishlab turgan eski kodidan tiklangan. Ishlab chiquvchining kompyuteri ulangan tarmoq `mderp.uz` ni bloklagani (FortiGuard "Newly Observed Domain") uchun real javoblar bilan solishtirib bo‘lmadi. Ochiq tarmoqda [`tool/api_probe.py`](../tool/api_probe.py) ni ishga tushirib tekshiring (faqat GET so‘rovlar yuboradi) va farq bo‘lsa shu faylni hamda tegishli `*_model.dart` ni yangilang.
+> **Holat.** Har bir endpoint yonida qanday tekshirilgani yozilgan: **✓ real javob** — telefonda ishlayotgan ilovaning logidagi haqiqiy javob bilan solishtirilgan; **kod** — shakl eski ishlab turgan koddan tiklangan. Real javoblarni [`tool/api_probe.py`](../tool/api_probe.py) (faqat GET, login/parolni `.env` dan oladi) yoki debug konsoldagi `← 200 GET ...` loglari orqali tekshirish mumkin.
 
 ## Umumiy qoidalar
 
@@ -18,6 +18,10 @@ Backend: PHP, standart manzil `https://mderp.uz/` (`--dart-define=API_BASE_URL` 
 `success` `true` bo‘lmasa, ilova buni xato deb biladi va `message` / `error` / `recommendation` matnini foydalanuvchiga ko‘rsatadi (`ApiEnvelopeParser`).
 
 **HTTP 401** sessiyani tugatadi: ilova login ekraniga qaytadi.
+
+**Debug log.** Debug build'da har so‘rov konsolga chiqadi: `→ GET url`, `← 200 GET url (196 ms, 1.4 KB)` va javob formatlangan JSON sifatida. `password` va `token` `***` bilan yashiriladi, 20 KB dan katta javoblarning faqat boshi ko‘rsatiladi (`lib/core/network/api_log_interceptor.dart`).
+
+**Katta javoblar.** 50 KB dan katta javob fon isolate'da dekodlanadi; katalog (`items.php`, ~3,7 MB) esa modellarga aylantirilishi bilan birga fon isolate'da ishlanadi — UI qotmaydi.
 
 **Turlar.** ID va sanoqlar goh son, goh matn bo‘lib keladi. Ilova ularni `JsonReader` orqali o‘qiydi, shuning uchun ikkalasi ham ishlaydi. Quyida `id` deb yozilgan joyda `"12"` yoki `12` bo‘lishi mumkin.
 
